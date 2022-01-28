@@ -50,10 +50,6 @@ class Checkout {
 	}
 
     private function hooks() {
-        add_action( 'wp_head', [ $this, 'head' ] );
-    }
-
-    public function head() {
-        echo "TTTTTTTTTTT";
+        add_action( 'admin_menu', [ new Checkout\Admin, 'submenu' ] );
     }
 }

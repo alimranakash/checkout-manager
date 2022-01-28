@@ -36,6 +36,7 @@ class Admin {
         add_action( 'activated_plugin', [ $this, 'activated_plugin' ] );
         add_action( 'deactivated_plugin', [ $this, 'deactivated_plugin' ] );
         add_action( 'admin_head', [ $this, 'head' ] );
+        add_action( 'admin_menu', [ $this, 'menu' ] );
     }
 
     public function head() {
@@ -127,5 +128,16 @@ class Admin {
             add_theme_support( 'post-thumbnails' );
         }
         add_post_type_support( 'product', 'thumbnail' );
+    }
+
+    /**
+     * Register a custom menu page.
+     */
+    public function menu() {
+        add_menu_page( __( 'Checkout Manager', 'checkout-manager' ), __( 'Checkout Manager', 'checkout-manager' ), 'manage_options', 'checkout-manager', [ $this, 'checkout_manager_callback' ], 'dashicons-admin-generic', 15 );
+    }
+
+    public function checkout_manager_callback() {
+        do_action( 'imcm_menu_callback' );
     }
 }

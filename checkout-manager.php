@@ -10,7 +10,7 @@
  * Author URI:        https://wpplugines.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       wc-menu-cart
+ * Text Domain:       checkout-manager
  * Domain Path:       /languages
  */
 
@@ -136,6 +136,7 @@ final class Plugin {
         new App();
         new Front();
         new Admin();
+        new Template();
     }
 
     /**
