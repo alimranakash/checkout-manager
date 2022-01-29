@@ -91,12 +91,6 @@ class Assets {
             $deps = isset( $style['deps'] ) ? $style['deps'] : false;
             wp_register_style( $handale, $style['src'], $deps, $style['version'] );
         }
-
-        //scripts localize function
-        wp_localize_script( 'admin-script', 'IM', [
-            'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'nonce'   => wp_create_nonce( 'im-plugin' ),
-        ] );
         
         //Scripts register
         $scripts = $this->get_scripts();
@@ -106,9 +100,15 @@ class Assets {
         }
 
         //scripts localize function
-        wp_localize_script( 'front-script', 'IM', [
+        wp_localize_script( 'front-script', 'IMCM', [
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'nonce'   => wp_create_nonce( 'im-plugin' ),
+            'nonce'   => wp_create_nonce( 'checkout-manager' ),
+        ] );
+
+        //scripts localize function
+        wp_localize_script( 'admin-script', 'IMCM', [
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'nonce'   => wp_create_nonce( 'checkout-manager' ),
         ] );
     }
 }

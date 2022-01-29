@@ -33,6 +33,9 @@ class App {
     }
 
     public function load() {
-        App\Checkout::instance();
+        $options = get_option( 'imch-setting-general' );
+        if ( isset( $options['fields-editor'] ) && $options['fields-editor'] == 'on' ) {
+            App\Checkout::instance();
+        }
     }
 }

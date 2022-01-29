@@ -138,6 +138,6 @@ class Admin {
     }
 
     public function checkout_manager_callback() {
-        do_action( 'imcm_menu_callback' );
+        do_action( 'imcm_settings' );
     }
 }

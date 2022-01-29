@@ -26,10 +26,15 @@ class Template {
 	}
 
     private function hooks() {
-        add_action( 'imcm_menu_callback', [ $this, 'settings' ] );
+        add_action( 'imcm_settings', [ $this, 'settings' ] );
+        add_action( 'imcm_fields_editor', [ $this, 'fields_editor' ] );
     }
 
     public function settings() {
         echo Helper::get_template( 'settings', 'views/admin' );
+    }
+
+    public function fields_editor() {
+        echo Helper::get_template( 'fields-editor', 'views/admin/fields-editor' );
     }
 }

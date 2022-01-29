@@ -41,6 +41,6 @@ class Admin {
     }
 
     public function checkout_fields_editor_callback() {
-        echo "TTTTTTTTTTTTT";
+        do_action( 'imcm_fields_editor' );
     }
 }
