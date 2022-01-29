@@ -50,6 +50,6 @@ class Checkout {
 	}
 
     private function hooks() {
-        add_action( 'admin_menu', [ new Checkout\Admin, 'submenu' ] );
+        new Checkout\Admin;
     }
 }

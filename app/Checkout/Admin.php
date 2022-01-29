@@ -18,18 +18,29 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Admin {
 
+    /**
+     * Constructor function
+     */
+    public function __construct() {
+        $this->hooks();
+    }
+
+    private function hooks() {
+        add_action( 'admin_menu', [ $this, 'submenu' ] );
+    }
+
     public function submenu() {
         add_submenu_page(
             'checkout-manager',
-            'My Custom Submenu Page',
-            'My Custom Submenu Page',
+            __( 'Checkout Fields Editor', 'checkout-manager' ),
+            __( 'Checkout Fields Editor', 'checkout-manager' ),
             'manage_options',
-            'my-custom-submenu-page',
-            [ $this, 'wpdocs_my_custom_submenu_page_callback' ] 
+            'checkout-fields-editor',
+            [ $this, 'checkout_fields_editor_callback' ] 
         );
     }
 
-    public function wpdocs_my_custom_submenu_page_callback() {
+    public function checkout_fields_editor_callback() {
         echo "TTTTTTTTTTTTT";
     }
 }
