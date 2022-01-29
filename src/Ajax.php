@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage Ajax
- * @author IM <im@gmail.com>
+ * @author Al Imran Akash <alimranakash.bd@gmail.com>
  */
 class Ajax {
 
