@@ -1,3 +1,76 @@
+.imcm #wpcontent {
+  background-color: #fff;
+}
+#imch-settings {
+  /*background-color: #f3f7fa;*/
+}
+#imch-setting-tabs {
+  display: flex;
+  flex-wrap: wrap;
+}
+.imch-setting-tabs-panel {
+  width: 15%;
+}
+.imch-setting-tabs-content {
+  width: 78%;
+  padding: 0 30px;
+}
+.imch-setting-heading h4 {
+  color: #483fb8;
+  font-size: 20px;
+  font-weight: 400;
+}
+.imch-setting-tabs-panel {
+  background-color: #f3f7fa;
+  padding: 25px;
+}
+.imch-setting-tabs-panel ul {
+  margin: 0;
+}
+.imch-setting-tabs-panel ul li {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px !important;
+}
+.imch-setting-tabs-panel ul li a {
+  text-decoration: none;
+  padding: 15px;
+  display: block;
+  background-color: #fff;
+  color: #b3b6c0;
+}
+.imch-setting-tabs-panel ul li.ui-tabs-active span,
+.imch-setting-tabs-panel ul li.ui-tabs-active a {
+  color: #483fb8;
+}
+.imch-setting-tabs-panel ul li.ui-tabs-active a:focus {
+  box-shadow: none;
+  outline: none;
+}
+.imch-setting-tabs-panel ul li span {
+  margin-right: 15px;
+}
+.imch-setting-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f3f7fa;
+}
+.imch-setting-save-button {
+  color: #483fb8;
+  border: 1px solid #483fb8;
+  background: transparent;
+  padding: 10px 20px;
+  line-height: 15px;
+  height: 40px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all .4s;
+}
+.imch-setting-save-button:hover {
+  background-color: #483fb8;
+  color: #fff;
+}
 .switch {
   position: relative;
   display: inline-block;

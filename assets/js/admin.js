@@ -1,4 +1,6 @@
 ;(function ($){
+	$('#imch-setting-tabs').tabs();
+	
 	$('.imch-setting').submit(function(e){
 		e.preventDefault();
 

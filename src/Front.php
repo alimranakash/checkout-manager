@@ -27,10 +27,15 @@ class Front {
 
     private function hooks() {
         add_action( 'wp_head', [ $this, 'head' ] );
+        add_filter( 'body_class', [ $this, 'body_class' ] );
     }
 
     public function head() {
         // wp_enqueue_style( 'front-style' );
         // wp_enqueue_script( 'front-script' );
+    }
+
+    public function body_class( $classes ) {
+        return array_merge( $classes, array( 'imcm' ) );
     }
 }

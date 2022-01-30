@@ -37,6 +37,7 @@ class Admin {
         add_action( 'deactivated_plugin', [ $this, 'deactivated_plugin' ] );
         add_action( 'admin_head', [ $this, 'head' ] );
         add_action( 'admin_menu', [ $this, 'menu' ] );
+        add_filter( 'admin_body_class', [ $this, 'admin_body_class' ] );
     }
 
     public function head() {
@@ -139,5 +140,9 @@ class Admin {
 
     public function checkout_manager_callback() {
         do_action( 'imcm_settings' );
+    }
+
+    public function admin_body_class( $classes ) {
+        return $classes .= 'imcm';
     }
 }

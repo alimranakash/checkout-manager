@@ -48,6 +48,10 @@ class Assets {
             'admin-style' => [
                 'src'     => IMCM_ASSETS . "/css/admin{$min}.css",
                 'version' => filemtime( IMCM_PATH . "/assets/css/admin{$min}.css" ),
+            ],
+            'jquery-ui' => [
+                'src'     => "//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css",
+                'version' => time(),
             ]
         ];
     }
