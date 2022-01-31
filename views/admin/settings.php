@@ -30,20 +30,22 @@
 							<input type="hidden" name="action" value="imch-setting">
 							<input type="hidden" name="option_name" value="imch-setting-general">
 							<input type="hidden" name="page_load" value="yes">
-							<p>
-								<label for=""><?php _e( 'Checkout Fields Editor', 'checkout-manager' ); ?></label>
-								<label class="switch">
-								  	<input type="checkbox" name="fields-editor" <?php checked( $options['fields-editor'], 'on' ); ?>>
+							<p class="imch-setting-form-group">
+								<label class="imch-setting-form-label" for="fields-editor"><?php _e( 'Checkout Fields Editor', 'checkout-manager' ); ?></label>
+								<label class="switch imch-setting-form-field">
+								  	<input id="fields-editor" type="checkbox" name="fields-editor" <?php checked( $options['fields-editor'], 'on' ); ?>>
 								  	<span class="slider"></span>
 								</label>
-								<input type="submit" value="<?php _e( 'Save Settings', 'checkout-manager' ); ?>">
 							</p>
 						</form>
 						<div class="cx-response-message" style="display: none;"></div>
 					</div>
 				</div>
-				<div id="display">
+				<div id="display" style="display: none;">
 					Lorem ipsum dolor sit, amet, consectetur adipisicing elit. Ullam fugiat iure exercitationem nesciunt eum odit perferendis minus quas error! Unde est assumenda ad earum excepturi libero neque illo ducimus quo.
+				</div>
+				<div class="imch-setting-footer">
+					<button class="imch-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
 				</div>
 		  	</div>
 		</div>
