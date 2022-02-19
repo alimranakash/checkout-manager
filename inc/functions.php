@@ -255,23 +255,27 @@ function imcm_custom_checkout_fields( $order ) {
     foreach ( $types as $type => $fields ) {
         foreach ( $fields as $name => $field ) {
             if ( !woocm_is_default_field( $name ) ) {
-                $_custom_fields[$type][ $name ] = $field['label'];
+                $_custom_fields[ $type ][ $name ] = $field['label'];
             }
         }
     }
 
     $custom_billing_fields = [];
-    foreach ( $_custom_fields['billing'] as $key => $label ) {
-        if ( array_key_exists( '_'. $key, $meta_datas ) ) {
-            $custom_billing_fields[ $label ] = $meta_datas['_'. $key];
-        }    
+    if ( isset( $_custom_fields['billing'] ) ) {
+        foreach ( $_custom_fields['billing'] as $key => $label ) {
+            if ( array_key_exists( '_'. $key, $meta_datas ) ) {
+                $custom_billing_fields[ $label ] = $meta_datas['_'. $key];
+            }    
+        }
     }
 
     $custom_shipping_fields = [];
-    foreach ( $_custom_fields['shipping'] as $key => $label ) {
-        if ( array_key_exists( '_'. $key, $meta_datas ) ) {
-            $custom_shipping_fields[ $label ] = $meta_datas['_'. $key];
-        }    
+    if ( isset( $_custom_fields['shipping'] ) ) {
+        foreach ( $_custom_fields['shipping'] as $key => $label ) {
+            if ( array_key_exists( '_'. $key, $meta_datas ) ) {
+                $custom_shipping_fields[ $label ] = $meta_datas['_'. $key];
+            }    
+        }
     }
 
     $custom_fields = [
