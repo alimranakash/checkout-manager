@@ -51,5 +51,7 @@ class Checkout {
 
     private function hooks() {
         new Checkout\Admin;
+        new Checkout\Ajax;
+        new Checkout\Front();
     }
 }

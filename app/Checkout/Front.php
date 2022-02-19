@@ -1,0 +1,118 @@
+<?php
+/**
+ * All admin facing functions
+ */
+namespace WPPlugines\Checkout_Manager\App\Checkout;
+
+/**
+ * if accessed directly, exit.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * @package Plugin
+ * @subpackage Front
+ * @author Al Imran Akash <alimranakash.bd@gmail.com>
+ */
+class Front {
+
+    /**
+     * Constructor function
+     */
+    public function __construct() {
+        $this->hooks();
+    }
+
+    private function hooks() {
+        add_filter( 'woocommerce_checkout_fields', [ $this, 'checkout_fields' ] );
+        add_action( 'woocommerce_order_details_after_customer_details', [ $this, 'render_custom_fields' ], 20 );
+    }
+
+    public function checkout_fields( $wc_fields ) {
+
+        $_woocm_fields = get_option( 'imcm-checkout-fields' ) ? : [];
+
+        if ( isset( $_woocm_fields['woocm_fields'] ) ) {
+            $types = $_woocm_fields['woocm_fields'];
+        }
+
+        if ( empty( $types ) ) return $wc_fields;
+
+        $_fields = [];
+
+        foreach ( $types as $type => $fields ) {
+            $priority = 10;
+            foreach ( $fields as $name => $field ) {
+                // if ( isset( $field['enabled'] ) ) {
+                    
+                    if( isset(  $wc_fields[ $type ][ $name ]['type'] ) ) {
+                        $_fields[ $type ][ $name ]['type']      = $wc_fields[ $type ][ $name ]['type'];
+                    }
+
+                    if ( ! woocm_is_default_field( $name ) ) {
+                        $_fields[ $type ][ $name ]['type']      = $field['type'];
+                    }
+
+                    if ( isset( $field['type'] ) && in_array( $field['type'], [ 'select', 'radio' ] ) ) {
+
+                        $_options = explode( PHP_EOL, $field['options'] );
+
+                        $options = [];
+                        foreach ( $_options as $_option ) {
+                            $options[ $_option ] = $_option;
+                        }
+
+                        $_fields[ $type ][ $name ]['options']   = $options;
+                    }
+
+
+                    $_fields[ $type ][ $name ]['label']         = $field['label'];
+                    $_fields[ $type ][ $name ]['required']      = isset( $field['required'] );
+
+                    $_fields[ $type ][ $name ]['priority']      = 0;
+                    $_fields[ $type ][ $name ]['validate']      = '';
+                    $_fields[ $type ][ $name ]['placeholder']   = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
+                    $_fields[ $type ][ $name ]['class'][]       = $field['class'];
+                // }
+                $priority++;
+            }
+        }
+
+        return $_fields;
+    }
+
+    public function render_custom_fields( $order ) {
+
+        if ( is_int( $order ) || is_numeric( $order ) ) {
+            $order = wc_get_order( $order );
+        }
+        
+        $custom_fields = imcm_custom_checkout_fields( $order );
+        
+        if ( empty( $custom_fields['billing'] ) && empty( $custom_fields['shipping'] ) ) return;
+
+        echo '<section class="imcm-additional-fields-details woocommerce-columns woocommerce-columns--2 woocommerce-columns--addresses col2-set addresses">';
+        echo '<h2 class="woocommerce-column__title">'. __( 'Additional Fields', 'wc-one-pager' ) .'</h2>';
+        
+        $count = 1;
+        foreach ( $custom_fields as $key => $custom_field ) {
+            if ( !empty( $custom_field ) ) {
+                echo "<div class='woocommerce-column woocommerce-column--{$count} woocommerce-column--{$key}-address col-{$count}'>";
+                echo '<h4 class="woocommerce-">'. ucwords( $key ) .'</h4>';
+                    echo '<address>';
+
+                        foreach ( $custom_field as $key => $field ) {
+                            echo "<p><strong>{$key}:</strong> {$field}</p>";
+                        }
+
+                    echo '</address>';
+                echo '</div>';
+
+                $count++;
+            }   
+        }
+        echo '</section>';
+    }
+}

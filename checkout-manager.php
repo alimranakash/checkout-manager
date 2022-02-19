@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       Checkout Manager
+ * Plugin Name:       CheckOut Manager
  * Plugin URI:        https://wpplugines.com/
- * Description:       The most powerful woocommerce checkout manager by wpplugines
+ * Description:       The most powerful woocommerce CheckOut Manager by wpplugines
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2

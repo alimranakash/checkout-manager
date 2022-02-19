@@ -3,36 +3,36 @@
 	wp_enqueue_script( 'jquery-ui-tabs' );
 	wp_enqueue_script( 'admin-script' );
 
-	$options = get_option( 'imch-setting-general' );
+	$options = get_option( 'imcm-setting-general' );
 	if ( ! isset( $options['fields-editor'] ) ) {
 	    $options['fields-editor'] = 0;
 	}
 ?>
 <div class="wrap">
-	<div id="imch-settings">
-		<div id="imch-setting-tabs">
-			<div class="imch-setting-tabs-panel">
+	<div id="imcm-settings">
+		<div id="imcm-setting-tabs">
+			<div class="imcm-setting-tabs-panel">
 				<ul>
 				    <li class=""><a href="#general"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'General', 'checkout-manager' ); ?></a></li>
 				    <li><a href="#display"><span class="dashicons dashicons-admin-appearance"></span> <?php _e( 'Display', 'checkout-manager' ); ?></a></li>
 				  </ul>
 			</div>
 		  
-		  	<div class="imch-setting-tabs-content">
-				<div class="imch-setting-heading">
+		  	<div class="imcm-setting-tabs-content">
+				<div class="imcm-setting-heading">
 					<h4><?php _e( 'Settings', 'checkout-manager' ); ?></h4>
-					<button class="imch-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
 				</div>
 		  		<div id="general">
-		  			<div class="imch-setting-content">
-						<form action="" id="imch-setting-form" class="imch-setting">
+		  			<div class="imcm-setting-content">
+						<form action="" id="imcm-setting-form" class="imcm-setting">
 							<?php wp_nonce_field( 'checkout-manager' ); ?>
-							<input type="hidden" name="action" value="imch-setting">
-							<input type="hidden" name="option_name" value="imch-setting-general">
+							<input type="hidden" name="action" value="imcm-setting">
+							<input type="hidden" name="option_name" value="imcm-setting-general">
 							<input type="hidden" name="page_load" value="yes">
-							<p class="imch-setting-form-group">
-								<label class="imch-setting-form-label" for="fields-editor"><?php _e( 'Checkout Fields Editor', 'checkout-manager' ); ?></label>
-								<label class="switch imch-setting-form-field">
+							<p class="imcm-setting-form-group">
+								<label class="imcm-setting-form-label" for="fields-editor"><?php _e( 'Checkout Fields', 'checkout-manager' ); ?></label>
+								<label class="switch imcm-setting-form-field">
 								  	<input id="fields-editor" type="checkbox" name="fields-editor" <?php checked( $options['fields-editor'], 'on' ); ?>>
 								  	<span class="slider"></span>
 								</label>
@@ -44,8 +44,8 @@
 				<div id="display" style="display: none;">
 					Lorem ipsum dolor sit, amet, consectetur adipisicing elit. Ullam fugiat iure exercitationem nesciunt eum odit perferendis minus quas error! Unde est assumenda ad earum excepturi libero neque illo ducimus quo.
 				</div>
-				<div class="imch-setting-footer">
-					<button class="imch-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+				<div class="imcm-setting-footer">
+					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
 				</div>
 		  	</div>
 		</div>

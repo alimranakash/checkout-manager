@@ -38,6 +38,7 @@ class Admin {
         add_action( 'admin_head', [ $this, 'head' ] );
         add_action( 'admin_menu', [ $this, 'menu' ] );
         add_filter( 'admin_body_class', [ $this, 'admin_body_class' ] );
+        add_filter( "plugin_action_links_" . IMCM_BASENAME, [ $this, 'action_links' ] );   
     }
 
     public function head() {
@@ -102,17 +103,7 @@ class Admin {
      *
      * @return void
      */
-    public function build_dependencies_notice() {
-
-        $message_one = __( 'You have installed a development version of WooCommerce which requires files to be built and minified. From the plugin directory, run <code>grunt assets</code> to build and minify assets.', 'woocommerce' );
-        $message_two = sprintf(
-            /* translators: 1: URL of WordPress.org Repository 2: URL of the GitHub Repository release page */
-            __( 'Or you can download a pre-built version of the plugin from the <a href="%1$s">WordPress.org repository</a> or by visiting <a href="%2$s">the releases page in the GitHub repository</a>.', 'woocommerce' ),
-            'https://wordpress.org/plugins/woocommerce/',
-            'https://github.com/woocommerce/woocommerce/releases'
-        );
-        printf( '<div class="error"><p>%s %s</p></div>', $message_one, $message_two ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-    }
+    public function build_dependencies_notice() {}
 
     /**
      * Ensure theme and server variable compatibility and setup image sizes.
@@ -144,5 +135,14 @@ class Admin {
 
     public function admin_body_class( $classes ) {
         return $classes .= 'imcm';
+    }
+
+    public function action_links( $links ) {
+
+        $new_links = [
+            'settings'  => sprintf( '<a href="%1$s">' . __( 'Settings', 'woolementor' ) . '</a>', add_query_arg( 'page', 'checkout-manager', admin_url( 'admin.php' ) ) )
+        ];
+        
+        return array_merge( $new_links, $links );
     }
 }

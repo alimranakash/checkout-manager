@@ -27,14 +27,24 @@ class Template {
 
     private function hooks() {
         add_action( 'imcm_settings', [ $this, 'settings' ] );
-        add_action( 'imcm_fields_editor', [ $this, 'fields_editor' ] );
+        add_action( 'imcm_checkout_fields', [ $this, 'checkout_fields' ] );
+        add_action( 'imcm_custom_billing_fields', [ $this, 'billing_fields' ] );
+        add_action( 'imcm_custom_shipping_fields', [ $this, 'shipping_fields' ] );
     }
 
     public function settings() {
         echo Helper::get_template( 'settings', 'views/admin' );
     }
 
-    public function fields_editor() {
-        echo Helper::get_template( 'fields-editor', 'views/admin/fields-editor' );
+    public function checkout_fields() {
+        echo Helper::get_template( 'checkout-fields', 'views/admin/checkout' );
+    }
+
+    public function billing_fields( $order ) {
+        echo Helper::get_template( 'billing-fields', 'views/admin/checkout', [ 'order' => $order ] );
+    }
+
+    public function shipping_fields( $order ) {
+        echo Helper::get_template( 'shipping-fields', 'views/admin/checkout', [ 'order' => $order ] );
     }
 }

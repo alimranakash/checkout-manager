@@ -2,7 +2,7 @@
 /**
  * All admin facing functions
  */
-namespace WPPlugines\Checkout_Manager;
+namespace WPPlugines\Checkout_Manager\App\Checkout;
 
 /**
  * if accessed directly, exit.
@@ -26,12 +26,11 @@ class Ajax {
 	}
 
     private function hooks() {
-        add_action( 'wp_ajax_imcm-setting', [ $this, 'imcm_setting' ] );
-        add_action( 'wp_ajax_reset-setting', [ $this, 'reset_setting' ] );
+        add_action( 'wp_ajax_reset-checkout-fields', [ $this, 'reset_checkout_fields' ] );
         // add_action( 'wp_ajax_nopriv_callback-name', [ $this, 'callback_name' ] );
     }
 
-    public function imcm_setting() {
+    public function save_checkout_fields() {
         $response = [];
 
         if( !wp_verify_nonce( $_POST['_wpnonce'], 'checkout-manager' ) ) {
@@ -45,17 +44,34 @@ class Ajax {
 
         unset( $_POST['action'] );
         unset( $_POST['option_name'] );
-        unset( $_POST['page_load'] );
         unset( $_POST['_wpnonce'] );
         unset( $_POST['_wp_http_referer'] );
 
-        update_option( $option_name, $_POST );
+        update_option( 'imcm-manager_checkout', $_POST );
         
-        do_action( 'imcm-settings-saved', $option_name, $_POST );
+        do_action( 'imch-settings-saved', $option_name, $_POST );
         
         $response['status']     = 1;
         $response['page_load']  = $page_load;
         $response['message']    = __( 'Settings Saved!', 'checkout-manager' );
+        wp_send_json( $response );
+    }
+
+    public function reset_checkout_fields() {
+        $response = [];
+
+        if( !wp_verify_nonce( $_POST['nonce'], 'checkout-manager' ) ) {
+            $response['status']     = 0;
+            $response['message']    = __( 'Unauthorized!', 'checkout-manager' );
+            wp_send_json( $response );
+        }
+
+        delete_option( 'imcm-checkout-fields' );
+        
+        do_action( 'imcm-reset-settings', $option_name, $_POST );
+        
+        $response['status']     = 1;
+        $response['message']    = __( 'Reset Settings!', 'checkout-manager' );
         wp_send_json( $response );
     }
 }

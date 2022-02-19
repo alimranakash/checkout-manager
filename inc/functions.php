@@ -1,7 +1,7 @@
 <?php 
 
-if( !function_exists( 'pri' ) ) :
-function pri( $data ) {
+if( !function_exists( 'imcm_pri' ) ) :
+function imcm_pri( $data ) {
     echo '<pre>';
     if( is_object( $data ) || is_array( $data ) ) {
         print_r( $data );
@@ -223,5 +223,61 @@ function woocm_is_default_field( $field_id ) {
             return true;
         }
     }
+}
+endif;
+
+if( !function_exists( 'imcm_custom_checkout_meta_data' ) ) :
+function imcm_custom_checkout_meta_data( $order ) {
+    $meta_datas = $order->get_meta_data();
+    
+    $metas = [];
+    foreach ( $meta_datas as $meta_data ) {
+        $metas[ $meta_data->get_data()['key'] ] = $meta_data->get_data()['value'];
+    }
+    return $metas;
+}
+endif;
+
+if( !function_exists( 'imcm_custom_checkout_fields' ) ) :
+function imcm_custom_checkout_fields( $order ) {
+    $_woocm_fields = get_option( 'imcm-checkout-fields' ) ? : [];
+
+    $meta_datas = imcm_custom_checkout_meta_data( $order );
+
+    if ( isset( $_woocm_fields['woocm_fields'] ) ) {
+        $types = $_woocm_fields['woocm_fields'];
+    }
+    else {
+        $types = imcm_wc_fields();
+    }
+
+    $_custom_fields = [];
+    foreach ( $types as $type => $fields ) {
+        foreach ( $fields as $name => $field ) {
+            if ( !woocm_is_default_field( $name ) ) {
+                $_custom_fields[$type][ $name ] = $field['label'];
+            }
+        }
+    }
+
+    $custom_billing_fields = [];
+    foreach ( $_custom_fields['billing'] as $key => $label ) {
+        if ( array_key_exists( '_'. $key, $meta_datas ) ) {
+            $custom_billing_fields[ $label ] = $meta_datas['_'. $key];
+        }    
+    }
+
+    $custom_shipping_fields = [];
+    foreach ( $_custom_fields['shipping'] as $key => $label ) {
+        if ( array_key_exists( '_'. $key, $meta_datas ) ) {
+            $custom_shipping_fields[ $label ] = $meta_datas['_'. $key];
+        }    
+    }
+
+    $custom_fields = [
+        'billing'   => $custom_billing_fields,
+        'shipping'  => $custom_shipping_fields,
+    ];
+    return $custom_fields;
 }
 endif;
