@@ -186,7 +186,10 @@
 																
 																<p class='woocm-item-field-required'>
 																	<label for='{$required_text}'>{$required_text}</label>
-																	<input id='{$required_text}' type='checkbox' name='woocm_fields[{$type}][{$name}][required]' {$required}>
+																	<label class='woocm-item-switch'>
+																	  	<input id='{$required_text}' type='checkbox' name='woocm_fields[{$type}][{$name}][required]' {$required}>
+																	  	<span class='woocm-item-slider woocm-item-round'></span>
+																	</label>
 																</p>
 																<p class='woocm-item-field-class'>
 																	<label class='woocm-item-label' for='cls_{$field['id']}'>{$class_name_text}</label>
@@ -206,9 +209,9 @@
 													<?php 
 													printf( '<button class="woocm-modal-toggle" data-type="%s" title="%s">%s %s</button>',
 														$type,
-														__( 'Add ' . ucwords( $type ) . ' Field' , 'wc-one-pager' ),
+														__( 'Add ' . ucwords( $type ) . ' Field' , 'checkout-manager' ),
 														'<span class="dashicons dashicons-plus"></span>',
-														__( 'Add Field' , 'wc-one-pager' )
+														__( 'Add Field' , 'checkout-manager' )
 													);
 													?>
 												</div>

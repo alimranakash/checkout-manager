@@ -45,7 +45,8 @@ class Front {
         foreach ( $types as $type => $fields ) {
             $priority = 10;
             foreach ( $fields as $name => $field ) {
-                // if ( isset( $field['enabled'] ) ) {
+            // imcm_pri($field);
+                if ( isset( $field['enabled'] ) ) {
                     
                     if( isset(  $wc_fields[ $type ][ $name ]['type'] ) ) {
                         $_fields[ $type ][ $name ]['type']      = $wc_fields[ $type ][ $name ]['type'];
@@ -67,7 +68,6 @@ class Front {
                         $_fields[ $type ][ $name ]['options']   = $options;
                     }
 
-
                     $_fields[ $type ][ $name ]['label']         = $field['label'];
                     $_fields[ $type ][ $name ]['required']      = isset( $field['required'] );
 
@@ -75,7 +75,7 @@ class Front {
                     $_fields[ $type ][ $name ]['validate']      = '';
                     $_fields[ $type ][ $name ]['placeholder']   = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
                     $_fields[ $type ][ $name ]['class'][]       = $field['class'];
-                // }
+                }
                 $priority++;
             }
         }

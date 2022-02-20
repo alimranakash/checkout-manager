@@ -7,7 +7,6 @@ if ( is_int( $order ) || is_numeric( $order ) ) {
 
 $custom_fields = imcm_custom_checkout_fields( $order );
 
-
 if ( empty( $custom_fields['billing'] ) && empty( $custom_fields['shipping'] ) ) return;
 
 wp_enqueue_style( 'front-style' );
@@ -21,14 +20,11 @@ foreach ( $custom_fields as $key => $custom_field ) {
         echo "<div class='woocommerce-column woocommerce-column--{$count} woocommerce-column--{$key}-address col-{$count}'>";
         echo '<h4 class="imcm-custom-fields-title woocommerce-">'. ucwords( $key ) .'</h4>';
             echo '<address>';
-
                 foreach ( $custom_field as $key => $field ) {
                     echo "<p><strong>{$key}:</strong> {$field}</p>";
                 }
-
             echo '</address>';
         echo '</div>';
-
         $count++;
     }   
 }
