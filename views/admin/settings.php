@@ -3,9 +3,14 @@
 	wp_enqueue_script( 'jquery-ui-tabs' );
 	wp_enqueue_script( 'admin-script' );
 
-	$options = get_option( 'imcm-setting-general' );
-	if ( ! isset( $options['fields-editor'] ) ) {
-	    $options['fields-editor'] = 0;
+	$general = get_option( 'imcm-setting-general' );
+	if ( ! isset( $general['fields-editor'] ) ) {
+	    $general['fields-editor'] = 0;
+	}
+
+	$troubleshoot = get_option( 'imcm-setting-troubleshoot' );
+	if ( ! isset( $troubleshoot['fields-editor'] ) ) {
+	    $troubleshoot['fields-editor'] = 0;
 	}
 ?>
 <div class="wrap">
@@ -14,7 +19,7 @@
 			<div class="imcm-setting-tabs-panel">
 				<ul>
 				    <li class=""><a href="#general"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'General', 'checkout-manager' ); ?></a></li>
-				    <li><a href="#display"><span class="dashicons dashicons-admin-appearance"></span> <?php _e( 'Display', 'checkout-manager' ); ?></a></li>
+				    <li><a href="#troubleshoot"><span class="dashicons dashicons-admin-tools"></span> <?php _e( 'Troubleshoot', 'checkout-manager' ); ?></a></li>
 				  </ul>
 			</div>
 		  
@@ -33,7 +38,7 @@
 							<p class="imcm-setting-form-group">
 								<label class="imcm-setting-form-label" for="fields-editor"><?php _e( 'Checkout Fields', 'checkout-manager' ); ?></label>
 								<label class="switch imcm-setting-form-field">
-								  	<input id="fields-editor" type="checkbox" name="fields-editor" <?php checked( $options['fields-editor'], 'on' ); ?>>
+								  	<input id="fields-editor" type="checkbox" name="fields-editor" <?php checked( $general['fields-editor'], 'on' ); ?>>
 								  	<span class="slider"></span>
 								</label>
 							</p>
@@ -41,8 +46,25 @@
 						<div class="cx-response-message" style="display: none;"></div>
 					</div>
 				</div>
-				<div id="display" style="display: none;">
-					Lorem ipsum dolor sit, amet, consectetur adipisicing elit. Ullam fugiat iure exercitationem nesciunt eum odit perferendis minus quas error! Unde est assumenda ad earum excepturi libero neque illo ducimus quo.
+				<div id="troubleshoot" style="display: none;">
+					<div class="imcm-setting-content">
+						<form action="" id="imcm-setting-form" class="imcm-setting">
+							<?php wp_nonce_field( 'checkout-manager' ); ?>
+							<input type="hidden" name="action" value="imcm-setting">
+							<input type="hidden" name="option_name" value="imcm-setting-troubleshoot">
+							<input type="hidden" name="page_load" value="">
+							<p class="imcm-setting-form-group">
+								<label class="imcm-setting-form-label" for="enable-debug"><?php _e( 'Enable Debug', 'checkout-manager' ); ?></label>
+								<label class="switch imcm-setting-form-field">
+								  	<input id="enable-debug" type="checkbox" name="enable-debug" <?php checked( $troubleshoot['enable-debug'], 'on' ); ?>>
+								  	<span class="slider"></span>
+								</label>
+								<span class="cx-desc"></span>
+								<span class="cx-desc">Enable this if you face any CSS or JS related issues.</span>
+							</p>
+						</form>
+						<div class="cx-response-message" style="display: none;"></div>
+					</div>
 				</div>
 				<div class="imcm-setting-footer">
 					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>

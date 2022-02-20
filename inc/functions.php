@@ -1,7 +1,7 @@
 <?php 
 
-if( !function_exists( 'imcm_pri' ) ) :
-function imcm_pri( $data ) {
+if( !function_exists( 'pri' ) ) :
+function pri( $data ) {
     echo '<pre>';
     if( is_object( $data ) || is_array( $data ) ) {
         print_r( $data );

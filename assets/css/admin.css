@@ -55,6 +55,11 @@
 .imcm-setting-tabs-panel ul li span {
     margin-right: 15px;
 }
+.imcm-setting-form-group .cx-desc {
+    font-size: 13px;
+    margin-top: 5px;
+    font-style: italic;
+}
 .imcm-setting-heading {
     display: flex;
     justify-content: space-between;

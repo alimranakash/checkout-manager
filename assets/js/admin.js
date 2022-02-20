@@ -1,8 +1,6 @@
 ;(function ($){
 	$('#imcm-setting-tabs').tabs();
 
-	$('.woocm-sortable').sortable({axis: 'y'});
-
 	$(document).on("click",".imcm-setting-save-button",function(e) {
 		e.preventDefault();
 		$('.imcm-setting').submit();
@@ -195,4 +193,19 @@
 		parent.remove();
 		// alert('fffff')
 	});
+
+	if ( localStorage.getItem("woocm-active-tab") ) {
+		$('a.ui-tabs-anchor[href="'+ localStorage.getItem("woocm-active-tab") +'"]').click();
+	}
+
+	$("a.ui-tabs-anchor").click(function (e) {
+        e.preventDefault();
+
+        // $(this).removeClass("woocm-active-tab");
+        var target = $(this).attr("href");
+        localStorage.setItem("woocm-active-tab", target);
+    });
+
+	$('.woocm-sortable').sortable({axis: 'y'});
+
 })(jQuery);
