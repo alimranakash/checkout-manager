@@ -9,8 +9,8 @@
 	}
 
 	$troubleshoot = get_option( 'imcm-setting-troubleshoot' );
-	if ( ! isset( $troubleshoot['fields-editor'] ) ) {
-	    $troubleshoot['fields-editor'] = 0;
+	if ( ! isset( $troubleshoot['enable-debug'] ) ) {
+	    $troubleshoot['enable-debug'] = 0;
 	}
 ?>
 <div class="wrap">
@@ -60,7 +60,7 @@
 								  	<span class="slider"></span>
 								</label>
 								<span class="cx-desc"></span>
-								<span class="cx-desc">Enable this if you face any CSS or JS related issues.</span>
+								<span class="cx-desc"><?php _e( 'Enable this if you face any CSS or JS related issues.', 'checkout-manager' ); ?></span>
 							</p>
 						</form>
 						<div class="cx-response-message" style="display: none;"></div>

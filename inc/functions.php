@@ -285,3 +285,15 @@ function imcm_custom_checkout_fields( $order ) {
     return $custom_fields;
 }
 endif;
+
+if( !function_exists( 'imcm_enable_debug' ) ) :
+function imcm_enable_debug() {
+    $troubleshoot = get_option( 'imcm-setting-troubleshoot' );
+
+    $enable_debug = false;
+    if ( $troubleshoot['enable-debug'] == 'on' ) {
+        $enable_debug = true;
+    }
+    return $enable_debug;
+}
+endif;

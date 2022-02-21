@@ -33,7 +33,7 @@ class App {
     }
 
     public function load() {
-        $options = get_option( 'imch-setting-general' );
+        $options = get_option( 'imcm-setting-general' );
         if ( isset( $options['fields-editor'] ) && $options['fields-editor'] == 'on' ) {
             App\Checkout::instance();
         }

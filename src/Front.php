@@ -31,8 +31,7 @@ class Front {
     }
 
     public function head() {
-        // wp_enqueue_style( 'front-style' );
-        // wp_enqueue_script( 'front-script' );
+        pri(IMCM_DEBUG_MODE);
     }
 
     public function body_class( $classes ) {

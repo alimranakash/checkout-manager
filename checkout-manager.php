@@ -98,7 +98,7 @@ final class Plugin {
         $this->define( 'IMCM_ABSPATH', dirname( IMCM_FILE ) . '/' );
         $this->define( 'IMCM_BASENAME', plugin_basename( IMCM_FILE ) );
         $this->define( 'IMCM_VERSION', $this->version );
-        $this->define( 'IMCM_DEBUG_MODE', true );
+        $this->define( 'IMCM_DEBUG_MODE', apply_filters( 'imcm-debug', isset( get_option( 'imcm-setting-troubleshoot', false )['enable-debug'] ) == 'on' ) );
         $this->define( 'IMCM_MIN_PHP_VERSION', '7.2' );
         $this->define( 'IMCM_MIN_WP_VERSION', '5.2' );
     }
