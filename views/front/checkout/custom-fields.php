@@ -17,11 +17,11 @@ echo '<h2 class="woocommerce-column__title">'. __( 'Custom Fields', 'wc-one-page
 $count = 1;
 foreach ( $custom_fields as $key => $custom_field ) {
     if ( !empty( $custom_field ) ) {
-        echo "<div class='woocommerce-column woocommerce-column--{$count} woocommerce-column--{$key}-address col-{$count}'>";
+        echo "<div class='woocommerce-column woocommerce-column--". esc_attr( $count ) ." woocommerce-column--". esc_attr( $key ) ."-address col-". esc_attr( $count ) ."'>";
         echo '<h4 class="imcm-custom-fields-title woocommerce-">'. ucwords( $key ) .'</h4>';
             echo '<address>';
                 foreach ( $custom_field as $key => $field ) {
-                    echo "<p><strong>{$key}:</strong> {$field}</p>";
+                    echo "<p><strong>". esc_attr( $key ) .":</strong> ". esc_html( $field ) ."</p>";
                 }
             echo '</address>';
         echo '</div>';

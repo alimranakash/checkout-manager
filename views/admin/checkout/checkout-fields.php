@@ -9,7 +9,10 @@
 	    $options['fields-editor'] = 0;
 	}
 
-	$_woocm_fields = get_option( 'imcm-checkout-fields' ) ? : [];
+	$_woocm_fields = get_option( 'imcm-checkout-fields' ) ? : '';
+	// pri($_woocm_fields);
+
+	$_woocm_fields = unserialize( $_woocm_fields );
 
 	if ( isset( $_woocm_fields['woocm_fields'] ) ) {
 		$types = $_woocm_fields['woocm_fields'];
@@ -67,14 +70,14 @@
 				  </ul>
 			</div>
 		  
-		  	<div class="imcm-setting-tabs-content">
+		  	<div class="imcm-setting-tabs-content imcm-checkout-fields-panel">
 				<div class="imcm-setting-heading">
 					<h4><?php _e( 'Settings', 'checkout-manager' ); ?></h4>
 					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
 				</div>
 				<form action="" id="imcm-setting-form" class="imcm-setting">
 					<?php wp_nonce_field( 'checkout-manager' ); ?>
-					<input type="hidden" name="action" value="imcm-setting">
+					<input type="hidden" name="action" value="checkout-fields">
 					<input type="hidden" name="option_name" value="imcm-checkout-fields">
 					<input type="hidden" name="page_load" value="0">
 					<div id="checkout-fields">

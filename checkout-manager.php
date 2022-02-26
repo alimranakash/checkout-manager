@@ -3,13 +3,9 @@
  * Plugin Name:       CheckOut Manager
  * Plugin URI:        https://wpplugines.com/
  * Description:       CheckOut Manager - The most advanced and powerful customization of your checkout page.
- * Version:           1.0.0
- * Requires at least: 5.2
- * Requires PHP:      7.2
+ * Version:           0.9
  * Author:            Al Imran Akash
  * Author URI:        https://profiles.wordpress.org/al-imran-akash/
- * License:           GPL v2 or later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       checkout-manager
  * Domain Path:       /languages
  */
@@ -99,8 +95,8 @@ final class Plugin {
         $this->define( 'IMCM_BASENAME', plugin_basename( IMCM_FILE ) );
         $this->define( 'IMCM_VERSION', $this->version );
         $this->define( 'IMCM_DEBUG_MODE', apply_filters( 'imcm-debug', isset( get_option( 'imcm-setting-troubleshoot', false )['enable-debug'] ) == 'on' ) );
-        $this->define( 'IMCM_MIN_PHP_VERSION', '7.2' );
-        $this->define( 'IMCM_MIN_WP_VERSION', '5.2' );
+        $this->define( 'IMCM_MIN_PHP_VERSION', '5.6' );
+        $this->define( 'IMCM_MIN_WP_VERSION', '4.0' );
     }
 
     /**

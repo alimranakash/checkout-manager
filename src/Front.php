@@ -31,7 +31,7 @@ class Front {
     }
 
     public function head() {
-        pri(IMCM_DEBUG_MODE);
+        // pri(IMCM_DEBUG_MODE);
     }
 
     public function body_class( $classes ) {

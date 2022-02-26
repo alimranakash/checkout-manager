@@ -9,7 +9,7 @@ echo '<h3>'. __( 'Custom Billing Fields', 'wc-one-pager' ) .'</h3>';
 echo '<div class="address">';
 
 foreach ( $billing_fields as $label => $value ) {
-	echo "<p><strong>{$label}:</strong> {$value}</p>";
+	echo "<p><strong>". esc_html( $label ) .":</strong> ". esc_html( $value ) ."</p>";
 }
 
 echo '</div>';

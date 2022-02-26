@@ -1,12 +1,12 @@
 === CheckOut Manager ===
 Contributors: al-imran-akash
 Tags: woocommerce checkout manager, woocommerce checkout editor, woocommerce checkout fields editor, woocommerce, woocommerce checkout, checkout, checkout editor
-Requires at least: 4.1
-Tested up to: 5.3
-Requires PHP: 5.6
-License:           GPL v2 or later
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: trunk
+Requires at least: 5.0
+Tested up to: 5.9
+Stable tag: 0.9
+Requires PHP: 5.4
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 CheckOut Manager - The most advanced and powerful customization of your checkout page.
 
@@ -20,5 +20,5 @@ Installation is fairly straight forward. Install it from the WordPress plugin re
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial Release 
+= 0.9 =
+* Initial version release

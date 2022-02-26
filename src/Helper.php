@@ -74,6 +74,17 @@ class Helper {
         return apply_filters( 'imcm_plugin_get_posts', $posts, $_args );
     }
 
+    public static function get_option( $key, $section, $default = '' ) {
+
+        $options = get_option( $key );
+
+        if ( isset( $options[ $section ] ) ) {
+            return $options[ $section ];
+        }
+
+        return $default;
+    }
+
     /**
      * Includes a template file resides in /views diretory
      *

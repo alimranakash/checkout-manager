@@ -1,17 +1,10 @@
 <?php 
-	wp_enqueue_style( 'admin-style' );
-	wp_enqueue_script( 'jquery-ui-tabs' );
-	wp_enqueue_script( 'admin-script' );
+wp_enqueue_style( 'admin-style' );
+wp_enqueue_script( 'jquery-ui-tabs' );
+wp_enqueue_script( 'admin-script' );
 
-	$general = get_option( 'imcm-setting-general' );
-	if ( ! isset( $general['fields-editor'] ) ) {
-	    $general['fields-editor'] = 0;
-	}
-
-	$troubleshoot = get_option( 'imcm-setting-troubleshoot' );
-	if ( ! isset( $troubleshoot['enable-debug'] ) ) {
-	    $troubleshoot['enable-debug'] = 0;
-	}
+$general 		= get_option( 'imcm-setting-general' );
+$troubleshoot 	= get_option( 'imcm-setting-troubleshoot' );
 ?>
 <div class="wrap">
 	<div id="imcm-settings">
@@ -22,7 +15,7 @@
 				    <li><a href="#troubleshoot"><span class="dashicons dashicons-admin-tools"></span> <?php _e( 'Troubleshoot', 'checkout-manager' ); ?></a></li>
 				  </ul>
 			</div>
-		  
+
 		  	<div class="imcm-setting-tabs-content">
 				<div class="imcm-setting-heading">
 					<h4><?php _e( 'Settings', 'checkout-manager' ); ?></h4>
@@ -38,7 +31,8 @@
 							<p class="imcm-setting-form-group">
 								<label class="imcm-setting-form-label" for="fields-editor"><?php _e( 'Checkout Fields', 'checkout-manager' ); ?></label>
 								<label class="switch imcm-setting-form-field">
-								  	<input id="fields-editor" type="checkbox" name="fields-editor" <?php checked( $general['fields-editor'], 'on' ); ?>>
+									<input id="fields-editor" type='checkbox' name='fields-editor' <?php checked( isset( $general['fields-editor'] ) ); ?> value='1'>
+    
 								  	<span class="slider"></span>
 								</label>
 							</p>
@@ -56,7 +50,7 @@
 							<p class="imcm-setting-form-group">
 								<label class="imcm-setting-form-label" for="enable-debug"><?php _e( 'Enable Debug', 'checkout-manager' ); ?></label>
 								<label class="switch imcm-setting-form-field">
-								  	<input id="enable-debug" type="checkbox" name="enable-debug" <?php checked( $troubleshoot['enable-debug'], 'on' ); ?>>
+									<input id="enable-debug" type='checkbox' name='enable-debug' <?php checked( isset( $troubleshoot['enable-debug'] ) ); ?> value='1'>
 								  	<span class="slider"></span>
 								</label>
 								<span class="cx-desc"></span>

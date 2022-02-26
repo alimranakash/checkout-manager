@@ -50,7 +50,7 @@ class Assets {
                 'version' => filemtime( IMCM_PATH . "/assets/css/admin{$min}.css" ),
             ],
             'jquery-ui' => [
-                'src'     => "//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css",
+                'src'     => IMCM_ASSETS . "/css/jquery-ui.css",
                 'version' => time(),
             ]
         ];
@@ -70,12 +70,12 @@ class Assets {
             'front-script' => [
                 'src'     => IMCM_ASSETS . "/js/front{$min}.js",
                 'version' => filemtime( IMCM_PATH . "/assets/js/front{$min}.js" ),
-                'deps'    => [ 'jquery', 'wp-util' ],
+                'deps'    => [ 'jquery' ],
             ],
             'admin-script' => [
                 'src'     => IMCM_ASSETS . "/js/admin{$min}.js",
                 'version' => filemtime( IMCM_PATH . "/assets/js/admin{$min}.js" ),
-                'deps'    => [ 'jquery', 'wp-util' ],
+                'deps'    => [ 'jquery' ],
             ]
         ];
     }

@@ -3,7 +3,7 @@
 
 	$(document).on("click",".imcm-setting-save-button",function(e) {
 		e.preventDefault();
-		$('.imcm-setting').submit();
+		$('.ui-tabs-panel[aria-hidden="false"] .imcm-setting, .imcm-checkout-fields-panel .imcm-setting').submit();
 	});
 	
 	$('.imcm-setting').submit(function(e) {
@@ -201,7 +201,6 @@
 	$("a.ui-tabs-anchor").click(function (e) {
         e.preventDefault();
 
-        // $(this).removeClass("woocm-active-tab");
         var target = $(this).attr("href");
         localStorage.setItem("woocm-active-tab", target);
     });

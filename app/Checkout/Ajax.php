@@ -26,8 +26,8 @@ class Ajax {
 	}
 
     private function hooks() {
+        add_action( 'wp_ajax_checkout-fields', [ $this, 'save_checkout_fields' ] );
         add_action( 'wp_ajax_reset-checkout-fields', [ $this, 'reset_checkout_fields' ] );
-        // add_action( 'wp_ajax_nopriv_callback-name', [ $this, 'callback_name' ] );
     }
 
     public function save_checkout_fields() {
@@ -47,9 +47,9 @@ class Ajax {
         unset( $_POST['_wpnonce'] );
         unset( $_POST['_wp_http_referer'] );
 
-        update_option( 'imcm-manager_checkout', $_POST );
+        update_option( $option_name, sanitize_text_field( serialize( $_POST ) ) );
         
-        do_action( 'imch-settings-saved', $option_name, $_POST );
+        do_action( 'imch-checkout-fields', $option_name, sanitize_text_field( serialize( $_POST ) ) );
         
         $response['status']     = 1;
         $response['page_load']  = $page_load;

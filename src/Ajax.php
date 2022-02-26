@@ -27,8 +27,6 @@ class Ajax {
 
     private function hooks() {
         add_action( 'wp_ajax_imcm-setting', [ $this, 'imcm_setting' ] );
-        add_action( 'wp_ajax_reset-setting', [ $this, 'reset_setting' ] );
-        // add_action( 'wp_ajax_nopriv_callback-name', [ $this, 'callback_name' ] );
     }
 
     public function imcm_setting() {
@@ -49,9 +47,9 @@ class Ajax {
         unset( $_POST['_wpnonce'] );
         unset( $_POST['_wp_http_referer'] );
 
-        update_option( $option_name, $_POST );
+        update_option( $option_name, imcm_sanitize_field( $_POST ) );
         
-        do_action( 'imcm-settings-saved', $option_name, $_POST );
+        do_action( 'imcm-settings-saved', $option_name, imcm_sanitize_field( $_POST ) );
         
         $response['status']     = 1;
         $response['page_load']  = $page_load;
