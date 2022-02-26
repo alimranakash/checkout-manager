@@ -33,7 +33,7 @@ final class Plugin {
      *
      * @var string
      */
-    public $version = '5.4.1';
+    public $version = '0.9';
 
     /**
      * The single instance of the class.
