@@ -9,7 +9,9 @@
             "email": "alimranakash.bd@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "wpplugines/plugin": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "WPPlugines\\Checkout_Manager\\" : "src/",

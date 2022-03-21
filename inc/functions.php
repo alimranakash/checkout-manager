@@ -311,3 +311,26 @@ function imcm_sanitize_field( $field ) {
     return $value;
 }
 endif;
+
+if( ! function_exists( 'imcm_sanitize' ) ) :
+    function imcm_sanitize( $value, $type = 'text' ) {
+        if( ! in_array( $type, [ 'textarea', 'email', 'file', 'class', 'key', 'title', 'user', 'option', 'meta' ] ) ) {
+            $type = 'text';
+        }
+
+        if( array_key_exists( $type,
+            $maps = [
+                'text'      => 'text_field',
+                'textarea'  => 'textarea_field',
+                'file'      => 'file_name',
+                'class'     => 'html_class',
+            ]
+        ) ) {
+            $type = $maps[ $type ];
+        }
+
+        $fn = "sanitize_{$type}";
+
+        return $fn( $value );
+    }
+endif;

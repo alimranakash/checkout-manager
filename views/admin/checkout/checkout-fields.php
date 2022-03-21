@@ -10,9 +10,6 @@
 	}
 
 	$_woocm_fields = get_option( 'imcm-checkout-fields' ) ? : '';
-	// pri($_woocm_fields);
-
-	$_woocm_fields = unserialize( $_woocm_fields );
 
 	if ( isset( $_woocm_fields['woocm_fields'] ) ) {
 		$types = $_woocm_fields['woocm_fields'];
@@ -143,8 +140,7 @@
 														$set_options 	= isset( $field['options'] ) ? $field['options'] : '';
 														$label 			= esc_attr( $field['label'] );
 
-														$html = "";
-														$html .= "<li class='woocm-list-item'>
+														echo "<li class='woocm-list-item'>
 															<h4 data-name='woocm-{$name}'>
 																<span class='dashicons dashicons-menu-alt2'></span>
 																<span>{$field['label']}</span>
@@ -202,7 +198,6 @@
 																</p>
 															</div>
 														</li>";
-														echo $html;
 													endforeach; 
 													?>
 
@@ -212,7 +207,7 @@
 													<?php 
 													printf( '<button class="woocm-modal-toggle" data-type="%s" title="%s">%s %s</button>',
 														$type,
-														__( 'Add ' . ucwords( $type ) . ' Field' , 'checkout-manager' ),
+														__( 'Add ' . esc_html( ucwords( $type ) ) . ' Field' , 'checkout-manager' ),
 														'<span class="dashicons dashicons-plus"></span>',
 														__( 'Add Field' , 'checkout-manager' )
 													);
@@ -223,13 +218,12 @@
 													<div class="woocm-modal-wrapper woocm-modal-transition">
 														<div class="woocm-modal-header">
 															<button class="woocm-modal-close woocm-modal-toggle"><span class="dashicons dashicons-no-alt"></span></button>
-															<h2 class="woocm-modal-heading"><?php _e( 'Add ' . ucwords( $type ) . ' Field' , 'checkout-manager' ); ?></h2>
+															<h2 class="woocm-modal-heading"><?php _e( 'Add ' . esc_html( ucwords( $type ) ) . ' Field' , 'checkout-manager' ); ?></h2>
 														</div>
 
 														<div class="woocm-modal-body">
 															<?php 
-															$html = "";
-															$html .= "<div class='woocm-modal-content'>
+															echo "<div class='woocm-modal-content'>
 																<div id='woocm-clone-{$type}-item' class='woocm-clone-item-panel'>
 																	<li class='woocm-list-item ui-sortable-handle'>
 
@@ -291,7 +285,6 @@
 																	<button class='woocm-clone-item' data-type='{$type}'>Insert Field</button>
 																</div>
 															</div>";
-															echo $html;
 															?>
 														</div>
 													</div>

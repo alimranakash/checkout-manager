@@ -47,9 +47,9 @@ class Ajax {
         unset( $_POST['_wpnonce'] );
         unset( $_POST['_wp_http_referer'] );
 
-        update_option( $option_name, sanitize_text_field( serialize( $_POST ) ) );
+        update_option( $option_name, map_deep( wp_unslash( $_POST ), 'imcm_sanitize' ) );
         
-        do_action( 'imch-checkout-fields', $option_name, sanitize_text_field( serialize( $_POST ) ) );
+        do_action( 'imch-checkout-fields', $option_name, map_deep( wp_unslash( $_POST ), 'imcm_sanitize' ) );
         
         $response['status']     = 1;
         $response['page_load']  = $page_load;
@@ -67,8 +67,6 @@ class Ajax {
         }
 
         delete_option( 'imcm-checkout-fields' );
-        
-        do_action( 'imcm-reset-settings', $option_name, $_POST );
         
         $response['status']     = 1;
         $response['message']    = __( 'Reset Settings!', 'checkout-manager' );
