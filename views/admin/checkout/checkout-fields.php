@@ -101,7 +101,7 @@
 														$readonly 		= '';
 														$hide 			= '';
 
-														if ( woocm_is_default_field( $name ) ) {
+														if ( imcm_is_default_field( $name ) ) {
 															$disabled 	= 'disabled';
 															$readonly 	= 'readonly';
 															$hide 		= 'woocm-hide';

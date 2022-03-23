@@ -52,7 +52,7 @@ class Front {
                         $_fields[ $type ][ $name ]['type']      = $wc_fields[ $type ][ $name ]['type'];
                     }
 
-                    if ( ! woocm_is_default_field( $name ) ) {
+                    if ( ! imcm_is_default_field( $name ) ) {
                         $_fields[ $type ][ $name ]['type']      = $field['type'];
                     }
 

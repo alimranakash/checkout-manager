@@ -1,7 +1,7 @@
 <?php 
 
-if( !function_exists( 'pri' ) ) :
-function pri( $data ) {
+if( !function_exists( 'imcm_pri' ) ) :
+function imcm_pri( $data ) {
     echo '<pre>';
     if( is_object( $data ) || is_array( $data ) ) {
         print_r( $data );
@@ -214,8 +214,8 @@ endif;
  *
  * @return boolean
  */
-if( !function_exists( 'woocm_is_default_field' ) ) :
-function woocm_is_default_field( $field_id ) {
+if( !function_exists( 'imcm_is_default_field' ) ) :
+function imcm_is_default_field( $field_id ) {
 
     $default_fields = imcm_wc_fields();
     foreach ( $default_fields as $key => $fields ) {
@@ -254,7 +254,7 @@ function imcm_custom_checkout_fields( $order ) {
     $_custom_fields = [];
     foreach ( $types as $type => $fields ) {
         foreach ( $fields as $name => $field ) {
-            if ( !woocm_is_default_field( $name ) ) {
+            if ( !imcm_is_default_field( $name ) ) {
                 $_custom_fields[ $type ][ $name ] = $field['label'];
             }
         }
