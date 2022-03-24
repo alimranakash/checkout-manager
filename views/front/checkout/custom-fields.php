@@ -12,7 +12,7 @@ if ( empty( $custom_fields['billing'] ) && empty( $custom_fields['shipping'] ) )
 wp_enqueue_style( 'front-style' );
 
 echo '<section class="imcm-additional-fields-details woocommerce-columns woocommerce-columns--2 woocommerce-columns--addresses col2-set addresses">';
-echo '<h2 class="woocommerce-column__title">'. __( 'Custom Fields', 'wc-one-pager' ) .'</h2>';
+echo '<h2 class="woocommerce-column__title">'. __( 'Custom Fields', 'checkout-manager' ) .'</h2>';
 
 $count = 1;
 foreach ( $custom_fields as $key => $custom_field ) {

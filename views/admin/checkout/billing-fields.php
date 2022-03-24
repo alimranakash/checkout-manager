@@ -5,7 +5,7 @@ $custom_fields 	= imcm_custom_checkout_fields( $order );
 if ( empty( $custom_fields['billing'] ) ) return;
 
 $billing_fields	= $custom_fields['billing'];
-echo '<h3>'. __( 'Custom Billing Fields', 'wc-one-pager' ) .'</h3>';
+echo '<h3>'. __( 'Custom Billing Fields', 'checkout-manager' ) .'</h3>';
 echo '<div class="address">';
 
 foreach ( $billing_fields as $label => $value ) {
