@@ -297,3 +297,17 @@ function imcm_enable_debug() {
     return $enable_debug;
 }
 endif;
+
+if( !function_exists( 'imcm_sanitize_field' ) ) :
+function imcm_sanitize_field( $field ) {
+
+    if( is_array( $field ) ) {
+        $value = array_map( 'sanitize_text_field', $field );
+    }
+    else {
+        $value = sanitize_text_field( $field );
+    }
+
+    return $value;
+}
+endif;

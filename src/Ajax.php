@@ -47,9 +47,13 @@ class Ajax {
         unset( $_POST['_wpnonce'] );
         unset( $_POST['_wp_http_referer'] );
 
-        update_option( $option_name, map_deep( wp_unslash( $_POST ), 'sanitize_text_field' ) );
-        
-        do_action( 'imcm-settings-saved', $option_name, map_deep( wp_unslash( $_POST ), 'sanitize_text_field' ) );
+        $fields = [];
+        foreach ( $_POST as $key => $field ) {
+            $fields[ $key ] = imcm_sanitize_field( $field );
+        }
+
+        update_option( $option_name, $fields );
+        do_action( 'imcm-settings-saved', $option_name, $fields );
         
         $response['status']     = 1;
         $response['page_load']  = $page_load;

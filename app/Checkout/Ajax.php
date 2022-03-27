@@ -47,9 +47,37 @@ class Ajax {
         unset( $_POST['_wpnonce'] );
         unset( $_POST['_wp_http_referer'] );
 
-        update_option( $option_name, map_deep( wp_unslash( $_POST ), 'sanitize_text_field' ) );
-        
-        do_action( 'imch-checkout-fields', $option_name, map_deep( wp_unslash( $_POST ), 'sanitize_text_field' ) );
+        $custom_billing_fields = [];
+        if ( isset( $_POST['woocm_fields']['billing'] ) ) {
+            foreach ( $_POST['woocm_fields']['billing'] as $billing ) {
+                $custom_billing_fields[ $billing['id'] ] = imcm_sanitize_field( $billing );
+            }
+        }
+
+        $custom_shipping_fields = [];
+        if ( isset( $_POST['woocm_fields']['shipping'] ) ) {
+            foreach ( $_POST['woocm_fields']['shipping'] as $shipping ) {
+                $custom_shipping_fields[ $shipping['id'] ] = imcm_sanitize_field( $shipping );
+            }
+        }
+
+        $custom_order_fields = [];
+        if ( isset( $_POST['woocm_fields']['order'] ) ) {
+            foreach ( $_POST['woocm_fields']['order'] as $order ) {
+                $custom_order_fields[ $order['id'] ] = imcm_sanitize_field( $order );
+            }
+        }
+
+        $woocm_fields = [
+            'woocm_fields'  => [
+                'billing'   => $custom_billing_fields,
+                'shipping'  => $custom_shipping_fields,
+                'order'     => $custom_order_fields,
+            ]
+        ];
+
+        update_option( $option_name, $woocm_fields );
+        do_action( 'imch-checkout-fields', $option_name, $woocm_fields );
         
         $response['status']     = 1;
         $response['page_load']  = $page_load;
