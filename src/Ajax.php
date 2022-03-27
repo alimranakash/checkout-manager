@@ -48,8 +48,10 @@ class Ajax {
         unset( $_POST['_wp_http_referer'] );
 
         $fields = [];
-        foreach ( $_POST as $key => $field ) {
-            $fields[ $key ] = imcm_sanitize_field( $field );
+        if ( ! empty( $_POST ) && is_array( $_POST ) ) {
+            foreach ( $_POST as $key => $field ) {
+                $fields[ $key ] = imcm_sanitize_field( $field );
+            }
         }
 
         update_option( $option_name, $fields );
