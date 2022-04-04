@@ -47,24 +47,25 @@ class Ajax {
         unset( $_POST['_wpnonce'] );
         unset( $_POST['_wp_http_referer'] );
 
+
         $custom_billing_fields = [];
         if ( isset( $_POST['woocm_fields']['billing'] ) ) {
-            foreach ( $_POST['woocm_fields']['billing'] as $billing ) {
-                $custom_billing_fields[ $billing['id'] ] = imcm_sanitize_field( $billing );
+            foreach ( $_POST['woocm_fields']['billing'] as $key => $billing ) {
+                $custom_billing_fields[ $key ] = imcm_sanitize_field( $billing );
             }
         }
 
         $custom_shipping_fields = [];
         if ( isset( $_POST['woocm_fields']['shipping'] ) ) {
-            foreach ( $_POST['woocm_fields']['shipping'] as $shipping ) {
-                $custom_shipping_fields[ $shipping['id'] ] = imcm_sanitize_field( $shipping );
+            foreach ( $_POST['woocm_fields']['shipping'] as $key => $shipping ) {
+                $custom_shipping_fields[ $key ] = imcm_sanitize_field( $shipping );
             }
         }
 
         $custom_order_fields = [];
         if ( isset( $_POST['woocm_fields']['order'] ) ) {
-            foreach ( $_POST['woocm_fields']['order'] as $order ) {
-                $custom_order_fields[ $order['id'] ] = imcm_sanitize_field( $order );
+            foreach ( $_POST['woocm_fields']['order'] as $key => $order ) {
+                $custom_order_fields[ $key ] = imcm_sanitize_field( $order );
             }
         }
 
