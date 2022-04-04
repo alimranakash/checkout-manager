@@ -18,6 +18,13 @@ It allows you to add, edit, customize, and delete fields on the checkout page.
 == Installation ==
 Installation is fairly straight forward. Install it from the WordPress plugin repository. 
 
+== Screenshots ==
+1. screenshot-1
+2. screenshot-2
+3. screenshot-3
+4. screenshot-4
+5. screenshot-5
+
 == Changelog ==
 
 = 0.9 =
