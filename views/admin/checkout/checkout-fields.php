@@ -190,6 +190,7 @@
 																	  	<span class='woocm-item-slider woocm-item-round'></span>
 																	</label>
 																</p>
+																
 																<p class='woocm-item-field-class'>
 																	<label class='woocm-item-label' for='cls_{$field['id']}'>{$class_name_text}</label>
 																	<select id='cls_{$field['id']}' name='woocm_fields[{$type}][{$name}][class]'>
