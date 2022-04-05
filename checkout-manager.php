@@ -3,7 +3,7 @@
  * Plugin Name:       CheckOut Manager
  * Plugin URI:        https://wpplugines.com/
  * Description:       CheckOut Manager - The most advanced and powerful customization of your checkout page.
- * Version:           0.9
+ * Version:           1.0.0
  * Author:            Al Imran Akash
  * Author URI:        https://profiles.wordpress.org/al-imran-akash/
  * Text Domain:       checkout-manager
