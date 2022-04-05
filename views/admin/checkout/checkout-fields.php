@@ -29,9 +29,9 @@
 	$newfield_text		= __( 'New Field', 'checkout-manager' );
 	$newfield_id		= __( 'new_field', 'checkout-manager' );
 	$display_text		= __( 'Display', 'checkout-manager' );
-	$in_emails			= __( 'In Emails', 'checkout-manager' );
-	$in_thakyou			= __( 'In Thankyou', 'checkout-manager' );
-	$in_order			= __( 'In Order Details Pages', 'checkout-manager' );
+	$in_emails_text		= __( 'In Emails', 'checkout-manager' );
+	$in_thakyou_text	= __( 'In Thankyou Page', 'checkout-manager' );
+	$in_order_text		= __( 'In Order Details Pages', 'checkout-manager' );
 
 	$classes = [ 
 		'form-row-first' 	=>  __( 'Left', 'checkout-manager' ),
@@ -125,6 +125,27 @@
 															$required 	= '';
 														}
 
+														if ( isset( $field['in_emails'] ) && $field['in_emails'] == true ) {
+															$in_emails 	= 'checked';
+														}
+														else{
+															$in_emails 	= '';
+														}
+
+														if ( isset( $field['in_thakyou'] ) && $field['in_thakyou'] == true ) {
+															$in_thakyou 	= 'checked';
+														}
+														else{
+															$in_thakyou 	= '';
+														}
+
+														if ( isset( $field['in_order'] ) && $field['in_order'] == true ) {
+															$in_order 	= 'checked';
+														}
+														else{
+															$in_order 	= '';
+														}
+
 														$class_options = '';
 														foreach ( $classes as $value => $class ) {
 															$class_options .= "<option value='{$value}' ". selected( $value, $field['class'], false ) .">{$class}</option>";
@@ -203,26 +224,26 @@
 																</p>
 
 																<h2>{$display_text}</h2>
-																<p class='woocm-item-field-required'>
-																	<label for='{$in_emails}'>{$in_emails}</label>
+																<p class='woocm-item-field-in_emails'>
+																	<label for='{$in_emails}'>{$in_emails_text}</label>
 																	<label class='woocm-item-switch'>
-																	  	<input id='{$required_text}' type='checkbox' name='woocm_fields[{$type}][{$name}][required]' {$required}>
+																	  	<input id='{$in_emails}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_emails]' {$in_emails}>
 																	  	<span class='woocm-item-slider woocm-item-round'></span>
 																	</label>
 																</p>
 																
-																<p class='woocm-item-field-required'>
-																	<label for='{$in_thakyou}'>{$in_thakyou}</label>
+																<p class='woocm-item-field-in_thakyou'>
+																	<label for='{$in_thakyou}'>{$in_thakyou_text}</label>
 																	<label class='woocm-item-switch'>
-																	  	<input id='{$required_text}' type='checkbox' name='woocm_fields[{$type}][{$name}][required]' {$required}>
+																	  	<input id='{$in_thakyou}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_thakyou]' {$in_thakyou}>
 																	  	<span class='woocm-item-slider woocm-item-round'></span>
 																	</label>
 																</p>
 																
-																<p class='woocm-item-field-required'>
-																	<label for='{$in_order}'>{$in_order}</label>
+																<p class='woocm-item-field-in_order'>
+																	<label for='{$in_order}'>{$in_order_text}</label>
 																	<label class='woocm-item-switch'>
-																	  	<input id='{$required_text}' type='checkbox' name='woocm_fields[{$type}][{$name}][required]' {$required}>
+																	  	<input id='{$in_order}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_order]' {$in_order}>
 																	  	<span class='woocm-item-slider woocm-item-round'></span>
 																	</label>
 																</p>
