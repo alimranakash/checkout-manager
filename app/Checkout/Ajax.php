@@ -47,7 +47,6 @@ class Ajax {
         unset( $_POST['_wpnonce'] );
         unset( $_POST['_wp_http_referer'] );
 
-
         $custom_billing_fields = [];
         if ( isset( $_POST['woocm_fields']['billing'] ) ) {
             foreach ( $_POST['woocm_fields']['billing'] as $key => $billing ) {
