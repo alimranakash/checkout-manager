@@ -329,6 +329,31 @@
 																					{$class_options}
 																				</select>
 																			</p>
+																			<h2>{$display_text}</h2>
+
+																			<p class='woocm-item-field-in_emails'>
+																				<label for='{$in_emails}'>{$in_emails_text}</label>
+																				<label class='woocm-item-switch'>
+																				  	<input id='{$in_emails}' type='checkbox' %attrname%='woocm_fields[{$type}][{$type}_%%%][in_emails]' {$in_emails}>
+																				  	<span class='woocm-item-slider woocm-item-round'></span>
+																				</label>
+																			</p>
+
+																			<p class='woocm-item-field-in_thakyou'>
+																				<label for='{$in_thakyou}'>{$in_thakyou_text}</label>
+																				<label class='woocm-item-switch'>
+																				  	<input id='{$in_thakyou}' type='checkbox' %attrname%='woocm_fields[{$type}][{$type}_%%%][in_thakyou]' {$in_thakyou}>
+																				  	<span class='woocm-item-slider woocm-item-round'></span>
+																				</label>
+																			</p>
+
+																			<p class='woocm-item-field-in_order'>
+																				<label for='{$in_order}'>{$in_order_text}</label>
+																				<label class='woocm-item-switch'>
+																				  	<input id='{$in_order}' type='checkbox' %attrname%='woocm_fields[{$type}][{$type}_%%%][in_order]' {$in_order}>
+																				  	<span class='woocm-item-slider woocm-item-round'></span>
+																				</label>
+																			</p>
 																		</div>
 																	</li>
 																</div>
