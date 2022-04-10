@@ -18,7 +18,7 @@ $additional_fields = [];
 foreach ( $types as $type => $fields ) {
     foreach ( $fields as $name => $field ) {
         if ( ! imcm_is_default_field( $name ) ) {
-            $additional_fields[ $name ] = isset( $field['in_thakyou'] ) ? $field['in_thakyou'] : '';
+            $additional_fields[ $name ] = isset( $field['in_thakyou'] ) ? sanitize_text_field( $field['in_thakyou'] ) : '';
         }
     }
 }

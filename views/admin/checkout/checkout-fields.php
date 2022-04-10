@@ -67,7 +67,8 @@
 			<div class="imcm-setting-tabs-panel">
 				<ul>
 				    <li class=""><a href="#checkout-fields"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Checkout Fields', 'checkout-manager' ); ?></a></li>
-				    <!-- <li class=""><a href="#fields-style"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Fields Style', 'checkout-manager' ); ?></a></li> -->
+				    <li class=""><a href="#display-position"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Display Position', 'checkout-manager' ); ?></a></li>
+				    <li class=""><a href="#fields-style"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Fields Style', 'checkout-manager' ); ?></a></li>
 				  </ul>
 			</div>
 		  
@@ -380,9 +381,14 @@
 					</div>
 				</form>
 				<div class="cx-response-message" style="display: none;"></div>
-				<!-- <div id="fields-style">
+				<div id="display-position">
 					Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Quia iure cumque quam eum consectetur vero animi provident numquam, ratione temporibus. Eaque accusantium, inventore architecto. Vel nesciunt, facere ab iure nobis.
-				</div> -->
+					Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Quia iure cumque quam eum consectetur vero animi provident numquam, ratione temporibus. Eaque accusantium, inventore architecto. Vel nesciunt, facere ab iure nobis.
+					Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Quia iure cumque quam eum consectetur vero animi provident numquam, ratione temporibus. Eaque accusantium, inventore architecto. Vel nesciunt, facere ab iure nobis.
+				</div>
+				<div id="fields-style">
+					Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Quia iure cumque quam eum consectetur vero animi provident numquam, ratione temporibus. Eaque accusantium, inventore architecto. Vel nesciunt, facere ab iure nobis.
+				</div>
 				<div class="imcm-setting-footer">
 					<button class="imcm-setting-button imcm-setting-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
 					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
