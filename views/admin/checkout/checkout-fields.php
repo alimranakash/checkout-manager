@@ -101,16 +101,6 @@
 													foreach ( $fields as $name => $field ): 
 														// woocm_pri($field);
 
-														$disabled 		= '';
-														$readonly 		= '';
-														$hide 			= '';
-
-														if ( imcm_is_default_field( $name ) ) {
-															$disabled 	= 'disabled';
-															$readonly 	= 'readonly';
-															$hide 		= 'woocm-hide';
-														}
-
 														if ( isset( $field['enabled'] ) && $field['enabled'] == true ) {
 															$enabled 	= 'checked';
 														}
@@ -165,6 +155,42 @@
 														$set_options 	= isset( $field['options'] ) ? $field['options'] : '';
 														$label 			= esc_attr( $field['label'] );
 
+														$disabled 		= '';
+														$readonly 		= '';
+														$hide 			= '';
+
+														$display_html 	= "<h2>{$display_text}</h2>
+														<p class='woocm-item-field-in_emails'>
+															<label for='{$in_emails}'>{$in_emails_text}</label>
+															<label class='woocm-item-switch'>
+															  	<input id='{$in_emails}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_emails]' {$in_emails}>
+															  	<span class='woocm-item-slider woocm-item-round'></span>
+															</label>
+														</p>
+														
+														<p class='woocm-item-field-in_thakyou'>
+															<label for='{$in_thakyou}'>{$in_thakyou_text}</label>
+															<label class='woocm-item-switch'>
+															  	<input id='{$in_thakyou}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_thakyou]' {$in_thakyou}>
+															  	<span class='woocm-item-slider woocm-item-round'></span>
+															</label>
+														</p>
+														
+														<p class='woocm-item-field-in_order'>
+															<label for='{$in_order}'>{$in_order_text}</label>
+															<label class='woocm-item-switch'>
+															  	<input id='{$in_order}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_order]' {$in_order}>
+															  	<span class='woocm-item-slider woocm-item-round'></span>
+															</label>
+														</p>";
+														
+														if ( imcm_is_default_field( $name ) ) {
+															$disabled 		= 'disabled';
+															$readonly 		= 'readonly';
+															$hide 			= 'woocm-hide';
+															$display_html 	= '';
+														}
+
 														echo "<li class='woocm-list-item'>
 															<h4 data-name='woocm-{$name}'>
 																<span class='dashicons dashicons-menu-alt2'></span>
@@ -216,6 +242,7 @@
 																	</label>
 																</p>
 
+
 																<p class='woocm-item-field-class'>
 																	<label class='woocm-item-label' for='cls_{$field['id']}'>{$class_name_text}</label>
 																	<select id='cls_{$field['id']}' name='woocm_fields[{$type}][{$name}][class]'>
@@ -223,30 +250,8 @@
 																	</select>
 																</p>
 
-																<h2>{$display_text}</h2>
-																<p class='woocm-item-field-in_emails'>
-																	<label for='{$in_emails}'>{$in_emails_text}</label>
-																	<label class='woocm-item-switch'>
-																	  	<input id='{$in_emails}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_emails]' {$in_emails}>
-																	  	<span class='woocm-item-slider woocm-item-round'></span>
-																	</label>
-																</p>
+																{$display_html}
 																
-																<p class='woocm-item-field-in_thakyou'>
-																	<label for='{$in_thakyou}'>{$in_thakyou_text}</label>
-																	<label class='woocm-item-switch'>
-																	  	<input id='{$in_thakyou}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_thakyou]' {$in_thakyou}>
-																	  	<span class='woocm-item-slider woocm-item-round'></span>
-																	</label>
-																</p>
-																
-																<p class='woocm-item-field-in_order'>
-																	<label for='{$in_order}'>{$in_order_text}</label>
-																	<label class='woocm-item-switch'>
-																	  	<input id='{$in_order}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_order]' {$in_order}>
-																	  	<span class='woocm-item-slider woocm-item-round'></span>
-																	</label>
-																</p>
 															</div>
 														</li>";
 													endforeach; 

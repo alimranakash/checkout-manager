@@ -8,8 +8,11 @@ $billing_fields	= $custom_fields['shipping'];
 echo '<h3>'. __( 'Custom Shipping Fields', 'checkout-manager' ) .'</h3>';
 echo '<div class="address">';
 
-foreach ( $billing_fields as $label => $value ) {
-	echo "<p><strong>". esc_html( $label ) .":</strong> ". esc_html( $value ) ."</p>";
+foreach ( $billing_fields as $label => $single_fields ) {
+	foreach ( $single_fields as $key => $value ) {
+        echo "<p><strong>". esc_attr( $key ) .":</strong> ". esc_html( $value ) ."</p>";
+    }
+	// echo "<p><strong>". esc_html( $label ) .":</strong> ". esc_html( $value ) ."</p>";
 }
 
 echo '</div>';

@@ -264,7 +264,8 @@ function imcm_custom_checkout_fields( $order ) {
     if ( isset( $_custom_fields['billing'] ) ) {
         foreach ( $_custom_fields['billing'] as $key => $label ) {
             if ( array_key_exists( '_'. $key, $meta_datas ) ) {
-                $custom_billing_fields[ $label ] = $meta_datas['_'. $key];
+                // $custom_billing_fields[ $label ] = $meta_datas['_'. $key];
+                $custom_billing_fields[ $key ][ $label ] = $meta_datas['_'. $key];
             }    
         }
     }
@@ -273,7 +274,8 @@ function imcm_custom_checkout_fields( $order ) {
     if ( isset( $_custom_fields['shipping'] ) ) {
         foreach ( $_custom_fields['shipping'] as $key => $label ) {
             if ( array_key_exists( '_'. $key, $meta_datas ) ) {
-                $custom_shipping_fields[ $label ] = $meta_datas['_'. $key];
+                // $custom_shipping_fields[ $label ] = $meta_datas['_'. $key];
+                $custom_shipping_fields[ $key ][ $label ] = $meta_datas['_'. $key];
             }    
         }
     }
