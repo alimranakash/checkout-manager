@@ -396,7 +396,40 @@
 						<input type="hidden" name="option_name" value="imcm-checkout-fields">
 						<input type="hidden" name="page_load" value="0">
 						<div class="imcm-setting-content">
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla alias obcaecati, perferendis, animi laboriosam exercitationem odit sequi, nemo, amet delectus tempora reprehenderit in expedita hic. Laboriosam maxime voluptatem aliquid molestiae.
+							<div class="imcm-display-position-panel">
+								<p>
+									<label for=""><?php _e( 'On Thankyou Page', 'checkout-manager' ); ?></label>
+									<select name="" id="">
+										<option value="no"><?php _e( 'Dont\'t Show', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_before_thankyou"><?php _e( 'Before Thankyou', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_order_details_before_order_table"><?php _e( 'Before Order Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_after_order_details"><?php _e( 'After Order Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_order_details_after_customer_details"><?php _e( 'After All Details', 'checkout-manager' ); ?></option>
+									</select>
+								</p>
+								<p>
+									<label for=""><?php _e( 'On Email Template', 'checkout-manager' ); ?></label>
+									<select name="" id="">
+										<option value="no"><?php _e( 'Dont\'t Show', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_email_order_details"><?php _e( 'Order Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_email_order_meta"><?php _e( 'Order Meta', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_email_customer_details"><?php _e( 'Customer Details', 'checkout-manager' ); ?></option>
+									</select>
+								</p>
+								<p>
+									<label for=""><?php _e( 'On Order Edit Page', 'checkout-manager' ); ?></label>
+									<select name="" id="">
+										<option value="no"><?php _e( 'Dont\'t Show', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_data_after_order_details"><?php _e( 'After Order Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_data_after_billing_address"><?php _e( 'After Billing Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_data_after_shipping_address"><?php _e( 'After Shipping Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_items_after_shipping"><?php _e( 'Order Items After Shipping', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_totals_after_tax"><?php _e( 'After Tax', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_totals_after_total"><?php _e( 'After Order Total', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_order_item_add_action_buttons"><?php _e( 'After Action Buttons', 'checkout-manager' ); ?></option>
+									</select>
+								</p>
+							</div>
 						</div>
 					</form>
 					<div class="cx-response-message" style="display: none;"></div>
