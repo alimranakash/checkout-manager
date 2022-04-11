@@ -68,21 +68,21 @@
 				<ul>
 				    <li class=""><a href="#checkout-fields"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Checkout Fields', 'checkout-manager' ); ?></a></li>
 				    <li class=""><a href="#display-position"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Display Position', 'checkout-manager' ); ?></a></li>
-				    <li class=""><a href="#fields-style"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Fields Style', 'checkout-manager' ); ?></a></li>
+				    <li class=""><a href="#style-options"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Style Options', 'checkout-manager' ); ?></a></li>
 				  </ul>
 			</div>
 		  
 		  	<div class="imcm-setting-tabs-content imcm-checkout-fields-panel">
-				<div class="imcm-setting-heading">
-					<h4><?php _e( 'Settings', 'checkout-manager' ); ?></h4>
-					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
-				</div>
-				<form action="" id="imcm-setting-form" class="imcm-setting">
-					<?php wp_nonce_field( 'checkout-manager' ); ?>
-					<input type="hidden" name="action" value="checkout-fields">
-					<input type="hidden" name="option_name" value="imcm-checkout-fields">
-					<input type="hidden" name="page_load" value="0">
-					<div id="checkout-fields">
+				<div id="checkout-fields">
+					<div class="imcm-setting-heading">
+						<h4><?php _e( 'Settings', 'checkout-manager' ); ?></h4>
+						<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
+					<form action="" id="imcm-setting-form" class="imcm-setting">
+						<?php wp_nonce_field( 'checkout-manager' ); ?>
+						<input type="hidden" name="action" value="checkout-fields">
+						<input type="hidden" name="option_name" value="imcm-checkout-fields">
+						<input type="hidden" name="page_load" value="0">
 			  			<div class="imcm-setting-content">
 			  				<div id="woocm-checkout-panel">
 								<div class="woocm-checkout-panel-tabs">
@@ -378,20 +378,52 @@
 								</div>
 							</div>
 						</div>
+					</form>
+					<div class="cx-response-message" style="display: none;"></div>
+					<div class="imcm-setting-footer">
+						<button class="imcm-setting-button imcm-setting-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
+						<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
 					</div>
-				</form>
-				<div class="cx-response-message" style="display: none;"></div>
+				</div>
 				<div id="display-position">
-					Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Quia iure cumque quam eum consectetur vero animi provident numquam, ratione temporibus. Eaque accusantium, inventore architecto. Vel nesciunt, facere ab iure nobis.
-					Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Quia iure cumque quam eum consectetur vero animi provident numquam, ratione temporibus. Eaque accusantium, inventore architecto. Vel nesciunt, facere ab iure nobis.
-					Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Quia iure cumque quam eum consectetur vero animi provident numquam, ratione temporibus. Eaque accusantium, inventore architecto. Vel nesciunt, facere ab iure nobis.
+					<div class="imcm-setting-heading">
+						<h4><?php _e( 'Display Position', 'checkout-manager' ); ?></h4>
+						<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
+					<form action="" id="imcm-display-position-form" class="imcm-setting">
+						<?php wp_nonce_field( 'checkout-manager' ); ?>
+						<input type="hidden" name="action" value="display-position">
+						<input type="hidden" name="option_name" value="imcm-checkout-fields">
+						<input type="hidden" name="page_load" value="0">
+						<div class="imcm-setting-content">
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla alias obcaecati, perferendis, animi laboriosam exercitationem odit sequi, nemo, amet delectus tempora reprehenderit in expedita hic. Laboriosam maxime voluptatem aliquid molestiae.
+						</div>
+					</form>
+					<div class="cx-response-message" style="display: none;"></div>
+					<div class="imcm-setting-footer">
+						<button class="imcm-setting-button imcm-display-position-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
+						<button class="imcm-setting-button imcm-display-position-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
 				</div>
-				<div id="fields-style">
-					Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Quia iure cumque quam eum consectetur vero animi provident numquam, ratione temporibus. Eaque accusantium, inventore architecto. Vel nesciunt, facere ab iure nobis.
-				</div>
-				<div class="imcm-setting-footer">
-					<button class="imcm-setting-button imcm-setting-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
-					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+				<div id="style-options">
+					<div class="imcm-setting-heading">
+						<h4><?php _e( 'Style Options', 'checkout-manager' ); ?></h4>
+						<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
+					<form action="" id="imcm-style-options-form" class="imcm-setting">
+						<?php wp_nonce_field( 'checkout-manager' ); ?>
+						<input type="hidden" name="action" value="style-options">
+						<input type="hidden" name="option_name" value="imcm-checkout-fields">
+						<input type="hidden" name="page_load" value="0">
+						<div class="imcm-setting-content">
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla alias obcaecati, perferendis, animi laboriosam exercitationem odit sequi, nemo, amet delectus tempora reprehenderit in expedita hic. Laboriosam maxime voluptatem aliquid molestiae.
+						</div>
+					</form>
+					<div class="cx-response-message" style="display: none;"></div>
+					<div class="imcm-setting-footer">
+						<button class="imcm-setting-button imcm-style-options-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
+						<button class="imcm-setting-button imcm-style-options-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
 				</div>
 		  	</div>
 		</div>
