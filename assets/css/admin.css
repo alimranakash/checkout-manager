@@ -501,3 +501,17 @@ text-align: right;
 /*switch button*/
 
 /* popup modal */
+
+/*display-position*/
+.imcm-display-position-panel {}
+.imcm-display-position-panel p {}
+.imcm-display-position-panel p label {
+    width: 220px;
+    display: inline-block;
+}
+.imcm-display-position-panel p select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #e3e3e3;
+}
+/*display-position*/

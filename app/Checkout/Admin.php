@@ -26,9 +26,17 @@ class Admin {
     }
 
     private function hooks() {
+
+
+        $display_position   = get_option( 'display_position' );
+        $billing_hooks      = isset( $display_position['order_billing_hooks'] ) ? $display_position['order_billing_hooks'] : '';
+        $shipping_hooks     = isset( $display_position['order_shipping_hooks'] ) ? $display_position['order_shipping_hooks'] : '';
+
+        // imcm_pri($shipping_hooks);
+
         add_action( 'admin_menu', [ $this, 'submenu' ] );
-        add_action( 'woocommerce_admin_order_data_after_billing_address', [ $this, 'custom_billing_fields' ] );
-        add_action( 'woocommerce_admin_order_data_after_shipping_address', [ $this, 'custom_shipping_fields' ] );
+        add_action( $billing_hooks, [ $this, 'custom_billing_fields' ] );
+        add_action( $shipping_hooks, [ $this, 'custom_shipping_fields' ] );
     }
 
     public function submenu() {

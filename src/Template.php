@@ -31,6 +31,7 @@ class Template {
         add_action( 'imcm_custom_billing_fields', [ $this, 'billing_fields' ] );
         add_action( 'imcm_custom_shipping_fields', [ $this, 'shipping_fields' ] );
         add_action( 'imcm_custom_fields', [ $this, 'custom_fields' ] );
+        add_action( 'imcm_custom_email_fields', [ $this, 'email_fields' ] );
     }
 
     public function settings() {
@@ -51,5 +52,9 @@ class Template {
 
     public function custom_fields( $order ) {
         echo Helper::get_template( 'custom-fields', 'views/front/checkout', [ 'order' => $order ] );
+    }
+
+    public function email_fields( $order ) {
+        echo Helper::get_template( 'email-fields', 'views/email', [ 'order' => $order ] );
     }
 }
