@@ -29,7 +29,10 @@ class Ajax {
         add_action( 'wp_ajax_checkout-fields', [ $this, 'save_checkout_fields' ] );
         add_action( 'wp_ajax_reset-checkout-fields', [ $this, 'reset_checkout_fields' ] );
         add_action( 'wp_ajax_display-position', [ $this, 'display_position' ] );
+<<<<<<< HEAD
         add_action( 'wp_ajax_style-options', [ $this, 'style_options' ] );
+=======
+>>>>>>> display
     }
 
     public function save_checkout_fields() {
@@ -119,6 +122,7 @@ class Ajax {
             }
         }
 
+<<<<<<< HEAD
         update_option( 'imcm-display-position', $display_position );
 
         $response['status']     = 1;
@@ -143,6 +147,9 @@ class Ajax {
         }
 
         update_option( 'imcm-style-options', $imcm_style_options );
+=======
+        update_option( 'display_position', $display_position );
+>>>>>>> display
 
         $response['status']     = 1;
         $response['message']    = __( 'Save Settings!', 'checkout-manager' );

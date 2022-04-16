@@ -36,6 +36,21 @@
 	$in_thakyou_text		= __( 'In Thankyou Page', 'checkout-manager' );
 	$in_order_text			= __( 'In Order Details Pages', 'checkout-manager' );
 
+	$enabled_text 		= __( 'Field Enabled/Disabled', 'checkout-manager' );
+	$label_text 		= __( 'Label', 'checkout-manager' );
+	$name_text 			= __( 'Name', 'checkout-manager' );
+	$placeholder_text	= __( 'Placeholder', 'checkout-manager' );
+	$required_text 		= __( 'Required', 'checkout-manager' );
+	$class_name_text 	= __( 'Class Name', 'checkout-manager' );
+	$type_text 			= __( 'Type', 'checkout-manager' );
+	$option_text		= __( 'Option', 'checkout-manager' );
+	$newfield_text		= __( 'New Field', 'checkout-manager' );
+	$newfield_id		= __( 'new_field', 'checkout-manager' );
+	$display_text		= __( 'Display', 'checkout-manager' );
+	$in_emails_text		= __( 'In Emails', 'checkout-manager' );
+	$in_thakyou_text	= __( 'In Thankyou Page', 'checkout-manager' );
+	$in_order_text		= __( 'In Order Details Pages', 'checkout-manager' );
+
 	$classes = [ 
 		'form-row-first' 	=>  __( 'Left', 'checkout-manager' ),
 		'form-row-last' 	=>  __( 'Right', 'checkout-manager' ),
@@ -508,6 +523,83 @@
 						</div>
 					</form>
 					<div class="cx-response-message" style="display: none;"></div>
+					</div>
+					<form action="" id="imcm-display-position-form" class="imcm-setting">
+						<?php wp_nonce_field( 'checkout-manager' ); ?>
+						<input type="hidden" name="action" value="display-position">
+						<input type="hidden" name="page_load" value="0">
+						<div class="imcm-setting-content">
+							<div class="imcm-display-position-panel">
+								<p>
+									<label for=""><?php _e( 'On Thankyou Page', 'checkout-manager' ); ?></label>
+									<select name="display_position[thankyou_hooks]" id="">
+										<option value=""><?php _e( 'Dont\'t Show', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_before_thankyou"><?php _e( 'Before Thankyou', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_order_details_before_order_table"><?php _e( 'Before Order Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_after_order_details"><?php _e( 'After Order Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_order_details_after_customer_details" selected="selected"><?php _e( 'After All Details', 'checkout-manager' ); ?></option>
+									</select>
+								</p>
+								<p>
+									<label for=""><?php _e( 'On Order Edit Page(Billing Fields)', 'checkout-manager' ); ?></label>
+									<select name="display_position[order_billing_hooks]" id="">
+										<option value=""><?php _e( 'Dont\'t Show', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_data_after_order_details"><?php _e( 'After Order Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_data_after_billing_address" selected="selected"><?php _e( 'After Billing Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_totals_after_tax"><?php _e( 'After Tax', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_totals_after_total"><?php _e( 'After Order Total', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_order_item_add_action_buttons"><?php _e( 'After Action Buttons', 'checkout-manager' ); ?></option>
+									</select>
+								</p>
+								<p>
+									<label for=""><?php _e( 'On Order Edit Page(Shipping Fields)', 'checkout-manager' ); ?></label>
+									<select name="display_position[order_shipping_hooks]" id="">
+										<option value=""><?php _e( 'Dont\'t Show', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_data_after_order_details"><?php _e( 'After Order Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_data_after_shipping_address" selected="selected"><?php _e( 'After Shipping Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_items_after_shipping"><?php _e( 'Order Items After Shipping', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_totals_after_tax"><?php _e( 'After Tax', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_admin_order_totals_after_total"><?php _e( 'After Order Total', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_order_item_add_action_buttons"><?php _e( 'After Action Buttons', 'checkout-manager' ); ?></option>
+									</select>
+								</p>
+								<p>
+									<label for=""><?php _e( 'On Email Template', 'checkout-manager' ); ?></label>
+									<select name="display_position[email_hooks]" id="">
+										<option value=""><?php _e( 'Dont\'t Show', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_email_order_details"><?php _e( 'Order Details', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_email_order_meta"><?php _e( 'Order Meta', 'checkout-manager' ); ?></option>
+										<option value="woocommerce_email_customer_details" selected="selected"><?php _e( 'Customer Details', 'checkout-manager' ); ?></option>
+									</select>
+								</p>
+							</div>
+						</div>
+						<div class="imcm-setting-footer">
+							<button class="imcm-setting-button imcm-display-position-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
+							<button class="imcm-setting-button imcm-display-position-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+						</div>
+					</form>
+					<div class="cx-response-message" style="display: none;"></div>
+				</div>
+				<div id="style-options">
+					<div class="imcm-setting-heading">
+						<h4><?php _e( 'Style Options', 'checkout-manager' ); ?></h4>
+						<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
+					<form action="" id="imcm-style-options-form" class="imcm-setting">
+						<?php wp_nonce_field( 'checkout-manager' ); ?>
+						<input type="hidden" name="action" value="style-options">
+						<input type="hidden" name="option_name" value="imcm-checkout-fields">
+						<input type="hidden" name="page_load" value="0">
+						<div class="imcm-setting-content">
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla alias obcaecati, perferendis, animi laboriosam exercitationem odit sequi, nemo, amet delectus tempora reprehenderit in expedita hic. Laboriosam maxime voluptatem aliquid molestiae.
+						</div>
+					</form>
+					<div class="cx-response-message" style="display: none;"></div>
+					<div class="imcm-setting-footer">
+						<button class="imcm-setting-button imcm-style-options-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
+						<button class="imcm-setting-button imcm-style-options-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
 				</div>
 		  	</div>
 		</div>

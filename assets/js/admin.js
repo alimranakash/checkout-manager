@@ -207,6 +207,7 @@
 
 	$('.woocm-sortable').sortable({axis: 'y'});
 
+<<<<<<< HEAD
 	// $('#imcm-display-position-form').submit(function(e) {
 	// 	e.preventDefault();
 
@@ -289,4 +290,35 @@
 	// });
 
 
+=======
+	$('#imcm-display-position-form').submit(function(e) {
+		e.preventDefault();
+
+		// $('.cx-response-message').hide();
+
+		// var $form = $(this);
+		// var $data = $form.serialize();
+
+		// $.ajax({
+		// 	url: IMCM.ajaxurl,
+		// 	data: $data,
+		// 	type: 'POST',
+		// 	dataType: 'JSON',
+		// 	success: function(resp) {
+		// 		$('.cx-response-message').html( resp.message ).show();
+		// 		console.log(resp);
+
+		// 		// if ( resp.page_load == 'yes' ) {
+		// 		// 	setTimeout(function() {
+		// 		// 		location.reload()
+		// 		// 	}, 2000);
+		// 		// }
+		// 	},
+		// 	error: function( $xhr, $sts, $err ) {
+		// 		console.log($err);
+		// 	}
+		// });
+	});
+
+>>>>>>> display
 })(jQuery);

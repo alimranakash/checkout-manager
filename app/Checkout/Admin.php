@@ -27,10 +27,20 @@ class Admin {
 
     private function hooks() {
 
+<<<<<<< HEAD
         $display_position   = get_option( 'imcm-display-position' );
         $billing_hooks      = isset( $display_position['order_billing_hooks'] ) ? $display_position['order_billing_hooks'] : '';
         $shipping_hooks     = isset( $display_position['order_shipping_hooks'] ) ? $display_position['order_shipping_hooks'] : '';
 
+=======
+
+        $display_position   = get_option( 'display_position' );
+        $billing_hooks      = isset( $display_position['order_billing_hooks'] ) ? $display_position['order_billing_hooks'] : '';
+        $shipping_hooks     = isset( $display_position['order_shipping_hooks'] ) ? $display_position['order_shipping_hooks'] : '';
+
+        // imcm_pri($shipping_hooks);
+
+>>>>>>> display
         add_action( 'admin_menu', [ $this, 'submenu' ] );
         add_action( $billing_hooks, [ $this, 'custom_billing_fields' ] );
         add_action( $shipping_hooks, [ $this, 'custom_shipping_fields' ] );
