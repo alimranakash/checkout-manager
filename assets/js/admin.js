@@ -207,7 +207,6 @@
 
 	$('.woocm-sortable').sortable({axis: 'y'});
 
-<<<<<<< HEAD
 	// $('#imcm-display-position-form').submit(function(e) {
 	// 	e.preventDefault();
 
@@ -289,8 +288,6 @@
 	// 	});
 	// });
 
-
-=======
 	$('#imcm-display-position-form').submit(function(e) {
 		e.preventDefault();
 
@@ -320,5 +317,4 @@
 		// });
 	});
 
->>>>>>> display
 })(jQuery);

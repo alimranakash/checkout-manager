@@ -26,11 +26,7 @@ class Front {
     }
 
     private function hooks() {
-<<<<<<< HEAD
         $display_position   = get_option( 'imcm-display-position' );
-=======
-        $display_position   = get_option( 'display_position' );
->>>>>>> display
         $hook_name          = isset( $display_position['thankyou_hooks'] ) ? $display_position['thankyou_hooks'] : '';
 
         add_filter( 'woocommerce_checkout_fields', [ $this, 'checkout_fields' ] );

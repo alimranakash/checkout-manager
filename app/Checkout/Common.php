@@ -26,13 +26,8 @@ class Common {
     }
 
     private function hooks() {
-
-
-<<<<<<< HEAD
         $display_position   = get_option( 'imcm-display-position' );
-=======
-        $display_position   = get_option( 'display_position' );
->>>>>>> display
+
         $email_hook         = isset( $display_position['email_hooks'] ) ? $display_position['email_hooks'] : '';
 
         add_action( $email_hook, [ $this, 'custom_email_fields' ] );
