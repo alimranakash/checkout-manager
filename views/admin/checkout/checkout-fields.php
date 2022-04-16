@@ -1,4 +1,7 @@
 <?php 
+	wp_enqueue_script( 'minicolors-script' );
+	wp_enqueue_style( 'minicolors-style' );
+
 	wp_enqueue_style( 'admin-style' );
 	wp_enqueue_script( 'jquery-ui-tabs' );
 	wp_enqueue_script( 'jquery-ui-sortable' );
@@ -18,16 +21,20 @@
 		$types = imcm_wc_fields();
 	}
 
-	$enabled_text 		= __( 'Field Enabled/Disabled', 'checkout-manager' );
-	$label_text 		= __( 'Label', 'checkout-manager' );
-	$name_text 			= __( 'Name', 'checkout-manager' );
-	$placeholder_text	= __( 'Placeholder', 'checkout-manager' );
-	$required_text 		= __( 'Required', 'checkout-manager' );
-	$class_name_text 	= __( 'Class Name', 'checkout-manager' );
-	$type_text 			= __( 'Type', 'checkout-manager' );
-	$option_text		= __( 'Option', 'checkout-manager' );
-	$newfield_text		= __( 'New Field', 'checkout-manager' );
-	$newfield_id		= __( 'new_field', 'checkout-manager' );
+	$enabled_text 			= __( 'Field Enabled/Disabled', 'checkout-manager' );
+	$label_text 			= __( 'Label', 'checkout-manager' );
+	$name_text 				= __( 'Name', 'checkout-manager' );
+	$placeholder_text		= __( 'Placeholder', 'checkout-manager' );
+	$required_text 			= __( 'Required', 'checkout-manager' );
+	$class_name_text 		= __( 'Class Name', 'checkout-manager' );
+	$type_text 				= __( 'Type', 'checkout-manager' );
+	$option_text			= __( 'Option', 'checkout-manager' );
+	$newfield_text			= __( 'New Field', 'checkout-manager' );
+	$newfield_id			= __( 'new_field', 'checkout-manager' );
+	$display_text			= __( 'Display', 'checkout-manager' );
+	$in_emails_text			= __( 'In Emails', 'checkout-manager' );
+	$in_thakyou_text		= __( 'In Thankyou Page', 'checkout-manager' );
+	$in_order_text			= __( 'In Order Details Pages', 'checkout-manager' );
 
 	$classes = [ 
 		'form-row-first' 	=>  __( 'Left', 'checkout-manager' ),
@@ -36,26 +43,52 @@
 	];
 
 	$_field_types = [ 
-		'text'			=> __( 'Text', 'checkout-manager' ),
-		'state'			=> __( 'State', 'checkout-manager' ),
-		'textarea'		=> __( 'Textarea', 'checkout-manager' ),
-		'checkbox'		=> __( 'Checkbox', 'checkout-manager' ),
-		'password'		=> __( 'Password', 'checkout-manager' ),
-		'datetime'		=> __( 'Datetime', 'checkout-manager' ),
-		'datetime-local'=> __( 'Datetime Local', 'checkout-manager' ),
-		'date'			=> __( 'Date', 'checkout-manager' ),
-		'month'			=> __( 'Month', 'checkout-manager' ),
-		'time'			=> __( 'Time', 'checkout-manager' ),
-		'week'			=> __( 'Week', 'checkout-manager' ),
-		'number'		=> __( 'Number', 'checkout-manager' ),
-		'email'			=> __( 'Email', 'checkout-manager' ),
-		'url'			=> __( 'Url', 'checkout-manager' ),
-		'tel'			=> __( 'Tel', 'checkout-manager' ),
-		'country'		=> __( 'Country', 'checkout-manager' ),
-		'select'		=> __( 'Select', 'checkout-manager' ),
-		'radio'			=> __( 'Radio', 'checkout-manager' ),
-		'file'			=> __( 'Upload File', 'checkout-manager' ),
+		'text'				=> __( 'Text', 'checkout-manager' ),
+		'state'				=> __( 'State', 'checkout-manager' ),
+		'textarea'			=> __( 'Textarea', 'checkout-manager' ),
+		'checkbox'			=> __( 'Checkbox', 'checkout-manager' ),
+		'password'			=> __( 'Password', 'checkout-manager' ),
+		'datetime'			=> __( 'Datetime', 'checkout-manager' ),
+		'datetime-local'	=> __( 'Datetime Local', 'checkout-manager' ),
+		'date'				=> __( 'Date', 'checkout-manager' ),
+		'month'				=> __( 'Month', 'checkout-manager' ),
+		'time'				=> __( 'Time', 'checkout-manager' ),
+		'week'				=> __( 'Week', 'checkout-manager' ),
+		'number'			=> __( 'Number', 'checkout-manager' ),
+		'email'				=> __( 'Email', 'checkout-manager' ),
+		'url'				=> __( 'Url', 'checkout-manager' ),
+		'tel'				=> __( 'Tel', 'checkout-manager' ),
+		'country'			=> __( 'Country', 'checkout-manager' ),
+		'select'			=> __( 'Select', 'checkout-manager' ),
+		'radio'				=> __( 'Radio', 'checkout-manager' ),
+		'file'				=> __( 'Upload File', 'checkout-manager' ),
 	];
+
+	$display_position   	= get_option( 'imcm-display-position' );
+    $_thankyou_hook     	= isset( $display_position['thankyou_hooks'] ) ? $display_position['thankyou_hooks'] : '';
+    $_email_hook        	= isset( $display_position['email_hooks'] ) ? $display_position['email_hooks'] : '';
+    $_order_hooks_billing   = isset( $display_position['order_billing_hooks'] ) ? $display_position['order_billing_hooks'] : '';
+    $_order_hooks_shipping  = isset( $display_position['order_shipping_hooks'] ) ? $display_position['order_shipping_hooks'] : '';
+
+	$thankyou_hooks = '<option value="">'. __( 'Dont\'t Show', 'handy-addons' ) .'</option>';
+	foreach ( imcm_thankyou_hooks() as $hook => $label ) {
+		$thankyou_hooks .= "<option value=". esc_attr( $hook ) ." ". selected( $hook, $_thankyou_hook, false ) .">". esc_html( $label ) ."</option>";
+	}
+
+	$email_hooks = '<option value="">'. __( 'Dont\'t Show', 'handy-addons' ) .'</option>';
+	foreach ( imcm_email_hooks() as $hook => $label ) {
+		$email_hooks .= "<option value=". esc_attr( $hook ) ." ". selected( $hook, $_email_hook, false ) .">". esc_html( $label ) ."</option>";
+	}
+
+	$order_hooks_billing = '<option value="">'. __( 'Dont\'t Show', 'handy-addons' ) .'</option>';
+	foreach ( imcm_order_hooks() as $hook => $label ) {
+		$order_hooks_billing .= "<option value=". esc_attr( $hook ) ." ". selected( $hook, $_order_hooks_billing, false ) .">". esc_html( $label ) ."</option>";
+	}
+
+	$order_hooks_shipping = '<option value="">'. __( 'Dont\'t Show', 'handy-addons' ) .'</option>';
+	foreach ( imcm_order_hooks() as $hook => $label ) {
+		$order_hooks_shipping .= "<option value=". esc_attr( $hook ) ." ". selected( $hook, $_order_hooks_shipping, false ) .">". esc_html( $label ) ."</option>";
+	}
 ?>
 <div class="wrap">
 	<div id="imcm-settings">
@@ -63,21 +96,22 @@
 			<div class="imcm-setting-tabs-panel">
 				<ul>
 				    <li class=""><a href="#checkout-fields"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Checkout Fields', 'checkout-manager' ); ?></a></li>
-				    <!-- <li class=""><a href="#fields-style"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Fields Style', 'checkout-manager' ); ?></a></li> -->
+				    <li class=""><a href="#display-position"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Display Position', 'checkout-manager' ); ?></a></li>
+				    <li class=""><a href="#style-options"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Style Options', 'checkout-manager' ); ?></a></li>
 				  </ul>
 			</div>
 		  
 		  	<div class="imcm-setting-tabs-content imcm-checkout-fields-panel">
-				<div class="imcm-setting-heading">
-					<h4><?php _e( 'Settings', 'checkout-manager' ); ?></h4>
-					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
-				</div>
-				<form action="" id="imcm-setting-form" class="imcm-setting">
-					<?php wp_nonce_field( 'checkout-manager' ); ?>
-					<input type="hidden" name="action" value="checkout-fields">
-					<input type="hidden" name="option_name" value="imcm-checkout-fields">
-					<input type="hidden" name="page_load" value="0">
-					<div id="checkout-fields">
+				<div id="checkout-fields">
+					<div class="imcm-setting-heading">
+						<h4><?php _e( 'Settings', 'checkout-manager' ); ?></h4>
+						<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
+					<form action="" id="imcm-setting-form" class="imcm-setting">
+						<?php wp_nonce_field( 'checkout-manager' ); ?>
+						<input type="hidden" name="action" value="checkout-fields">
+						<input type="hidden" name="option_name" value="imcm-checkout-fields">
+						<input type="hidden" name="page_load" value="0">
 			  			<div class="imcm-setting-content">
 			  				<div id="woocm-checkout-panel">
 								<div class="woocm-checkout-panel-tabs">
@@ -97,16 +131,6 @@
 													foreach ( $fields as $name => $field ): 
 														// woocm_pri($field);
 
-														$disabled 		= '';
-														$readonly 		= '';
-														$hide 			= '';
-
-														if ( imcm_is_default_field( $name ) ) {
-															$disabled 	= 'disabled';
-															$readonly 	= 'readonly';
-															$hide 		= 'woocm-hide';
-														}
-
 														if ( isset( $field['enabled'] ) && $field['enabled'] == true ) {
 															$enabled 	= 'checked';
 														}
@@ -119,6 +143,27 @@
 														}
 														else{
 															$required 	= '';
+														}
+
+														if ( isset( $field['in_emails'] ) && $field['in_emails'] == true ) {
+															$in_emails 	= 'checked';
+														}
+														else{
+															$in_emails 	= '';
+														}
+
+														if ( isset( $field['in_thakyou'] ) && $field['in_thakyou'] == true ) {
+															$in_thakyou 	= 'checked';
+														}
+														else{
+															$in_thakyou 	= '';
+														}
+
+														if ( isset( $field['in_order'] ) && $field['in_order'] == true ) {
+															$in_order 	= 'checked';
+														}
+														else{
+															$in_order 	= '';
 														}
 
 														$class_options = '';
@@ -139,6 +184,42 @@
 
 														$set_options 	= isset( $field['options'] ) ? $field['options'] : '';
 														$label 			= esc_attr( $field['label'] );
+
+														$disabled 		= '';
+														$readonly 		= '';
+														$hide 			= '';
+
+														$display_html 	= "<h2>{$display_text}</h2>
+														<p class='woocm-item-field-in_emails'>
+															<label for='{$in_emails}'>{$in_emails_text}</label>
+															<label class='woocm-item-switch'>
+															  	<input id='{$in_emails}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_emails]' {$in_emails}>
+															  	<span class='woocm-item-slider woocm-item-round'></span>
+															</label>
+														</p>
+														
+														<p class='woocm-item-field-in_thakyou'>
+															<label for='{$in_thakyou}'>{$in_thakyou_text}</label>
+															<label class='woocm-item-switch'>
+															  	<input id='{$in_thakyou}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_thakyou]' {$in_thakyou}>
+															  	<span class='woocm-item-slider woocm-item-round'></span>
+															</label>
+														</p>
+														
+														<p class='woocm-item-field-in_order'>
+															<label for='{$in_order}'>{$in_order_text}</label>
+															<label class='woocm-item-switch'>
+															  	<input id='{$in_order}' type='checkbox' name='woocm_fields[{$type}][{$name}][in_order]' {$in_order}>
+															  	<span class='woocm-item-slider woocm-item-round'></span>
+															</label>
+														</p>";
+														
+														if ( imcm_is_default_field( $name ) ) {
+															$disabled 		= 'disabled';
+															$readonly 		= 'readonly';
+															$hide 			= 'woocm-hide';
+															$display_html 	= '';
+														}
 
 														echo "<li class='woocm-list-item'>
 															<h4 data-name='woocm-{$name}'>
@@ -190,13 +271,17 @@
 																	  	<span class='woocm-item-slider woocm-item-round'></span>
 																	</label>
 																</p>
-																
+
+
 																<p class='woocm-item-field-class'>
 																	<label class='woocm-item-label' for='cls_{$field['id']}'>{$class_name_text}</label>
 																	<select id='cls_{$field['id']}' name='woocm_fields[{$type}][{$name}][class]'>
 																		{$class_options}
 																	</select>
 																</p>
+
+																{$display_html}
+																
 															</div>
 														</li>";
 													endforeach; 
@@ -279,6 +364,31 @@
 																					{$class_options}
 																				</select>
 																			</p>
+																			<h2>{$display_text}</h2>
+
+																			<p class='woocm-item-field-in_emails'>
+																				<label for='{$in_emails}'>{$in_emails_text}</label>
+																				<label class='woocm-item-switch'>
+																				  	<input id='{$in_emails}' type='checkbox' %attrname%='woocm_fields[{$type}][{$type}_%%%][in_emails]' {$in_emails}>
+																				  	<span class='woocm-item-slider woocm-item-round'></span>
+																				</label>
+																			</p>
+
+																			<p class='woocm-item-field-in_thakyou'>
+																				<label for='{$in_thakyou}'>{$in_thakyou_text}</label>
+																				<label class='woocm-item-switch'>
+																				  	<input id='{$in_thakyou}' type='checkbox' %attrname%='woocm_fields[{$type}][{$type}_%%%][in_thakyou]' {$in_thakyou}>
+																				  	<span class='woocm-item-slider woocm-item-round'></span>
+																				</label>
+																			</p>
+
+																			<p class='woocm-item-field-in_order'>
+																				<label for='{$in_order}'>{$in_order_text}</label>
+																				<label class='woocm-item-switch'>
+																				  	<input id='{$in_order}' type='checkbox' %attrname%='woocm_fields[{$type}][{$type}_%%%][in_order]' {$in_order}>
+																				  	<span class='woocm-item-slider woocm-item-round'></span>
+																				</label>
+																			</p>
 																		</div>
 																	</li>
 																</div>
@@ -297,15 +407,107 @@
 								</div>
 							</div>
 						</div>
+					</form>
+					<div class="cx-response-message" style="display: none;"></div>
+					<div class="imcm-setting-footer">
+						<button class="imcm-setting-button imcm-setting-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
+						<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
 					</div>
-				</form>
-				<div class="cx-response-message" style="display: none;"></div>
-				<!-- <div id="fields-style">
-					Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Quia iure cumque quam eum consectetur vero animi provident numquam, ratione temporibus. Eaque accusantium, inventore architecto. Vel nesciunt, facere ab iure nobis.
-				</div> -->
-				<div class="imcm-setting-footer">
-					<button class="imcm-setting-button imcm-setting-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
-					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+				</div>
+				<div id="display-position">
+					<div class="imcm-setting-heading">
+						<h4><?php _e( 'Display Position', 'checkout-manager' ); ?></h4>
+						<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
+					<form action="" id="imcm-display-position-form" class="imcm-setting">
+						<?php wp_nonce_field( 'checkout-manager' ); ?>
+						<input type="hidden" name="action" value="display-position">
+						<input type="hidden" name="page_load" value="0">
+						<div class="imcm-setting-content">
+							<div class="imcm-display-position-panel">
+								<p>
+									<label for=""><?php _e( 'On Thankyou Page', 'checkout-manager' ); ?></label>
+									<select name="display_position[thankyou_hooks]" id="">
+										<?php echo $thankyou_hooks; ?>
+									</select>
+								</p>
+								<p>
+									<label for=""><?php _e( 'On Order Edit Page(Billing Fields)', 'checkout-manager' ); ?></label>
+									<select name="display_position[order_billing_hooks]" id="">
+										<?php echo $order_hooks_billing; ?>
+									</select>
+								</p>
+								<p>
+									<label for=""><?php _e( 'On Order Edit Page(Shipping Fields)', 'checkout-manager' ); ?></label>
+									<select name="display_position[order_shipping_hooks]" id="">
+										<?php echo $order_hooks_shipping; ?>
+									</select>
+								</p>
+								<p>
+									<label for=""><?php _e( 'On Email Template', 'checkout-manager' ); ?></label>
+									<select name="display_position[email_hooks]" id="">
+										<?php echo $email_hooks; ?>
+									</select>
+								</p>
+							</div>
+						</div>
+						<div class="imcm-setting-footer">
+							<button class="imcm-setting-button imcm-display-position-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
+							<button class="imcm-setting-button imcm-display-position-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+						</div>
+					</form>
+					<div class="cx-response-message" style="display: none;"></div>
+				</div>
+				<div id="style-options">
+					<div class="imcm-setting-heading">
+						<h4><?php _e( 'Style Options', 'checkout-manager' ); ?></h4>
+						<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+					</div>
+					<form action="" id="imcm-style-options-form" class="imcm-setting">
+						<?php wp_nonce_field( 'checkout-manager' ); ?>
+						<input type="hidden" name="action" value="style-options">
+						<input type="hidden" name="page_load" value="0">
+						<div class="imcm-setting-content">
+							<div class="imcm-style-options-panel">
+								<p>
+									<label for=""><?php _e( 'Checkout style', 'checkout-manager' ); ?></label>
+									<label class='woocm-item-switch'>
+									  	<input id='' type='checkbox' name="imcm_style_options[style-enable]" <?php checked( 'on', imcm_get_style( 'style-enable', '' ) ); ?>>
+									  	<span class='woocm-item-slider woocm-item-round'></span>
+									</label>
+								</p>
+								<p>
+									<label for=""><?php _e( 'Input field height', 'checkout-manager' ); ?></label>
+									<input class="imcm-style-field" type="number" name="imcm_style_options[height]" value="<?php esc_attr_e( imcm_get_style( 'height', '40' ) ) ?>">
+								</p>
+								<p>
+									<label for=""><?php _e( 'Input field border', 'checkout-manager' ); ?></label>
+									<input class="imcm-style-field imcm-style-color" type="text" name="imcm_style_options[border]" value="<?php esc_attr_e( imcm_get_style( 'border', '#d1d1d1' ) ) ?>">
+								</p>
+								<p>
+									<label for=""><?php _e( 'Input field border on focus', 'checkout-manager' ); ?></label>
+									<input class="imcm-style-field imcm-style-color" type="text" name="imcm_style_options[border-focus]" value="<?php esc_attr_e( imcm_get_style( 'border-focus', '#d1d1d1' ) ) ?>">
+								</p>
+								<p>
+									<label for=""><?php _e( 'Input field border (correct info)', 'checkout-manager' ); ?></label>
+									<input class="imcm-style-field imcm-style-color" type="text" name="imcm_style_options[border-correct-info]" value="<?php esc_attr_e( imcm_get_style( 'border-correct-info', '#69bf29' ) ) ?>">
+								</p>
+								<p>
+									<label for=""><?php _e( 'Input field border (wrong info)', 'checkout-manager' ); ?></label>
+									<input class="imcm-style-field imcm-style-color" type="text" name="imcm_style_options[border-wrong-info]" value="<?php esc_attr_e( imcm_get_style( 'border-wrong-info', '#a00a00' ) ) ?>">
+								</p>
+								<p>
+									<label for=""><?php _e( 'Error message color', 'checkout-manager' ); ?></label>
+									<input class="imcm-style-field imcm-style-color" type="text" name="imcm_style_options[error-message-color]" value="<?php esc_attr_e( imcm_get_style( 'error-message-color', '#a00a00' ) ) ?>">
+								</p>
+							</div>
+						</div>
+						<div class="imcm-setting-footer">
+							<button class="imcm-setting-button imcm-style-options-reset-button"><?php _e( 'Reset', 'checkout-manager' ); ?></button>
+							<button class="imcm-setting-button imcm-style-options-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
+						</div>
+					</form>
+					<div class="cx-response-message" style="display: none;"></div>
 				</div>
 		  	</div>
 		</div>

@@ -26,8 +26,11 @@ class Front {
     }
 
     private function hooks() {
+        $display_position   = get_option( 'imcm-display-position' );
+        $hook_name          = isset( $display_position['thankyou_hooks'] ) ? $display_position['thankyou_hooks'] : '';
+
         add_filter( 'woocommerce_checkout_fields', [ $this, 'checkout_fields' ] );
-        add_action( 'woocommerce_order_details_after_customer_details', [ $this, 'render_custom_fields' ], 20 );
+        add_action( $hook_name, [ $this, 'render_custom_fields' ], 20 );
     }
 
     public function checkout_fields( $wc_fields ) {

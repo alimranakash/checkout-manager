@@ -41,6 +41,10 @@ class Assets {
         $min = defined( 'IMCM_DEBUG_MODE' ) && IMCM_DEBUG_MODE ? '' : '.min';
 
         return [
+            'minicolors-style' => [
+                'src'     => IMCM_ASSETS . "/css/jquery.minicolors.css",
+                'version' => filemtime( IMCM_PATH . "/assets/css/jquery.minicolors.css" ),
+            ],
             'front-style' => [
                 'src'     => IMCM_ASSETS . "/css/front{$min}.css",
                 'version' => filemtime( IMCM_PATH . "/assets/css/front{$min}.css" ),
@@ -67,6 +71,11 @@ class Assets {
         $min = defined( 'IMCM_DEBUG_MODE' ) && IMCM_DEBUG_MODE ? '' : '.min';
 
         return [
+            'minicolors-script' => [
+                'src'     => IMCM_ASSETS . "/js/jquery.minicolors{$min}.js",
+                'version' => filemtime( IMCM_PATH . "/assets/js/jquery.minicolors{$min}.js" ),
+                'deps'    => [ 'jquery' ],
+            ],
             'front-script' => [
                 'src'     => IMCM_ASSETS . "/js/front{$min}.js",
                 'version' => filemtime( IMCM_PATH . "/assets/js/front{$min}.js" ),

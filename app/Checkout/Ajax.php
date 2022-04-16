@@ -28,12 +28,14 @@ class Ajax {
     private function hooks() {
         add_action( 'wp_ajax_checkout-fields', [ $this, 'save_checkout_fields' ] );
         add_action( 'wp_ajax_reset-checkout-fields', [ $this, 'reset_checkout_fields' ] );
+        add_action( 'wp_ajax_display-position', [ $this, 'display_position' ] );
+        add_action( 'wp_ajax_style-options', [ $this, 'style_options' ] );
     }
 
     public function save_checkout_fields() {
         $response = [];
 
-        if( !wp_verify_nonce( $_POST['_wpnonce'], 'checkout-manager' ) ) {
+        if( ! wp_verify_nonce( $_POST['_wpnonce'], 'checkout-manager' ) ) {
             $response['status']     = 0;
             $response['message']    = __( 'Unauthorized!', 'checkout-manager' );
             wp_send_json( $response );
@@ -88,7 +90,7 @@ class Ajax {
     public function reset_checkout_fields() {
         $response = [];
 
-        if( !wp_verify_nonce( $_POST['nonce'], 'checkout-manager' ) ) {
+        if( ! wp_verify_nonce( $_POST['nonce'], 'checkout-manager' ) ) {
             $response['status']     = 0;
             $response['message']    = __( 'Unauthorized!', 'checkout-manager' );
             wp_send_json( $response );
@@ -98,6 +100,52 @@ class Ajax {
         
         $response['status']     = 1;
         $response['message']    = __( 'Reset Settings!', 'checkout-manager' );
+        wp_send_json( $response );
+    }
+
+    public function display_position() {
+        $response = [];
+
+        if( ! wp_verify_nonce( $_POST['_wpnonce'], 'checkout-manager' ) ) {
+            $response['status']     = 0;
+            $response['message']    = __( 'Unauthorized!', 'checkout-manager' );
+            wp_send_json( $response );
+        }
+
+        $display_position = [];
+        if ( isset( $_POST['display_position'] ) ) {
+            foreach ( $_POST['display_position'] as $key => $hook ) {
+                $display_position[ $key ] = imcm_sanitize_field( $hook );
+            }
+        }
+
+        update_option( 'imcm-display-position', $display_position );
+
+        $response['status']     = 1;
+        $response['message']    = __( 'Save Settings!', 'checkout-manager' );
+        wp_send_json( $response );
+    }
+
+    public function style_options() {
+        $response = [];
+
+        if( ! wp_verify_nonce( $_POST['_wpnonce'], 'checkout-manager' ) ) {
+            $response['status']     = 0;
+            $response['message']    = __( 'Unauthorized!', 'checkout-manager' );
+            wp_send_json( $response );
+        }
+
+        $imcm_style_options = [];
+        if ( isset( $_POST['imcm_style_options'] ) ) {
+            foreach ( $_POST['imcm_style_options'] as $name => $style ) {
+                $imcm_style_options[ $name ] = imcm_sanitize_field( $style );
+            }
+        }
+
+        update_option( 'imcm-style-options', $imcm_style_options );
+
+        $response['status']     = 1;
+        $response['message']    = __( 'Save Settings!', 'checkout-manager' );
         wp_send_json( $response );
     }
 }

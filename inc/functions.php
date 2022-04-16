@@ -264,7 +264,8 @@ function imcm_custom_checkout_fields( $order ) {
     if ( isset( $_custom_fields['billing'] ) ) {
         foreach ( $_custom_fields['billing'] as $key => $label ) {
             if ( array_key_exists( '_'. $key, $meta_datas ) ) {
-                $custom_billing_fields[ $label ] = $meta_datas['_'. $key];
+                // $custom_billing_fields[ $label ] = $meta_datas['_'. $key];
+                $custom_billing_fields[ $key ][ $label ] = $meta_datas['_'. $key];
             }    
         }
     }
@@ -273,7 +274,8 @@ function imcm_custom_checkout_fields( $order ) {
     if ( isset( $_custom_fields['shipping'] ) ) {
         foreach ( $_custom_fields['shipping'] as $key => $label ) {
             if ( array_key_exists( '_'. $key, $meta_datas ) ) {
-                $custom_shipping_fields[ $label ] = $meta_datas['_'. $key];
+                // $custom_shipping_fields[ $label ] = $meta_datas['_'. $key];
+                $custom_shipping_fields[ $key ][ $label ] = $meta_datas['_'. $key];
             }    
         }
     }
@@ -309,5 +311,60 @@ function imcm_sanitize_field( $field ) {
     }
 
     return $value;
+}
+endif;
+
+if( !function_exists( 'imcm_thankyou_hooks' ) ) :
+function imcm_thankyou_hooks() {
+
+    $hooks = [
+        'woocommerce_before_thankyou'                       => __( 'Before Thankyou', 'checkout-manager' ),
+        'woocommerce_order_details_before_order_table'      => __( 'Before Order Details', 'checkout-manager' ),
+        'woocommerce_after_order_details'                   => __( 'After Order Details', 'checkout-manager' ),
+        'woocommerce_order_details_after_customer_details'  => __( 'After All Details', 'checkout-manager' ),
+    ];
+
+    return apply_filters( 'imcm_thankyou_hooks', $hooks );
+}
+endif;
+
+if( !function_exists( 'imcm_email_hooks' ) ) :
+function imcm_email_hooks() {
+
+    $hooks = [
+        'woocommerce_email_order_details'       => __( 'Order Details', 'checkout-manager' ),
+        'woocommerce_email_order_meta'          => __( 'Order Meta', 'checkout-manager' ),
+        'woocommerce_email_customer_details'    => __( 'Customer Details', 'checkout-manager' ),
+    ];
+
+    return apply_filters( 'imcm_email_hooks', $hooks );
+}
+endif;
+
+if( !function_exists( 'imcm_order_hooks' ) ) :
+function imcm_order_hooks() {
+
+    $hooks = [
+        'woocommerce_admin_order_data_after_order_details'      => __( 'After Order Details', 'checkout-manager' ),
+        'woocommerce_admin_order_data_after_billing_address'    => __( 'After Billing Details', 'checkout-manager' ),
+        'woocommerce_admin_order_data_after_shipping_address'   => __( 'After Shipping Details', 'checkout-manager' ),
+        'woocommerce_admin_order_items_after_shipping'          => __( 'Order Items After Shipping', 'checkout-manager' ),
+        'woocommerce_admin_order_totals_after_tax'              => __( 'After Tax', 'checkout-manager' ),
+        'woocommerce_admin_order_totals_after_total'            => __( 'After Order Total', 'checkout-manager' ),
+        'woocommerce_order_item_add_action_buttons'             => __( 'After Action Buttons', 'checkout-manager' ),
+    ];
+
+    return apply_filters( 'imcm_order_hooks', $hooks );
+}
+endif;
+
+if( !function_exists( 'imcm_get_style' ) ) :
+function imcm_get_style( $name, $default ) {
+
+    $_style = get_option( 'imcm-style-options' );
+
+    $style  = isset( $_style[ $name ] ) ? $_style[ $name ] : $default;
+    
+    return apply_filters( 'imcm_get_style', $style );
 }
 endif;

@@ -207,4 +207,86 @@
 
 	$('.woocm-sortable').sortable({axis: 'y'});
 
+	// $('#imcm-display-position-form').submit(function(e) {
+	// 	e.preventDefault();
+
+	// 	$('.cx-response-message').hide();
+
+	// 	var $form = $(this);
+	// 	var $data = $form.serialize();
+
+	// 	$.ajax({
+	// 		url: IMCM.ajaxurl,
+	// 		data: $data,
+	// 		type: 'POST',
+	// 		dataType: 'JSON',
+	// 		success: function(resp) {
+	// 			$('.cx-response-message').html( resp.message ).show();
+	// 			console.log(resp);
+	// 		},
+	// 		error: function( $xhr, $sts, $err ) {
+	// 			console.log($err);
+	// 		}
+	// 	});
+	// });
+
+	$('.imcm-style-color').minicolors({
+
+	  // hue, brightness, saturation, or wheel
+	  control: 'hue',
+
+	  // default color
+	  defaultValue: '',
+
+	  // hex or rgb
+	  format: 'rgb',
+
+	  // show/hide speed
+	  showSpeed: 100,
+	  hideSpeed: 100,
+
+	  // is inline mode?
+	  inline: false,
+
+	  // uppercase or lowercase
+	  letterCase: 'lowercase',
+
+	  // enables opacity slider
+	  opacity: false,
+
+	  // custom position
+	  position: 'bottom left',
+	  
+	  // additional theme class
+	  theme: 'default',
+
+	  // an array of colors that will show up under the main color <a href="https://www.jqueryscript.net/tags.php?/grid/">grid</a>
+	  swatches: [ 'swatches', 'opacity']
+	  
+	});
+
+	// $('#imcm-style-options-form').submit(function(e) {
+	// 	e.preventDefault();
+
+	// 	$('.cx-response-message').hide();
+
+	// 	var $form = $(this);
+	// 	var $data = $form.serialize();
+
+	// 	$.ajax({
+	// 		url: IMCM.ajaxurl,
+	// 		data: $data,
+	// 		type: 'POST',
+	// 		dataType: 'JSON',
+	// 		success: function(resp) {
+	// 			$('.cx-response-message').html( resp.message ).show();
+	// 			console.log(resp);
+	// 		},
+	// 		error: function( $xhr, $sts, $err ) {
+	// 			console.log($err);
+	// 		}
+	// 	});
+	// });
+
+
 })(jQuery);

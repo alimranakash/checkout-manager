@@ -18,7 +18,7 @@ $additional_fields = [];
 foreach ( $types as $type => $fields ) {
     foreach ( $fields as $name => $field ) {
         if ( ! imcm_is_default_field( $name ) ) {
-            $additional_fields[ $name ] = isset( $field['in_order'] ) ? sanitize_text_field( $field['in_order'] ) : '';
+            $additional_fields[ $name ] = isset( $field['in_emails'] ) ? sanitize_text_field( $field['in_emails'] ) : '';
         }
     }
 }
@@ -29,6 +29,31 @@ if ( empty( $custom_fields['billing'] ) ) return;
 
 $billing_fields	= $custom_fields['billing'];
 echo '<h3>'. __( 'Custom Billing Fields', 'checkout-manager' ) .'</h3>';
+echo '<div class="address">';
+
+foreach ( $billing_fields as $key => $single_fields ) {
+	if ( array_key_exists( $key, $additional_fields ) && 'on' == $additional_fields[ $key ] ) {
+        foreach ( $single_fields as $key => $value ) {
+            echo "<p><strong>". esc_attr( $key ) .":</strong> ". esc_html( $value ) ."</p>";
+        }
+    }
+}
+
+echo '</div>';
+
+// $additional_fields = [];
+// foreach ( $types as $type => $fields ) {
+//     foreach ( $fields as $name => $field ) {
+//         if ( ! imcm_is_default_field( $name ) ) {
+//             $additional_fields[ $name ] = isset( $field['in_emails'] ) ? sanitize_text_field( $field['in_emails'] ) : '';
+//         }
+//     }
+// }
+
+if ( empty( $custom_fields['shipping'] ) ) return;
+
+$billing_fields	= $custom_fields['shipping'];
+echo '<h3>'. __( 'Custom Shipping Fields', 'checkout-manager' ) .'</h3>';
 echo '<div class="address">';
 
 foreach ( $billing_fields as $key => $single_fields ) {

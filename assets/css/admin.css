@@ -448,7 +448,7 @@ text-align: right;
     border: 1px solid #ece6ff;
 }
 /*switch button*/
-.woocm-item-switch {
+.imcm .woocm-item-switch {
     position: relative;
     display: inline-block;
     width: 49px;
@@ -481,13 +481,13 @@ text-align: right;
     -webkit-transition: .4s;
     transition: .4s;
 }
-.woocm-list-item input:checked + .woocm-item-slider {
+.woocm-item-switch input:checked + .woocm-item-slider {
     background-color: #562dd4;
 }
-.woocm-list-item input:focus + .woocm-item-slider {
+.woocm-item-switch input:focus + .woocm-item-slider {
     box-shadow: 0 0 1px #562dd4;
 }
-.woocm-list-item input:checked + .woocm-item-slider:before {
+.woocm-item-switch input:checked + .woocm-item-slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
@@ -501,3 +501,34 @@ text-align: right;
 /*switch button*/
 
 /* popup modal */
+
+/*display-position*/
+.imcm-display-position-panel {}
+.imcm-display-position-panel p {}
+.imcm-display-position-panel p label {
+    width: 220px;
+    display: inline-block;
+}
+.imcm-display-position-panel p select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #e3e3e3;
+}
+/*display-position*/
+
+/*Style Options*/
+.imcm-style-options-panel {}
+.imcm-style-options-panel p {
+    margin: 50px 0;
+    display: flex;
+    gap: 50px;
+}
+.imcm-style-options-panel p label {
+    width: 220px;
+    display: inline-block;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+.imcm-style-options-panel p input {}
+/*Style Options*/

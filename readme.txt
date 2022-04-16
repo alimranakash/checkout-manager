@@ -3,7 +3,7 @@ Contributors: al-imran-akash
 Tags: woocommerce checkout manager, woocommerce checkout editor, woocommerce checkout fields editor, woocommerce, woocommerce checkout, checkout, checkout editor
 Requires at least: 5.0
 Tested up to: 5.9
-Stable tag: 1.0.0
+Stable tag: 0.9
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -26,9 +26,6 @@ Installation is fairly straight forward. Install it from the WordPress plugin re
 5. screenshot-5
 
 == Changelog ==
-
-= 1.0.0 - 2022-04-05 =
-* [fix] Display fixed in thankyou page, order details page and emails
 
 = 0.9 =
 * Initial version release
