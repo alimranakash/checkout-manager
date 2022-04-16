@@ -104,6 +104,46 @@ class Assets {
             $deps = isset( $style['deps'] ) ? $style['deps'] : false;
             wp_register_style( $handale, $style['src'], $deps, $style['version'] );
         }
+
+        $style_enable   = imcm_get_style( 'style-enable', '' );
+        $height         = imcm_get_style( 'height', '40' );
+        $border         = imcm_get_style( 'border', '#d1d1d1' );
+        $border_focus   = imcm_get_style( 'border-focus', '#d1d1d1' );
+        $border_correct = imcm_get_style( 'border-correct-info', '#69bf29' );
+        $border_wrong   = imcm_get_style( 'border-wrong-info', '#a00a00' );
+        $error_message  = imcm_get_style( 'error-message-color', '#a00a00' );
+
+        $custom_css     = "
+            .imcm .woocommerce form .form-row input.input-text, 
+            .imcm .woocommerce form .form-row .select2-container .select2-choice, 
+            .imcm .woocommerce form .form-row select {
+                height: {$height}px;
+                border-color: {$border};
+            }
+            .imcm .woocommerce form .form-row.woocommerce-invalid .select2-container .select2-choice, 
+            .imcm .woocommerce form .form-row.woocommerce-invalid input.input-text, 
+            .imcm .woocommerce form .form-row.woocommerce-invalid select, 
+            .imcm .woocommerce form .form-row.woocommerce-invalid textarea {
+                border-color: {$border_wrong};
+            }
+            .imcm .woocommerce form .form-row.woocommerce-invalid label, 
+            .imcm .woocommerce form .form-row.woocommerce-invalid .ywccp_error {
+                color: {$error_message};
+            }
+            .imcm .woocommerce form .form-row textarea:focus, 
+            .imcm .woocommerce input[type='email']:focus, 
+            .imcm .woocommerce input[type='number']:focus, 
+            .imcm .woocommerce input[type='password']:focus, 
+            .imcm .woocommerce input[type='reset']:focus, 
+            .imcm .woocommerce input[type='search']:focus, 
+            .imcm .woocommerce input[type='tel']:focus, 
+            .imcm .woocommerce input[type='text']:focus, 
+            .imcm .woocommerce input[type='url']:focus, 
+            .imcm .woocommerce textarea:focus {
+                border-color: {$border_focus}
+            }
+        ";
+        wp_add_inline_style( 'front-style', $custom_css );
         
         //Scripts register
         $scripts = $this->get_scripts();
