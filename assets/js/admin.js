@@ -58,7 +58,7 @@
 		});
 	});
 
-	$('.woocm-tab-btn').on('click', function(e){
+	$('.woocm-tab-btn').on('click', function(e) {
 		e.preventDefault();
 		var $tab = $(this).attr('data-tab');
 		$('.woocm-tab-content').hide();
