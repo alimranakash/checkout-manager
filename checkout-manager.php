@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name:       CheckOut Manager
+ * Plugin Name:       Checkout Manager for Woocommerce
  * Plugin URI:        https://wpplugines.com/
- * Description:       CheckOut Manager - The most advanced and powerful customization of your checkout page.
- * Version:           0.9
+ * Description:       Checkout Manager - The most advanced and powerful customization of your checkout page.
+ * Version:           1.0.2
  * Author:            Al Imran Akash
  * Author URI:        https://profiles.wordpress.org/al-imran-akash/
  * Text Domain:       checkout-manager

@@ -34,6 +34,7 @@ class Front {
     }
 
     public function checkout_fields( $wc_fields ) {
+        wp_enqueue_style( 'front-style' );
 
         $_woocm_fields = get_option( 'imcm-checkout-fields' ) ? : [];
 

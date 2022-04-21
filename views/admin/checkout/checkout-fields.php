@@ -110,9 +110,9 @@
 		<div id="imcm-setting-tabs">
 			<div class="imcm-setting-tabs-panel">
 				<ul>
-				    <li class=""><a href="#checkout-fields"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Checkout Fields', 'checkout-manager' ); ?></a></li>
-				    <li class=""><a href="#display-position"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Display Position', 'checkout-manager' ); ?></a></li>
-				    <li class=""><a href="#style-options"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'Style Options', 'checkout-manager' ); ?></a></li>
+				    <li class=""><a href="#checkout-fields"><span class="dashicons dashicons-screenoptions"></span> <?php _e( 'Checkout Fields', 'checkout-manager' ); ?></a></li>
+				    <li class=""><a href="#display-position"><span class="dashicons dashicons-welcome-view-site"></span> <?php _e( 'Display Position', 'checkout-manager' ); ?></a></li>
+				    <li class=""><a href="#style-options"><span class="dashicons dashicons-admin-customizer"></span> <?php _e( 'Style Options', 'checkout-manager' ); ?></a></li>
 				  </ul>
 			</div>
 		  
@@ -503,10 +503,10 @@
 									<label for=""><?php _e( 'Input field border on focus', 'checkout-manager' ); ?></label>
 									<input class="imcm-style-field imcm-style-color" type="text" name="imcm_style_options[border-focus]" value="<?php esc_attr_e( imcm_get_style( 'border-focus', '#d1d1d1' ) ) ?>">
 								</p>
-								<p>
+								<!-- <p>
 									<label for=""><?php _e( 'Input field border (correct info)', 'checkout-manager' ); ?></label>
 									<input class="imcm-style-field imcm-style-color" type="text" name="imcm_style_options[border-correct-info]" value="<?php esc_attr_e( imcm_get_style( 'border-correct-info', '#69bf29' ) ) ?>">
-								</p>
+								</p> -->
 								<p>
 									<label for=""><?php _e( 'Input field border (wrong info)', 'checkout-manager' ); ?></label>
 									<input class="imcm-style-field imcm-style-color" type="text" name="imcm_style_options[border-wrong-info]" value="<?php esc_attr_e( imcm_get_style( 'border-wrong-info', '#a00a00' ) ) ?>">

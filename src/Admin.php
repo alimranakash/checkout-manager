@@ -126,7 +126,7 @@ class Admin {
      * Register a custom menu page.
      */
     public function menu() {
-        add_menu_page( __( 'Checkout Manager', 'checkout-manager' ), __( 'Checkout Manager', 'checkout-manager' ), 'manage_options', 'checkout-manager', [ $this, 'checkout_manager_callback' ], 'dashicons-admin-generic', 15 );
+        add_menu_page( __( 'Checkout Manager', 'checkout-manager' ), __( 'Checkout Manager', 'checkout-manager' ), 'manage_options', 'checkout-manager', [ $this, 'checkout_manager_callback' ], IMCM_ASSETS .'/img/logo.png', 15 );
     }
 
     public function checkout_manager_callback() {

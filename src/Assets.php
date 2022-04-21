@@ -114,6 +114,10 @@ class Assets {
         $error_message  = imcm_get_style( 'error-message-color', '#a00a00' );
 
         $custom_css     = "
+            .imcm .woocommerce .select2-container .select2-selection--single, 
+            .imcm .woocommerce select, 
+            .imcm .woocommerce-page .select2-container .select2-selection--single, 
+            .imcm .woocommerce-page select,
             .imcm .woocommerce form .form-row input.input-text, 
             .imcm .woocommerce form .form-row .select2-container .select2-choice, 
             .imcm .woocommerce form .form-row select {
@@ -131,19 +135,22 @@ class Assets {
                 color: {$error_message};
             }
             .imcm .woocommerce form .form-row textarea:focus, 
-            .imcm .woocommerce input[type='email']:focus, 
-            .imcm .woocommerce input[type='number']:focus, 
-            .imcm .woocommerce input[type='password']:focus, 
-            .imcm .woocommerce input[type='reset']:focus, 
-            .imcm .woocommerce input[type='search']:focus, 
-            .imcm .woocommerce input[type='tel']:focus, 
-            .imcm .woocommerce input[type='text']:focus, 
-            .imcm .woocommerce input[type='url']:focus, 
-            .imcm .woocommerce textarea:focus {
+            .imcm .woocommerce form input[type='email']:focus, 
+            .imcm .woocommerce form input[type='number']:focus, 
+            .imcm .woocommerce form input[type='password']:focus, 
+            .imcm .woocommerce form input[type='reset']:focus, 
+            .imcm .woocommerce form input[type='search']:focus, 
+            .imcm .woocommerce form input[type='tel']:focus, 
+            .imcm .woocommerce form input[type='text']:focus, 
+            .imcm .woocommerce form input[type='url']:focus, 
+            .imcm .woocommerce form textarea:focus {
                 border-color: {$border_focus}
             }
         ";
-        wp_add_inline_style( 'front-style', $custom_css );
+
+        if ( 'on' == $style_enable ) {
+            wp_add_inline_style( 'front-style', $custom_css );
+        }
         
         //Scripts register
         $scripts = $this->get_scripts();
