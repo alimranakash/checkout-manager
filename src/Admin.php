@@ -95,7 +95,7 @@ class Admin {
      * Note: the first-loaded translation file overrides any following ones if the same translation is present.
      */
     public function load_plugin_textdomain() {
-        load_plugin_textdomain( 'cx-plugin', false, plugin_basename( dirname( IMCM_FILE ) ) . '/i18n/languages' );
+        load_plugin_textdomain( 'checkout-manager', false, plugin_basename( dirname( IMCM_FILE ) ) . '/languages' );
     }
 
     /**

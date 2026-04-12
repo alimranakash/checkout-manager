@@ -30,6 +30,8 @@ class Ajax {
         add_action( 'wp_ajax_reset-checkout-fields', [ $this, 'reset_checkout_fields' ] );
         add_action( 'wp_ajax_display-position', [ $this, 'display_position' ] );
         add_action( 'wp_ajax_style-options', [ $this, 'style_options' ] );
+        add_action( 'wp_ajax_imcm-export-settings', [ $this, 'export_settings' ] );
+        add_action( 'wp_ajax_imcm-import-settings', [ $this, 'import_settings' ] );
     }
 
     public function save_checkout_fields() {
@@ -147,5 +149,71 @@ class Ajax {
         $response['status']     = 1;
         $response['message']    = __( 'Save Settings!', 'checkout-manager' );
         wp_send_json( $response );
+    }
+
+    /**
+     * Export all plugin settings as JSON.
+     *
+     * @since 1.1.0
+     */
+    public function export_settings() {
+        if ( ! wp_verify_nonce( isset( $_POST['nonce'] ) ? $_POST['nonce'] : '', 'checkout-manager' ) || ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( [ 'message' => __( 'Unauthorized!', 'checkout-manager' ) ] );
+        }
+
+        $option_keys = [
+            'imcm-setting-general',
+            'imcm-setting-troubleshoot',
+            'imcm-checkout-fields',
+            'imcm-display-position',
+            'imcm-style-options',
+        ];
+
+        $export_data = [];
+        foreach ( $option_keys as $key ) {
+            $export_data[ $key ] = get_option( $key );
+        }
+
+        wp_send_json_success( [
+            'data'    => $export_data,
+            'message' => __( 'Settings exported successfully!', 'checkout-manager' ),
+        ] );
+    }
+
+    /**
+     * Import plugin settings from JSON.
+     *
+     * @since 1.1.0
+     */
+    public function import_settings() {
+        if ( ! wp_verify_nonce( isset( $_POST['nonce'] ) ? $_POST['nonce'] : '', 'checkout-manager' ) || ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( [ 'message' => __( 'Unauthorized!', 'checkout-manager' ) ] );
+        }
+
+        $raw = isset( $_POST['import_data'] ) ? wp_unslash( $_POST['import_data'] ) : '';
+        $data = json_decode( $raw, true );
+
+        if ( json_last_error() !== JSON_ERROR_NONE || ! is_array( $data ) ) {
+            wp_send_json_error( [ 'message' => __( 'Invalid JSON data. Please paste a valid export file.', 'checkout-manager' ) ] );
+        }
+
+        $allowed_keys = [
+            'imcm-setting-general',
+            'imcm-setting-troubleshoot',
+            'imcm-checkout-fields',
+            'imcm-display-position',
+            'imcm-style-options',
+        ];
+
+        foreach ( $data as $key => $value ) {
+            if ( in_array( $key, $allowed_keys, true ) ) {
+                update_option( sanitize_key( $key ), $value );
+            }
+        }
+
+        wp_send_json_success( [
+            'message' => __( 'Settings imported successfully! Reloading...', 'checkout-manager' ),
+            'reload'  => true,
+        ] );
     }
 }

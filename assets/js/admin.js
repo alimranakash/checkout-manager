@@ -207,6 +207,109 @@
 
 	$('.woocm-sortable').sortable({axis: 'y'});
 
+	// =========================================================
+	// Conditional Logic: show/hide "Value" field based on operator
+	// =========================================================
+	$(document).on('change', '.woocm-item-condition-operator', function() {
+		var op 			= $(this).val();
+		var $parent 	= $(this).closest('.woocm-item-wrap, .woocm-clone-item-panel');
+		var $valueRow 	= $parent.find('.woocm-item-field-condition-value');
+		if ( op === 'empty' || op === 'not_empty' ) {
+			$valueRow.slideUp();
+		} else {
+			$valueRow.slideDown();
+		}
+	});
+
+	// =========================================================
+	// Validation: show/hide regex field based on validation type
+	// =========================================================
+	$(document).on('change', '.woocm-item-validation-select', function() {
+		var val 		= $(this).val();
+		var $parent 	= $(this).closest('.woocm-item-wrap, .woocm-clone-item-panel');
+		var $regexRow 	= $parent.find('.woocm-item-field-validation-regex');
+		if ( val === 'regex' ) {
+			$regexRow.slideDown();
+		} else {
+			$regexRow.slideUp();
+		}
+	});
+
+	// =========================================================
+	// Import / Export
+	// =========================================================
+	$(document).on('click', '#imcm-export-btn', function(e) {
+		e.preventDefault();
+		var $btn = $(this);
+		$btn.text('Exporting...').prop('disabled', true);
+
+		$.ajax({
+			url: IMCM.ajaxurl,
+			data: { action: 'imcm-export-settings', nonce: IMCM.nonce },
+			type: 'POST',
+			dataType: 'JSON',
+			success: function(resp) {
+				$btn.text('Export Settings').prop('disabled', false);
+				if ( resp.success ) {
+					var json = JSON.stringify(resp.data.data, null, 2);
+					var blob = new Blob([json], { type: 'application/json' });
+					var url  = URL.createObjectURL(blob);
+					var a    = document.createElement('a');
+					a.href     = url;
+					a.download = 'checkout-manager-settings.json';
+					document.body.appendChild(a);
+					a.click();
+					document.body.removeChild(a);
+					URL.revokeObjectURL(url);
+				} else {
+					alert(resp.data ? resp.data.message : 'Export failed.');
+				}
+			},
+			error: function() {
+				$btn.text('Export Settings').prop('disabled', false);
+				alert('Export request failed. Please try again.');
+			}
+		});
+	});
+
+	$(document).on('click', '#imcm-import-btn', function(e) {
+		e.preventDefault();
+		var import_data = $('#imcm-import-data').val().trim();
+		if ( ! import_data ) {
+			alert('Please paste your exported JSON first.');
+			return;
+		}
+		if ( ! confirm('This will overwrite your current settings. Continue?') ) {
+			return;
+		}
+
+		var $btn = $(this);
+		$btn.text('Importing...').prop('disabled', true);
+
+		$.ajax({
+			url: IMCM.ajaxurl,
+			data: { action: 'imcm-import-settings', nonce: IMCM.nonce, import_data: import_data },
+			type: 'POST',
+			dataType: 'JSON',
+			success: function(resp) {
+				$btn.text('Import Settings').prop('disabled', false);
+				if ( resp.success ) {
+					$('#imcm-import-data').closest('.imcm-setting-content').find('.cx-response-message')
+						.html(resp.data.message).show();
+					if ( resp.data.reload ) {
+						setTimeout(function() { location.reload(); }, 1500);
+					}
+				} else {
+					alert(resp.data ? resp.data.message : 'Import failed.');
+				}
+			},
+			error: function() {
+				$btn.text('Import Settings').prop('disabled', false);
+				alert('Import request failed. Please try again.');
+			}
+		});
+	});
+
 	// $('#imcm-display-position-form').submit(function(e) {
 	// 	e.preventDefault();
 

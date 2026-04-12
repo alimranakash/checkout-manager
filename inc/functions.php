@@ -23,10 +23,10 @@ endif;
 if( !function_exists( 'imcm_wc_fields' ) ) :
 function imcm_wc_fields( $section = '' ) {
     $fields = [
-        'billing' => [ 
+        'billing' => [
             'billing_first_name'    => [
                 'id'            => 'billing_first_name',
-                'label'         => __( 'First name', 'woocheckout-manager' ),
+                'label'         => __( 'First name', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   =>  '',
@@ -34,7 +34,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'billing_last_name'     => [
                 'id'            => 'billing_last_name',
-                'label'         => __( 'Last name', 'woocheckout-manager' ),
+                'label'         => __( 'Last name', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -42,7 +42,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'billing_company'       => [
                 'id'            => 'billing_company',
-                'label'         => __( 'Company name', 'woocheckout-manager' ),
+                'label'         => __( 'Company name', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => false,
                 'placeholder'   => '',
@@ -50,7 +50,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'billing_country'       => [
                 'id'            => 'billing_country',
-                'label'         => __( 'Country / Region', 'woocheckout-manager' ),
+                'label'         => __( 'Country / Region', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -58,23 +58,23 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'billing_address_1'     => [
                 'id'            => 'billing_address_1',
-                'label'         => __( 'Street address', 'woocheckout-manager' ),
+                'label'         => __( 'Street address', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
-                'placeholder'   => __( 'House number and street name', 'woocheckout-manager' ),
+                'placeholder'   => __( 'House number and street name', 'checkout-manager' ),
                 'class'         => 'form-row-wide',
             ],
             'billing_address_2'     => [
                 'id'            => 'billing_address_2',
-                'label'         => __( 'Address 2', 'woocheckout-manager' ),
+                'label'         => __( 'Address 2', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => false,
-                'placeholder'   => __( 'Apartment, suite, unit, etc. (optional)', 'woocheckout-manager' ),
+                'placeholder'   => __( 'Apartment, suite, unit, etc. (optional)', 'checkout-manager' ),
                 'class'         => 'form-row-wide',
             ],
             'billing_city'          => [
                 'id'            => 'billing_city',
-                'label'         => __( 'Town / City', 'woocheckout-manager' ),
+                'label'         => __( 'Town / City', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -82,7 +82,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'billing_state'         => [
                 'id'            => 'billing_state',
-                'label'         => __( 'State', 'woocheckout-manager' ),
+                'label'         => __( 'State', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => 'text',
@@ -90,7 +90,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'billing_postcode'      => [
                 'id'            => 'billing_postcode',
-                'label'         => __( 'ZIP', 'woocheckout-manager' ),
+                'label'         => __( 'ZIP', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => 'text',
@@ -98,7 +98,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'billing_phone'         => [
                 'id'            => 'billing_phone',
-                'label'         => __( 'Phone', 'woocheckout-manager' ),
+                'label'         => __( 'Phone', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -106,7 +106,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'billing_email'         => [
                 'id'            => 'billing_email',
-                'label'         => __( 'Email address', 'woocheckout-manager' ),
+                'label'         => __( 'Email address', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -114,10 +114,10 @@ function imcm_wc_fields( $section = '' ) {
             ],
         ],
 
-        'shipping' => [ 
+        'shipping' => [
             'shipping_first_name'   => [
                 'id'            =>  'shipping_first_name',
-                'label'         => __( 'First name', 'woocheckout-manager' ),
+                'label'         => __( 'First name', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -125,7 +125,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'shipping_last_name'    => [
                 'id'            =>  'shipping_last_name',
-                'label'         => __( 'Last name', 'woocheckout-manager' ),
+                'label'         => __( 'Last name', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -133,7 +133,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'shipping_company'      => [
                 'id'            =>  'shipping_company',
-                'label'         => __( 'Company name', 'woocheckout-manager' ),
+                'label'         => __( 'Company name', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => false,
                 'placeholder'   => '',
@@ -141,7 +141,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'shipping_country'      => [
                 'id'            =>  'shipping_country',
-                'label'         => __( 'Country / Region', 'woocheckout-manager' ),
+                'label'         => __( 'Country / Region', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -149,23 +149,23 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'shipping_address_1'    => [
                 'id'            =>  'shipping_address_1',
-                'label'         => __( 'Street address', 'woocheckout-manager' ),
+                'label'         => __( 'Street address', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
-                'placeholder'   => 'House number and street name',
+                'placeholder'   => __( 'House number and street name', 'checkout-manager' ),
                 'class'         => 'form-row-wide',
             ],
             'shipping_address_2'    => [
                 'id'            =>  'shipping_address_2',
-                'label'         => __( 'address 2', 'woocheckout-manager' ),
+                'label'         => __( 'Address 2', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
-                'placeholder'   => 'Apartment, suite, unit, etc. (optional)',
+                'placeholder'   => __( 'Apartment, suite, unit, etc. (optional)', 'checkout-manager' ),
                 'class'         => 'form-row-wide',
             ],
             'shipping_city'         => [
                 'id'            =>  'shipping_city',
-                'label'         => __( 'Town / City', 'woocheckout-manager' ),
+                'label'         => __( 'Town / City', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -173,7 +173,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'shipping_state'        => [
                 'id'            =>  'shipping_state',
-                'label'         => __( 'State', 'woocheckout-manager' ),
+                'label'         => __( 'State', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -181,7 +181,7 @@ function imcm_wc_fields( $section = '' ) {
             ],
             'shipping_postcode'     => [
                 'id'            =>  'shipping_postcode',
-                'label'         => __( 'ZIP', 'woocheckout-manager' ),
+                'label'         => __( 'ZIP', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => true,
                 'placeholder'   => '',
@@ -189,13 +189,13 @@ function imcm_wc_fields( $section = '' ) {
             ],
         ],
 
-        'order' => [ 
+        'order' => [
             'order_comments'    => [
                 'id'            =>  'order_comments',
-                'label'         => __( 'Order Notes', 'woocheckout-manager' ),
+                'label'         => __( 'Order Notes', 'checkout-manager' ),
                 'enabled'       => 'on',
                 'required'      => false,
-                'placeholder'   => 'Notes about your order, e.g. special notes for delivery.',
+                'placeholder'   => __( 'Notes about your order, e.g. special notes for delivery.', 'checkout-manager' ),
                 'class'         => 'notes',
             ],
         ]
@@ -290,10 +290,10 @@ endif;
 
 if( !function_exists( 'imcm_enable_debug' ) ) :
 function imcm_enable_debug() {
-    $troubleshoot = get_option( 'imcm-setting-troubleshoot' );
+    $troubleshoot = get_option( 'imcm-setting-troubleshoot', [] );
 
     $enable_debug = false;
-    if ( $troubleshoot['enable-debug'] == 'on' ) {
+    if ( ! empty( $troubleshoot['enable-debug'] ) && $troubleshoot['enable-debug'] == 'on' ) {
         $enable_debug = true;
     }
     return $enable_debug;
@@ -364,7 +364,46 @@ function imcm_get_style( $name, $default ) {
     $_style = get_option( 'imcm-style-options' );
 
     $style  = isset( $_style[ $name ] ) ? $_style[ $name ] : $default;
-    
+
     return apply_filters( 'imcm_get_style', $style );
+}
+endif;
+
+/**
+ * Returns available validation types for custom checkout fields.
+ *
+ * @since 1.1.0
+ * @return array
+ */
+if( !function_exists( 'imcm_get_validation_types' ) ) :
+function imcm_get_validation_types() {
+    $types = [
+        ''             => __( 'None', 'checkout-manager' ),
+        'phone'        => __( 'Phone Number', 'checkout-manager' ),
+        'numeric'      => __( 'Numeric Only', 'checkout-manager' ),
+        'alpha'        => __( 'Letters Only', 'checkout-manager' ),
+        'alphanumeric' => __( 'Alphanumeric', 'checkout-manager' ),
+        'regex'        => __( 'Custom (Regex)', 'checkout-manager' ),
+    ];
+    return apply_filters( 'imcm_validation_types', $types );
+}
+endif;
+
+/**
+ * Returns available condition operators for conditional logic.
+ *
+ * @since 1.1.0
+ * @return array
+ */
+if( !function_exists( 'imcm_get_condition_operators' ) ) :
+function imcm_get_condition_operators() {
+    $operators = [
+        'equals'     => __( 'Equals', 'checkout-manager' ),
+        'not_equals' => __( 'Not Equals', 'checkout-manager' ),
+        'contains'   => __( 'Contains', 'checkout-manager' ),
+        'not_empty'  => __( 'Is Not Empty', 'checkout-manager' ),
+        'empty'      => __( 'Is Empty', 'checkout-manager' ),
+    ];
+    return apply_filters( 'imcm_condition_operators', $operators );
 }
 endif;

@@ -57,7 +57,7 @@
 		'form-row-wide' 	=>  __( 'Wide', 'checkout-manager' ),
 	];
 
-	$_field_types = [ 
+	$_field_types = [
 		'text'				=> __( 'Text', 'checkout-manager' ),
 		'state'				=> __( 'State', 'checkout-manager' ),
 		'textarea'			=> __( 'Textarea', 'checkout-manager' ),
@@ -78,6 +78,35 @@
 		'radio'				=> __( 'Radio', 'checkout-manager' ),
 		'file'				=> __( 'Upload File', 'checkout-manager' ),
 	];
+
+	// Pre-build all available fields list for condition logic dropdowns
+	$_all_condition_fields = [];
+	foreach ( $types as $_ctype => $_csection ) {
+		foreach ( $_csection as $_cname => $_cfield ) {
+			$_clabel = isset( $_cfield['label'] ) ? $_cfield['label'] : $_cname;
+			$_all_condition_fields[ $_cname ] = esc_html( $_clabel ) . ' (' . esc_html( ucfirst( $_ctype ) ) . ')';
+		}
+	}
+
+	// Pre-build static operator options (no selected — used in modal for new fields)
+	$_condition_operators      = imcm_get_condition_operators();
+	$_modal_operators_html     = '<option value="">'. __( '-- Select --', 'checkout-manager' ) .'</option>';
+	foreach ( $_condition_operators as $_op_val => $_op_label ) {
+		$_modal_operators_html .= "<option value='{$_op_val}'>{$_op_label}</option>";
+	}
+
+	// Pre-build static validation options (no selected — used in modal)
+	$_validation_types     = imcm_get_validation_types();
+	$_modal_validation_html = '';
+	foreach ( $_validation_types as $_vval => $_vlabel ) {
+		$_modal_validation_html .= "<option value='{$_vval}'>{$_vlabel}</option>";
+	}
+
+	// Pre-build static condition fields options (no selected — used in modal)
+	$_modal_condition_fields_html = '<option value="">'. __( '-- No Condition --', 'checkout-manager' ) .'</option>';
+	foreach ( $_all_condition_fields as $_cname => $_clabel ) {
+		$_modal_condition_fields_html .= "<option value='{$_cname}'>{$_clabel}</option>";
+	}
 
 	$display_position   	= get_option( 'imcm-display-position' );
     $_thankyou_hook     	= isset( $display_position['thankyou_hooks'] ) ? $display_position['thankyou_hooks'] : '';
@@ -181,6 +210,37 @@
 															$in_order 	= '';
 														}
 
+														// Conditional Logic & Validation values
+														$condition_field    = isset( $field['condition_field'] ) ? $field['condition_field'] : '';
+														$condition_operator = isset( $field['condition_operator'] ) ? $field['condition_operator'] : 'equals';
+														$condition_value    = isset( $field['condition_value'] ) ? $field['condition_value'] : '';
+														$field_validation   = isset( $field['validation'] ) ? $field['validation'] : '';
+														$validation_regex   = isset( $field['validation_regex'] ) ? $field['validation_regex'] : '';
+
+														// Build per-field condition fields dropdown
+														$_cf_options = '<option value="">'. __( '-- No Condition --', 'checkout-manager' ) .'</option>';
+														foreach ( $_all_condition_fields as $_cfname => $_cflabel ) {
+															$_cfselected = selected( $_cfname, $condition_field, false );
+															$_cf_options .= "<option value='{$_cfname}' {$_cfselected}>{$_cflabel}</option>";
+														}
+
+														// Build per-field operator dropdown
+														$_op_options = '<option value="">'. __( '-- Select --', 'checkout-manager' ) .'</option>';
+														foreach ( $_condition_operators as $_op_val => $_op_label ) {
+															$_op_sel = selected( $_op_val, $condition_operator, false );
+															$_op_options .= "<option value='{$_op_val}' {$_op_sel}>{$_op_label}</option>";
+														}
+
+														// Build per-field validation dropdown
+														$_vld_options = '';
+														foreach ( $_validation_types as $_vval => $_vlabel ) {
+															$_vsel = selected( $_vval, $field_validation, false );
+															$_vld_options .= "<option value='{$_vval}' {$_vsel}>{$_vlabel}</option>";
+														}
+
+														$_hide_cond_value = in_array( $condition_operator, [ 'empty', 'not_empty' ] ) ? 'style="display:none"' : '';
+														$_hide_regex      = ( $field_validation !== 'regex' ) ? 'style="display:none"' : '';
+
 														$class_options = '';
 														foreach ( $classes as $value => $class ) {
 															$class_options .= "<option value='{$value}' ". selected( $value, $field['class'], false ) .">{$class}</option>";
@@ -212,7 +272,7 @@
 															  	<span class='woocm-item-slider woocm-item-round'></span>
 															</label>
 														</p>
-														
+
 														<p class='woocm-item-field-in_thakyou'>
 															<label for='{$in_thakyou}'>{$in_thakyou_text}</label>
 															<label class='woocm-item-switch'>
@@ -220,7 +280,7 @@
 															  	<span class='woocm-item-slider woocm-item-round'></span>
 															</label>
 														</p>
-														
+
 														<p class='woocm-item-field-in_order'>
 															<label for='{$in_order}'>{$in_order_text}</label>
 															<label class='woocm-item-switch'>
@@ -228,12 +288,44 @@
 															  	<span class='woocm-item-slider woocm-item-round'></span>
 															</label>
 														</p>";
-														
+
+														$extra_html = "
+														<h2>". __( 'Validation', 'checkout-manager' ) ."</h2>
+														<p class='woocm-item-field-validation'>
+															<label class='woocm-item-label'>". __( 'Validation Type', 'checkout-manager' ) ."</label>
+															<select class='woocm-item-validation-select' name='woocm_fields[{$type}][{$name}][validation]'>
+																{$_vld_options}
+															</select>
+														</p>
+														<p class='woocm-item-field-validation-regex' {$_hide_regex}>
+															<label class='woocm-item-label'>". __( 'Regex Pattern', 'checkout-manager' ) ."</label>
+															<input type='text' class='woocm-item-input-field' name='woocm_fields[{$type}][{$name}][validation_regex]' value='{$validation_regex}' placeholder='/^[0-9]+$/'>
+														</p>
+														<h2>". __( 'Conditional Logic', 'checkout-manager' ) ."</h2>
+														<p class='woocm-item-field-condition-note' style='color:#666;font-style:italic;'>". __( 'Show this field only if:', 'checkout-manager' ) ."</p>
+														<p class='woocm-item-field-condition-field'>
+															<label class='woocm-item-label'>". __( 'Field', 'checkout-manager' ) ."</label>
+															<select class='woocm-item-condition-field' name='woocm_fields[{$type}][{$name}][condition_field]'>
+																{$_cf_options}
+															</select>
+														</p>
+														<p class='woocm-item-field-condition-operator'>
+															<label class='woocm-item-label'>". __( 'Operator', 'checkout-manager' ) ."</label>
+															<select class='woocm-item-condition-operator' name='woocm_fields[{$type}][{$name}][condition_operator]'>
+																{$_op_options}
+															</select>
+														</p>
+														<p class='woocm-item-field-condition-value' {$_hide_cond_value}>
+															<label class='woocm-item-label'>". __( 'Value', 'checkout-manager' ) ."</label>
+															<input type='text' class='woocm-item-input-field woocm-item-condition-value' name='woocm_fields[{$type}][{$name}][condition_value]' value='{$condition_value}'>
+														</p>";
+
 														if ( imcm_is_default_field( $name ) ) {
 															$disabled 		= 'disabled';
 															$readonly 		= 'readonly';
 															$hide 			= 'woocm-hide';
 															$display_html 	= '';
+															$extra_html     = '';
 														}
 
 														echo "<li class='woocm-list-item'>
@@ -296,7 +388,8 @@
 																</p>
 
 																{$display_html}
-																
+																{$extra_html}
+
 															</div>
 														</li>";
 													endforeach; 
@@ -404,11 +497,42 @@
 																				  	<span class='woocm-item-slider woocm-item-round'></span>
 																				</label>
 																			</p>
+
+																			<h2>". __( 'Validation', 'checkout-manager' ) ."</h2>
+																			<p class='woocm-item-field-validation'>
+																				<label class='woocm-item-label'>". __( 'Validation Type', 'checkout-manager' ) ."</label>
+																				<select class='woocm-input-field woocm-item-validation-select' %attrname%='woocm_fields[{$type}][{$type}_%%%][validation]'>
+																					{$_modal_validation_html}
+																				</select>
+																			</p>
+																			<p class='woocm-item-field-validation-regex' style='display:none'>
+																				<label class='woocm-item-label'>". __( 'Regex Pattern', 'checkout-manager' ) ."</label>
+																				<input type='text' class='woocm-input-field' %attrname%='woocm_fields[{$type}][{$type}_%%%][validation_regex]' placeholder='/^[0-9]+$/'>
+																			</p>
+
+																			<h2>". __( 'Conditional Logic', 'checkout-manager' ) ."</h2>
+																			<p class='woocm-item-field-condition-note' style='color:#666;font-style:italic;'>". __( 'Show this field only if:', 'checkout-manager' ) ."</p>
+																			<p class='woocm-item-field-condition-field'>
+																				<label class='woocm-item-label'>". __( 'Field', 'checkout-manager' ) ."</label>
+																				<select class='woocm-input-field woocm-item-condition-field' %attrname%='woocm_fields[{$type}][{$type}_%%%][condition_field]'>
+																					{$_modal_condition_fields_html}
+																				</select>
+																			</p>
+																			<p class='woocm-item-field-condition-operator'>
+																				<label class='woocm-item-label'>". __( 'Operator', 'checkout-manager' ) ."</label>
+																				<select class='woocm-input-field woocm-item-condition-operator' %attrname%='woocm_fields[{$type}][{$type}_%%%][condition_operator]'>
+																					{$_modal_operators_html}
+																				</select>
+																			</p>
+																			<p class='woocm-item-field-condition-value'>
+																				<label class='woocm-item-label'>". __( 'Value', 'checkout-manager' ) ."</label>
+																				<input type='text' class='woocm-input-field woocm-item-condition-value' %attrname%='woocm_fields[{$type}][{$type}_%%%][condition_value]' value=''>
+																			</p>
 																		</div>
 																	</li>
 																</div>
 																<div class='woocm-clone-item-btn-panel'>
-																	<button class='woocm-clone-item' data-type='{$type}'>Insert Field</button>
+																	<button class='woocm-clone-item' data-type='{$type}'>". __( 'Insert Field', 'checkout-manager' ) ."</button>
 																</div>
 															</div>";
 															?>

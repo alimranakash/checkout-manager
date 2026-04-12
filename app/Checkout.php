@@ -54,5 +54,6 @@ class Checkout {
         new Checkout\Common;
         new Checkout\Ajax;
         new Checkout\Front();
+        new Checkout\OrderMeta();
     }
 }

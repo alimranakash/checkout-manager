@@ -13,6 +13,7 @@ $troubleshoot 	= get_option( 'imcm-setting-troubleshoot' );
 				<ul>
 				    <li class=""><a href="#general"><span class="dashicons dashicons-admin-generic"></span> <?php _e( 'General', 'checkout-manager' ); ?></a></li>
 				    <li><a href="#troubleshoot"><span class="dashicons dashicons-admin-tools"></span> <?php _e( 'Troubleshoot', 'checkout-manager' ); ?></a></li>
+				    <li><a href="#import-export"><span class="dashicons dashicons-migrate"></span> <?php _e( 'Import / Export', 'checkout-manager' ); ?></a></li>
 				  </ul>
 			</div>
 
@@ -60,6 +61,34 @@ $troubleshoot 	= get_option( 'imcm-setting-troubleshoot' );
 						<div class="cx-response-message" style="display: none;"></div>
 					</div>
 				</div>
+				<div id="import-export" style="display: none;">
+					<div class="imcm-setting-content">
+
+						<div class="imcm-setting-heading">
+							<h4><?php _e( 'Export Settings', 'checkout-manager' ); ?></h4>
+						</div>
+						<p class="imcm-setting-form-group">
+							<label class="imcm-setting-form-label"><?php _e( 'Download all plugin settings as a JSON file.', 'checkout-manager' ); ?></label>
+							<button id="imcm-export-btn" class="imcm-setting-button"><?php _e( 'Export Settings', 'checkout-manager' ); ?></button>
+						</p>
+
+						<hr style="margin: 20px 0;">
+
+						<div class="imcm-setting-heading">
+							<h4><?php _e( 'Import Settings', 'checkout-manager' ); ?></h4>
+						</div>
+						<p class="imcm-setting-form-group">
+							<label class="imcm-setting-form-label"><?php _e( 'Paste exported JSON below and click Import.', 'checkout-manager' ); ?></label>
+							<textarea id="imcm-import-data" rows="8" style="width:100%;font-family:monospace;font-size:12px;" placeholder='{"imcm-checkout-fields": {...}}'></textarea>
+						</p>
+						<p class="imcm-setting-form-group">
+							<button id="imcm-import-btn" class="imcm-setting-button"><?php _e( 'Import Settings', 'checkout-manager' ); ?></button>
+						</p>
+						<div class="cx-response-message" style="display: none;"></div>
+
+					</div>
+				</div>
+
 				<div class="imcm-setting-footer">
 					<button class="imcm-setting-button imcm-setting-save-button"><?php _e( 'Save Change', 'checkout-manager' ); ?></button>
 				</div>
