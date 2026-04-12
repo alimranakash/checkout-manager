@@ -254,7 +254,8 @@ function imcm_custom_checkout_fields( $order ) {
     $_custom_fields = [];
     foreach ( $types as $type => $fields ) {
         foreach ( $fields as $name => $field ) {
-            if ( !imcm_is_default_field( $name ) ) {
+            // Only include non-default fields that are enabled
+            if ( ! imcm_is_default_field( $name ) && isset( $field['enabled'] ) && $field['enabled'] ) {
                 $_custom_fields[ $type ][ $name ] = $field['label'];
             }
         }

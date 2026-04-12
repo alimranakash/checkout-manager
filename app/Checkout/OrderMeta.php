@@ -50,7 +50,7 @@ class OrderMeta {
 					continue;
 				}
 
-				if ( ! isset( $field['enabled'] ) ) {
+				if ( ! isset( $field['enabled'] ) || ! $field['enabled'] ) {
 					continue;
 				}
 
@@ -84,7 +84,7 @@ class OrderMeta {
 					continue;
 				}
 
-				if ( ! isset( $field['enabled'] ) ) {
+				if ( ! isset( $field['enabled'] ) || ! $field['enabled'] ) {
 					continue;
 				}
 
