@@ -133,6 +133,13 @@ final class Plugin {
         new Front();
         new Admin();
         new Template();
+
+        /**
+         * Hook for Pro plugin and extensions to initialize.
+         *
+         * @since 1.1.0
+         */
+        do_action( 'imcm_init' );
     }
 
     /**

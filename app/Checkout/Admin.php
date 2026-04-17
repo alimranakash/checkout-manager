@@ -36,8 +36,18 @@ class Admin {
         $shipping_hooks     = isset( $display_position['order_shipping_hooks'] ) ? $display_position['order_shipping_hooks'] : '';
 
         add_action( 'admin_menu', [ $this, 'submenu' ] );
+        add_action( 'admin_menu', [ $this, 'admin_init' ], 20 );
         add_action( $billing_hooks, [ $this, 'custom_billing_fields' ] );
         add_action( $shipping_hooks, [ $this, 'custom_shipping_fields' ] );
+    }
+
+    /**
+     * Hook for Pro plugin and extensions to register admin pages.
+     *
+     * @since 1.1.0
+     */
+    public function admin_init() {
+        do_action( 'imcm_admin_menu' );
     }
 
     public function submenu() {

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Checkout Manager for WooCommerce lets you add, edit, reorder, validate, and conditionally display checkout fields without touching code.">
+    <meta name="keywords" content="WooCommerce checkout manager, checkout field editor, WooCommerce conditional fields, checkout customization">
+    <meta name="author" content="Worzen">
+    <meta property="og:title" content="Checkout Manager for WooCommerce">
+    <meta property="og:description" content="Build a faster, cleaner WooCommerce checkout with drag-and-drop fields, conditional logic, validation, and full display control.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Checkout Manager for WooCommerce">
+    <meta name="twitter:description" content="Customize every checkout field without code.">
+    <title>Checkout Manager for WooCommerce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: "#0f172a",
+                        brand: {
+                            50: "#ecfeff",
+                            100: "#cffafe",
+                            500: "#06b6d4",
+                            600: "#0891b2",
+                            700: "#0e7490"
+                        },
+                        accent: {
+                            100: "#ffedd5",
+                            500: "#f97316"
+                        }
+                    },
+                    fontFamily: {
+                        sans: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
+                        display: ["Sora", "ui-sans-serif", "system-ui", "sans-serif"]
+                    },
+                    boxShadow: {
+                        glow: "0 30px 80px rgba(8, 145, 178, 0.18)",
+                        card: "0 20px 60px rgba(15, 23, 42, 0.08)"
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        [id] { scroll-margin-top: 112px; }
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(6, 182, 212, 0.08), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.08), transparent 28%),
+                #f8fafc;
+        }
+        .grid-fade {
+            background-image:
+                linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 82%);
+        }
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.45), rgba(249, 115, 22, 0.35));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .faq-item[data-open="true"] .faq-answer { grid-template-rows: 1fr; }
+        .faq-item[data-open="true"] .faq-icon { transform: rotate(45deg); }
+        .faq-answer {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.25s ease;
+        }
+        .faq-answer > div { overflow: hidden; }
+    </style>
+</head>
+<body class="font-sans text-slate-700">
+    <div class="fixed inset-0 -z-10 grid-fade"></div>
+
+    <header class="sticky top-0 z-40 border-b border-white/70 bg-white/80 backdrop-blur-xl">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+            <a href="#top" class="flex items-center gap-3">
+                <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-ink text-white shadow-card">
+                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M4 7.5h16M7 12h10M9.5 16.5h5" stroke-linecap="round"/>
+                        <rect x="3" y="4" width="18" height="16" rx="3.5"/>
+                    </svg>
+                </span>
+                <div>
+                    <div class="font-display text-sm uppercase tracking-[0.25em] text-brand-600">Worzen</div>
+                    <div class="text-sm font-semibold text-ink">Checkout Manager</div>
+                </div>
+            </a>
+
+            <nav class="hidden items-center gap-8 text-sm font-semibold text-slate-600 md:flex">
+                <a href="#features" class="transition hover:text-ink">Features</a>
+                <a href="#preview" class="transition hover:text-ink">Preview</a>
+                <a href="#pro" class="transition hover:text-ink">Pro</a>
+                <a href="#faq" class="transition hover:text-ink">FAQ</a>
+                <a href="https://worzen.com/" target="_blank" rel="noopener noreferrer" class="rounded-full bg-ink px-5 py-3 text-white transition hover:-translate-y-0.5 hover:bg-slate-800">Visit Worzen</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="relative overflow-hidden px-6 pb-20 pt-16 lg:px-8 lg:pb-28 lg:pt-24">
+            <div class="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/90 px-4 py-2 text-sm font-semibold text-brand-700 shadow-sm">
+                        <span class="h-2 w-2 rounded-full bg-accent-500"></span>
+                        WooCommerce checkout editor built for real stores
+                    </div>
+                    <h1 class="mt-6 max-w-4xl font-display text-4xl font-extrabold leading-tight text-ink sm:text-5xl lg:text-6xl">
+                        Design a checkout flow that
+                        <span class="text-brand-600">collects better data</span>
+                        and converts more buyers.
+                    </h1>
+                    <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+                        Checkout Manager for WooCommerce gives you full control over billing, shipping, and order fields. Add custom fields, drag them into place, apply validation, show them conditionally, and keep everything synced across the order flow.
+                    </p>
+                    <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+                        <a href="https://worzen.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-ink px-7 py-4 text-base font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800">Get it from Worzen</a>
+                        <a href="#features" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-7 py-4 text-base font-semibold text-slate-700 transition hover:border-ink hover:text-ink">Explore features</a>
+                    </div>
+                    <div class="mt-10 grid gap-4 sm:grid-cols-3">
+                        <div class="rounded-3xl border border-white bg-white/90 p-5 shadow-card">
+                            <div class="text-3xl font-extrabold text-ink">10+</div>
+                            <p class="mt-2 text-sm leading-6 text-slate-500">Field types including text, select, radio, checkbox, date, and file upload.</p>
+                        </div>
+                        <div class="rounded-3xl border border-white bg-white/90 p-5 shadow-card">
+                            <div class="text-3xl font-extrabold text-ink">100%</div>
+                            <p class="mt-2 text-sm leading-6 text-slate-500">Control over field display in checkout, emails, thank-you page, and admin orders.</p>
+                        </div>
+                        <div class="rounded-3xl border border-white bg-white/90 p-5 shadow-card">
+                            <div class="text-3xl font-extrabold text-ink">JSON</div>
+                            <p class="mt-2 text-sm leading-6 text-slate-500">Import and export settings to reuse checkout setups across multiple stores.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="preview" class="reveal relative">
+                    <div class="hero-card relative overflow-hidden rounded-[32px] bg-slate-950 p-4 shadow-glow sm:p-6">
+                        <div class="absolute inset-x-0 top-0 h-28 bg-gradient-to-r from-brand-500/30 via-sky-400/15 to-accent-500/25 blur-2xl"></div>
+                        <div class="relative rounded-[26px] border border-white/10 bg-slate-900 p-4 text-white sm:p-5">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Live checkout builder</p>
+                                    <h2 class="mt-2 text-2xl font-bold">Storefront Experience</h2>
+                                </div>
+                                <span class="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-300">No code</span>
+                            </div>
+                            <div class="mt-5 grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
+                                <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-sm font-semibold text-white/90">Field stack</h3>
+                                        <span class="text-xs text-brand-300">Drag and drop</span>
+                                    </div>
+                                    <div class="mt-4 space-y-3 text-sm">
+                                        <div class="rounded-2xl border border-white/10 bg-white/5 p-3"><div class="flex items-center justify-between"><span>Billing Phone</span><span class="rounded-full bg-brand-500/15 px-2 py-1 text-[11px] text-brand-200">Required</span></div></div>
+                                        <div class="rounded-2xl border border-dashed border-brand-400/40 bg-brand-400/10 p-3"><div class="flex items-center justify-between"><span>Company VAT Number</span><span class="rounded-full bg-accent-500/15 px-2 py-1 text-[11px] text-orange-100">Conditional</span></div></div>
+                                        <div class="rounded-2xl border border-white/10 bg-white/5 p-3"><div class="flex items-center justify-between"><span>Delivery Instructions</span><span class="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/70">Textarea</span></div></div>
+                                    </div>
+                                </div>
+                                <div class="rounded-3xl bg-white p-4 text-slate-700">
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-sm font-bold text-ink">Checkout preview</p>
+                                        <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Optimized</span>
+                                    </div>
+                                    <div class="mt-4 space-y-3">
+                                        <div><label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Billing phone</label><div class="rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-400">+8801XXXXXXXXX</div></div>
+                                        <div><label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Company name</label><div class="rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-700">Worzen Studio</div></div>
+                                        <div>
+                                            <div class="mb-2 flex items-center justify-between">
+                                                <label class="block text-xs font-bold uppercase tracking-[0.2em] text-slate-500">VAT number</label>
+                                                <span class="text-[11px] font-semibold text-emerald-600">Visible because company exists</span>
+                                            </div>
+                                            <div class="rounded-2xl border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-700">BD-458832-21</div>
+                                        </div>
+                                        <div class="rounded-2xl bg-slate-100 p-4">
+                                            <div class="flex items-center justify-between text-sm">
+                                                <span class="font-semibold text-ink">Validation rule</span>
+                                                <span class="rounded-full bg-ink px-2.5 py-1 text-[11px] font-semibold text-white">Phone format</span>
+                                            </div>
+                                            <p class="mt-2 text-sm leading-6 text-slate-500">Built-in checks help keep order data cleaner before it reaches your WooCommerce admin.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 grid gap-3 sm:grid-cols-3">
+                                <div class="rounded-2xl border border-white/10 bg-white/5 p-3 text-sm text-white/80"><span class="block text-xs uppercase tracking-[0.2em] text-slate-400">Shows in</span><span class="mt-2 block font-semibold">Checkout + Admin</span></div>
+                                <div class="rounded-2xl border border-white/10 bg-white/5 p-3 text-sm text-white/80"><span class="block text-xs uppercase tracking-[0.2em] text-slate-400">Also in</span><span class="mt-2 block font-semibold">Emails + Thank You</span></div>
+                                <div class="rounded-2xl border border-white/10 bg-white/5 p-3 text-sm text-white/80"><span class="block text-xs uppercase tracking-[0.2em] text-slate-400">Saved as</span><span class="mt-2 block font-semibold">WooCommerce order meta</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="features" class="px-6 py-20 lg:px-8">
+            <div class="mx-auto max-w-7xl">
+                <div class="reveal flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                    <div class="max-w-3xl">
+                        <p class="text-sm font-bold uppercase tracking-[0.28em] text-brand-700">Why it matters</p>
+                        <h2 class="mt-4 font-display text-3xl font-extrabold text-ink sm:text-4xl">Turn the WooCommerce checkout from a fixed form into a store-specific workflow</h2>
+                    </div>
+                    <p class="max-w-2xl text-lg leading-8 text-slate-600">Whether you sell physical products, take service bookings, run B2B orders, or collect extra compliance data, the checkout should adapt to the business, not the other way around.</p>
+                </div>
+                <div class="mt-12 overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-card">
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] border-b border-slate-200 bg-slate-50 text-sm font-bold text-slate-500">
+                        <div class="px-6 py-4">Capability</div>
+                        <div class="px-6 py-4">Default WooCommerce</div>
+                        <div class="px-6 py-4">Checkout Manager</div>
+                    </div>
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] border-b border-slate-100 text-sm"><div class="px-6 py-5 font-semibold text-ink">Add custom checkout fields</div><div class="px-6 py-5 text-slate-400">Limited</div><div class="px-6 py-5 font-semibold text-emerald-600">Yes</div></div>
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] border-b border-slate-100 text-sm"><div class="px-6 py-5 font-semibold text-ink">Conditional field visibility</div><div class="px-6 py-5 text-slate-400">No</div><div class="px-6 py-5 font-semibold text-emerald-600">Yes</div></div>
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] border-b border-slate-100 text-sm"><div class="px-6 py-5 font-semibold text-ink">Custom validation rules</div><div class="px-6 py-5 text-slate-400">Basic only</div><div class="px-6 py-5 font-semibold text-emerald-600">Built in</div></div>
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] border-b border-slate-100 text-sm"><div class="px-6 py-5 font-semibold text-ink">Drag-and-drop ordering</div><div class="px-6 py-5 text-slate-400">No</div><div class="px-6 py-5 font-semibold text-emerald-600">Yes</div></div>
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] text-sm"><div class="px-6 py-5 font-semibold text-ink">Import and export configuration</div><div class="px-6 py-5 text-slate-400">No</div><div class="px-6 py-5 font-semibold text-emerald-600">JSON based</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 py-20 lg:px-8" id="pro">
+            <div class="mx-auto max-w-7xl">
+                <div class="reveal flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                    <div class="max-w-3xl">
+                        <p class="text-sm font-bold uppercase tracking-[0.28em] text-brand-700">Premium features</p>
+                        <h2 class="mt-4 font-display text-3xl font-extrabold text-ink sm:text-4xl">Pro Feature Tiers</h2>
+                    </div>
+                    <p class="max-w-2xl text-lg leading-8 text-slate-600">Unlock advanced features that give your checkout intelligent behavior, role-based access, and multi-step flows.</p>
+                </div>
+                <div class="mt-12 grid gap-8 lg:grid-cols-3">
+                    <!-- TIER 1 -->
+                    <div class="reveal rounded-[24px] border border-slate-200 bg-white p-8 shadow-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-extrabold text-brand-600">TIER 1</div>
+                                <h3 class="mt-2 text-xl font-bold text-ink">Role & Permission Management</h3>
+                            </div>
+                            <span class="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">Pro</span>
+                        </div>
+                        <ul class="mt-6 space-y-4 text-slate-600">
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">User role restrictions — assign field access per role</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Field-level permissions — lock fields from non-admins</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Audit log — track all field changes with timestamp/user</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- TIER 2 -->
+                    <div class="reveal rounded-[24px] border border-slate-200 bg-white p-8 shadow-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-extrabold text-brand-600">TIER 2</div>
+                                <h3 class="mt-2 text-xl font-bold text-ink">Advanced Dynamic Logic</h3>
+                            </div>
+                            <span class="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">Pro</span>
+                        </div>
+                        <ul class="mt-6 space-y-4 text-slate-600">
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Multi-condition rules (AND/OR logic)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Auto-calculated fields (formulas, not just show/hide)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Conditional field groups — hide entire sections</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Branching checkout paths based on customer/product type</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- TIER 3 -->
+                    <div class="reveal rounded-[24px] border border-slate-200 bg-white p-8 shadow-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-extrabold text-brand-600">TIER 3</div>
+                                <h3 class="mt-2 text-xl font-bold text-ink">Multi-Step Checkout</h3>
+                            </div>
+                            <span class="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">Pro</span>
+                        </div>
+                        <ul class="mt-6 space-y-4 text-slate-600">
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Step builder — segment checkout into digestible steps</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Progress indicator & validation per step</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Abandoned cart recovery (save progress)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Step-specific styling</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Bonus: Field prefill templates, advanced export, REST API access</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 py-20 lg:px-8" id="faq">
+            <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+                <div class="reveal">
+                    <p class="text-sm font-bold uppercase tracking-[0.28em] text-brand-700">FAQ</p>
+                    <h2 class="mt-4 font-display text-3xl font-extrabold text-ink sm:text-4xl">Quick answers for store owners and builders</h2>
+                    <p class="mt-5 text-lg leading-8 text-slate-600">These cover the most important decisions before you plug Checkout Manager into a live WooCommerce store.</p>
+                </div>
+                <div class="reveal space-y-4">
+                    <div class="faq-item rounded-[24px] border border-slate-200 bg-white p-6 shadow-card" data-open="true">
+                        <button class="flex w-full items-center justify-between gap-6 text-left"><span class="text-lg font-extrabold text-ink">Does it work with WooCommerce default checkout fields?</span><span class="faq-icon text-2xl font-light text-brand-700 transition">+</span></button>
+                        <div class="faq-answer"><div><p class="pt-4 leading-7 text-slate-600">Yes. The plugin lets you manage existing billing, shipping, and order fields while keeping WooCommerce defaults intact where needed.</p></div></div>
+                    </div>
+                    <div class="faq-item rounded-[24px] border border-slate-200 bg-white p-6 shadow-card" data-open="false">
+                        <button class="flex w-full items-center justify-between gap-6 text-left"><span class="text-lg font-extrabold text-ink">Can I show fields only for specific situations?</span><span class="faq-icon text-2xl font-light text-brand-700 transition">+</span></button>
+                        <div class="faq-answer"><div><p class="pt-4 leading-7 text-slate-600">Yes. Conditional logic lets you display a field only when another field matches a condition such as equals, not equals, contains, is empty, or is not empty.</p></div></div>
+                    </div>
+                    <div class="faq-item rounded-[24px] border border-slate-200 bg-white p-6 shadow-card" data-open="false">
+                        <button class="flex w-full items-center justify-between gap-6 text-left"><span class="text-lg font-extrabold text-ink">Where do custom field values appear after checkout?</span><span class="faq-icon text-2xl font-light text-brand-700 transition">+</span></button>
+                        <div class="faq-answer"><div><p class="pt-4 leading-7 text-slate-600">Custom values are saved to WooCommerce order meta and can also be displayed in the admin order view, thank-you page, and order emails depending on your settings.</p></div></div>
+                    </div>
+                    <div class="faq-item rounded-[24px] border border-slate-200 bg-white p-6 shadow-card" data-open="false">
+                        <button class="flex w-full items-center justify-between gap-6 text-left"><span class="text-lg font-extrabold text-ink">Can I move the same checkout setup between stores?</span><span class="faq-icon text-2xl font-light text-brand-700 transition">+</span></button>
+                        <div class="faq-answer"><div><p class="pt-4 leading-7 text-slate-600">Yes. The import and export tools let you copy plugin settings as JSON so you can reuse the same setup on staging, client sites, or multiple store installs.</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 pb-24 pt-10 lg:px-8">
+            <div class="mx-auto max-w-7xl">
+                <div class="reveal relative overflow-hidden rounded-[36px] bg-ink px-8 py-12 text-white shadow-glow sm:px-12 sm:py-16">
+                    <div class="absolute -left-10 top-0 h-48 w-48 rounded-full bg-brand-500/20 blur-3xl"></div>
+                    <div class="absolute bottom-0 right-0 h-52 w-52 rounded-full bg-accent-500/20 blur-3xl"></div>
+                    <div class="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+                        <div class="max-w-3xl">
+                            <p class="text-sm font-bold uppercase tracking-[0.28em] text-brand-200">Ready to launch</p>
+                            <h2 class="mt-4 font-display text-3xl font-extrabold sm:text-4xl">Build a checkout that fits your store instead of forcing your store into defaults.</h2>
+                            <p class="mt-5 text-lg leading-8 text-slate-300">Checkout Manager for WooCommerce is designed to help stores collect better information, reduce confusion, and keep order details useful after purchase.</p>
+                        </div>
+                        <div class="flex flex-col gap-4 sm:flex-row">
+                            <a href="https://worzen.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-base font-semibold text-ink transition hover:-translate-y-0.5 hover:bg-slate-100">Open Worzen</a>
+                            <a href="mailto:hi@worzen.com" class="inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-4 text-base font-semibold text-white transition hover:border-white/50 hover:bg-white/5">Contact sales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white/70 px-6 py-8 backdrop-blur lg:px-8">
+        <div class="mx-auto flex max-w-7xl flex-col gap-3 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+            <p>Checkout Manager for WooCommerce. Built for modern WooCommerce checkouts.</p>
+            <div class="flex items-center gap-5">
+                <a href="https://worzen.com/" target="_blank" rel="noopener noreferrer" class="transition hover:text-ink">worzen.com</a>
+                <a href="#top" class="transition hover:text-ink">Back to top</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const revealItems = document.querySelectorAll(".reveal");
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealItems.forEach((item) => revealObserver.observe(item));
+
+        document.querySelectorAll(".faq-item").forEach((item) => {
+            const button = item.querySelector("button");
+            button.addEventListener("click", () => {
+                const isOpen = item.dataset.open === "true";
+                document.querySelectorAll(".faq-item").forEach((faq) => {
+                    faq.dataset.open = "false";
+                });
+                item.dataset.open = isOpen ? "false" : "true";
+            });
+        });
+    </script>
+</body>
+</html>

@@ -117,6 +117,18 @@ class Front {
             }
         }
 
+        /**
+         * Filter checkout fields before returning.
+         * Pro plugin can use this hook to modify or extend checkout fields.
+         *
+         * @since 1.1.0
+         *
+         * @param array $_fields      Checkout fields array
+         * @param array $wc_fields    WooCommerce original fields
+         * @param array $config_fields Config fields from plugin settings
+         */
+        $_fields = apply_filters( 'imcm_checkout_fields_output', $_fields, $wc_fields, $config_fields );
+
         return $_fields;
     }
 
