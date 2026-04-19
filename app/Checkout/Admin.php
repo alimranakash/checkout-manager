@@ -59,10 +59,23 @@ class Admin {
             'checkout-fields',
             [ $this, 'checkout_fields_callback' ] 
         );
+
+        add_submenu_page(
+            'checkout-manager',
+            __( 'Premium Features', 'checkout-manager' ),
+            __( 'Premium Features', 'checkout-manager' ),
+            'manage_options',
+            'checkout-manager-pro',
+            [ $this, 'premium_features_callback' ] 
+        );
     }
 
     public function checkout_fields_callback() {
         do_action( 'imcm_checkout_fields' );
+    }
+
+    public function premium_features_callback() {
+        include_once IMCM_PATH . '/views/admin/premium-features.php';
     }
 
     public function custom_billing_fields( $order ) {

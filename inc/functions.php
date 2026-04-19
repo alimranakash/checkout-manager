@@ -420,12 +420,12 @@ if ( ! function_exists( 'imcm_fs' ) ) {
 
             $imcm_fs = fs_dynamic_init( array(
                 'id'                  => '27724',
-                'slug'                => 'checkout-manager-pro',
+                'slug'                => 'checkout-manager',
                 'premium_slug'        => 'checkout-manager-pro',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_03eea33de046f6556e4df4f443294',
                 'is_premium'          => true,
-                'is_premium_only'     => true,
+                'is_premium_only'     => false,
                 'has_addons'          => false,
                 'has_paid_plans'      => true,
                 'is_org_compliant'    => true,
