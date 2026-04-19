@@ -37,6 +37,8 @@ $troubleshoot 	= get_option( 'imcm-setting-troubleshoot' );
 								  	<span class="slider"></span>
 								</label>
 							</p>
+							<!-- ADD NEW FIELD HOOK -->
+    						<?php do_action( 'imcm_setting_general_fields' ); ?>
 						</form>
 						<div class="cx-response-message" style="display: none;"></div>
 					</div>

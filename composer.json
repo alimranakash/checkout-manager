@@ -1,5 +1,5 @@
 {
-    "name": "WPPlugines/Checkout_Manager",
+    "name": "wpplugins/checkout-manager",
     "description": "Checkout Manager",
     "type": "wordpress-plugin",
     "license": "GPLv2",
@@ -9,7 +9,9 @@
             "email": "alimranakash.bd@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "freemius/wordpress-sdk": "^2.13"
+    },
     "autoload": {
         "psr-4": {
             "WPPlugines\\Checkout_Manager\\" : "src/",
@@ -18,4 +20,3 @@
         "files": [ "inc/functions.php" ]
     }
 }
-

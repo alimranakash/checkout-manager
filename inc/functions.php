@@ -408,3 +408,47 @@ function imcm_get_condition_operators() {
     return apply_filters( 'imcm_condition_operators', $operators );
 }
 endif;
+
+if ( ! function_exists( 'imcm_fs' ) ) {
+    // Create a helper function for easy SDK access.
+    function imcm_fs() {
+        global $imcm_fs;
+
+        if ( ! isset( $imcm_fs ) ) {
+            // Include Freemius SDK.
+            // SDK is auto-loaded through Composer
+
+            $imcm_fs = fs_dynamic_init( array(
+                'id'                  => '27724',
+                'slug'                => 'checkout-manager-pro',
+                'premium_slug'        => 'checkout-manager-pro',
+                'type'                => 'plugin',
+                'public_key'          => 'pk_03eea33de046f6556e4df4f443294',
+                'is_premium'          => true,
+                'is_premium_only'     => true,
+                'has_addons'          => false,
+                'has_paid_plans'      => true,
+                'is_org_compliant'    => true,
+                // Automatically removed in the free version. If you're not using the
+                // auto-generated free version, delete this line before uploading to wp.org.
+                'wp_org_gatekeeper'   => 'OA7#BoRiBNqdf52FvzEf!!074aRLPs8fspif$7K1#4u4Csys1fQlCecVcUTOs2mcpeVHi#C2j9d09fOTvbC0HloPT7fFee5WdS3G',
+                'trial'               => array(
+                    'days'               => 3,
+                    'is_require_payment' => true,
+                ),
+                'menu'                => array(
+                    'slug'           => 'checkout-manager',
+                    'first-path'     => 'admin.php?page=checkout-manager',
+                    'support'        => false,
+                ),
+            ) );
+        }
+
+        return $imcm_fs;
+    }
+
+    // Init Freemius.
+    imcm_fs();
+    // Signal that SDK was initiated.
+    do_action( 'imcm_fs_loaded' );
+}
