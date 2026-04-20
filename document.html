@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout Manager Documentation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-slate-800 text-white shadow-lg fixed h-full overflow-y-auto">
+      <div class="p-6">
+        <h1 class="text-xl font-bold text-white mb-8">Checkout Manager</h1>
+        <nav class="space-y-2">
+          <a href="#overview" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">Overview</a>
+          <a href="#features" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">Key Features</a>
+          <a href="#pro-features" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">Pro Features</a>
+          <a href="#requirements" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">Requirements</a>
+          <a href="#installation" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">Installation</a>
+          <a href="#setup" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">Initial Setup</a>
+          <a href="#usage" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">How to Use</a>
+          <a href="#data" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">Custom Field Data</a>
+          <a href="#faq" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">FAQ</a>
+          <a href="#updates" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">Update Notes</a>
+          <a href="#reference" class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">Reference</a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 p-8">
+      <div class="max-w-4xl mx-auto">
+        <header class="mb-12 text-center">
+          <p class="text-sm font-semibold uppercase tracking-wider text-slate-600">Plugin Documentation</p>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Checkout Manager for WooCommerce</h1>
+          <p class="mt-6 text-lg leading-8 text-slate-600 max-w-2xl mx-auto">A comprehensive guide to install, configure, and use the Checkout Manager plugin for WooCommerce.</p>
+        </header>
+
+        <section id="overview" class="mb-12">
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">Overview</h2>
+            <p class="text-slate-600 leading-relaxed">Checkout Manager for WooCommerce is a powerful plugin that lets you fully customize your WooCommerce checkout page. It helps increase conversion rates and improve the checkout experience by allowing you to add, edit, and remove checkout fields with ease.</p>
+          </div>
+        </section>
+
+        <section id="features" class="mb-12">
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Key Features</h2>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-600">
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Add, edit, and remove billing, shipping, and order fields</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Drag &amp; drop field ordering</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Multiple field types: Text, Textarea, Select, Radio, Checkbox, Date, File Upload, and more</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Control field display on Thank You page, order emails, and admin order pages</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Customize checkout field styling</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Conditional Logic for dynamic field display</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Validation rules for phone, numeric, letters-only, alphanumeric, or custom regex</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Save custom field values to WooCommerce order meta</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Import and export settings using JSON</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="pro-features" class="mb-12">
+          <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Pro Features</h2>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-600">
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Role and permission management for field access by user role</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Field-level permissions to lock fields from non-admin users</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Audit logs for field changes with user and timestamp details</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Advanced dynamic logic with multi-condition AND/OR rules</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Auto-calculated fields and conditional field groups</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Branching checkout paths based on customer or product type</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Multi-step checkout flows with validation and progress indicators</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Abandoned cart recovery and save-progress support</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Step-specific styling and prefill templates</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-sky-600 flex-shrink-0"></span>Advanced export options and REST API access for integrations</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="requirements" class="mb-12">
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Requirements</h2>
+            <ul class="space-y-3 text-slate-600">
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-slate-700 flex-shrink-0"></span>WordPress 5.0 or higher</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-slate-700 flex-shrink-0"></span>PHP 5.6 or higher</li>
+              <li class="flex items-start gap-3"><span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-slate-700 flex-shrink-0"></span>WooCommerce installed and active</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="installation" class="mb-12">
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Installation</h2>
+            <ol class="space-y-3 text-slate-600">
+              <li>Upload the plugin folder to <code class="bg-slate-100 px-2 py-1 rounded text-sm text-slate-800">/wp-content/plugins/</code></li>
+              <li>Activate the plugin from the <strong>Plugins</strong> menu in WordPress admin</li>
+              <li>Ensure WooCommerce is installed and active</li>
+              <li>Go to <strong>Checkout Manager</strong> from the WordPress admin menu</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="setup" class="mb-12">
+          <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Initial Setup</h2>
+            <ul class="space-y-3 text-slate-600">
+              <li>Open the <strong>Checkout Manager</strong> settings page</li>
+              <li>Add new fields under <strong>Billing Fields</strong>, <strong>Shipping Fields</strong>, or <strong>Order Fields</strong></li>
+              <li>Configure label, input type, status, and visibility options for each field</li>
+              <li>Enable Conditional Logic when you need field display rules</li>
+              <li>Enable validation rules for custom fields as required</li>
+              <li>Save settings and verify the checkout page display</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="usage" class="mb-12">
+          <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">How to Use</h2>
+            <ol class="space-y-3 text-slate-600">
+              <li><strong>Add a field</strong>: fill out the new field form and click <strong>Save</strong></li>
+              <li><strong>Edit a field</strong>: use the <strong>Edit</strong> button next to an existing field</li>
+              <li><strong>Remove a field</strong>: click <strong>Delete</strong> or <strong>Remove</strong> next to the field</li>
+              <li><strong>Change field order</strong>: drag fields to reorder them</li>
+              <li><strong>Conditional Logic</strong>: show a field only when another field matches a condition</li>
+              <li><strong>Import / Export</strong>: export settings as JSON and import them on another site</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="data" class="mb-12">
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">Custom Field Data</h2>
+            <p class="text-slate-600 leading-relaxed">Custom field values are saved as WooCommerce order meta data. These values are visible on the WooCommerce order details page, in order emails, and in the admin order screen.</p>
+          </div>
+        </section>
+
+        <section id="faq" class="mb-12">
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
+            <div class="space-y-6 text-slate-600">
+              <div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-2">Does this plugin require WooCommerce?</h3>
+                <p>Yes. WooCommerce must be installed and active for this plugin to work.</p>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-2">Where are custom field values stored?</h3>
+                <p>Custom field values are stored as order meta data and can be viewed in the WooCommerce order details.</p>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-2">What is Conditional Logic?</h3>
+                <p>Conditional Logic allows a field to appear only when another field meets a specific condition, such as showing <code class="bg-slate-100 px-2 py-1 rounded text-sm text-slate-800">Company VAT</code> only when <code class="bg-slate-100 px-2 py-1 rounded text-sm text-slate-800">Company Name</code> is not empty.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="updates" class="mb-12">
+          <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Update Notes (1.1.0)</h2>
+            <ul class="space-y-3 text-slate-600">
+              <li>Custom field values now save correctly to WooCommerce order meta</li>
+              <li>Added Conditional Logic support with equals, not equals, contains, is empty, and is not empty conditions</li>
+              <li>Added field validation options for phone, numeric, letters-only, alphanumeric, and custom regex</li>
+              <li>Added JSON import/export for all settings</li>
+              <li>Fixed debug and text domain issues</li>
+              <li>Ensured field order is respected correctly on the checkout page</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="reference" class="mb-12">
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Reference</h2>
+            <ul class="space-y-2 text-slate-600">
+              <li><strong>Plugin Name:</strong> Checkout Manager for WooCommerce</li>
+              <li><strong>Version:</strong> 1.1.0</li>
+              <li><strong>Author:</strong> Al Imran Akash</li>
+              <li><strong>Plugin URI:</strong> <a href="https://worzen.com/" class="text-sky-600 hover:text-sky-800 transition-colors">https://worzen.com/</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
